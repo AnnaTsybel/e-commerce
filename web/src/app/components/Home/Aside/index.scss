@@ -1,0 +1,52 @@
+.aside {
+    padding: 40px 30px;
+    background: #2d3250;
+
+    &__categories {
+        margin-bottom: 30px;
+        display: grid;
+        grid-template-columns: (1, 1fr);
+        row-gap: 15px;
+    }
+
+    &__category {
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #676f9d;
+        text-decoration: none;
+        color: white;
+        cursor: pointer;
+
+        &__icon {
+            width: 17px;
+            height: 17px;
+            margin-right: 6px;
+        }
+
+        &__text {
+            font-size: 20px;
+        }
+    }
+
+    &__user {
+
+        &__info {
+            display: flex;
+            text-decoration: none;
+            color: white;
+
+            &__photo {
+                width: 70px;
+                height: 70px;
+                margin-right: 8px;
+                border-radius: 50%;
+            }
+
+            &__name {
+                margin-bottom: 5px;
+                font-size: 20px;
+            }
+        }
+    }
+}

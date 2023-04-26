@@ -1,0 +1,27 @@
+.categories {
+    display: flex;
+
+    &__item {
+        width: 33%;
+
+        &__title {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        &__subcategories {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__subcategory {
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+    }
+}

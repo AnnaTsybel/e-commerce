@@ -1,0 +1,13 @@
+.home {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    & .aside {
+        width: 28%;
+    }
+
+    &__content {
+        width: 70%;
+    }
+}

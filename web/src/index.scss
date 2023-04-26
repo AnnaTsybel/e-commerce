@@ -1,0 +1,37 @@
+@import url("./app/static/styles/__typography.scss");
+@import url("./app/static/styles/__reset.scss");
+@import url("./app/static/styles/__variables.scss");
+@import url("./app/static/styles/__mixins.scss");
+
+html {
+    scroll-behavior: smooth;
+    -webkit-touch-callout: none;
+    user-select: none;
+    font-display: swap;
+    font-family: "Raleway", sans-serif;
+    color: white;
+}
+
+.page {
+    min-height: calc(100vh - 50px);
+    padding-top: 100px;
+    background: #424769;
+
+    &-content {
+        min-height: calc(100vh - 150px);
+        padding: 30px;
+    }
+
+    &__auth {
+        padding-top: 0;
+
+        & .header,
+        & .footer {
+            display: none;
+        }
+
+        & .page__content {
+            padding: 0;
+        }
+    }
+}

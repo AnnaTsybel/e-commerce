@@ -1,0 +1,217 @@
+.product {
+    padding: 30px 40px;
+
+    &__content {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__info {
+        width: 50%;
+    }
+
+    &__title {
+        margin-bottom: 20px;
+        font-size: 40px;
+        font-family: "Raleway", sans-serif;
+    }
+
+    &__price {
+        margin-bottom: 10px;
+        font-size: 30px;
+        font-family: "Raleway", sans-serif;
+    }
+
+    &__no-avaible,
+    &__available {
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-family: "Raleway", sans-serif;
+    }
+
+    &__available {
+        color: rgb(119 182 114);
+    }
+
+    &__color {
+        margin-bottom: 10px;
+        display: flex;
+
+        &__text {
+            margin-right: 7px;
+            font-size: 20px;
+        }
+    }
+}
+
+.product-create,
+.product-edit {
+    width: 60%;
+    padding: 30px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 30px;
+    font-family: "Raleway", sans-serif;
+    background: #2d3250;
+
+    &__title {
+        font-size: 30px;
+        margin-bottom: 30px;
+    }
+
+    &__label {
+        z-index: 3;
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        font-size: 11px;
+        color: #acb7f9;
+    }
+
+    &__input {
+        width: 200px;
+        padding: 30px 10px 7px;
+        outline: none;
+        border: none;
+        background: #676f9d;
+        font-size: 16px;
+        color: #fff;
+        font-family: "Raleway", sans-serif;
+
+        &__wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        &:focus {
+            position: relative;
+
+            & + span:after {
+                z-index: 2;
+                position: absolute;
+                height: 100%;
+                width: 2px;
+                content: "";
+                left: 0;
+                bottom: 0;
+                background: #b5659b;
+            }
+        }
+
+        &::placeholder {
+            color: rgb(199 199 199);
+        }
+    }
+
+    &__textarea {
+        height: 300px;
+        width: 500px;
+        margin-bottom: 20px;
+        padding: 15px;
+        border: none;
+        outline: none;
+        resize: vertical;
+        font-family: "Raleway", sans-serif;
+        font-size: 16px;
+        color: #fff;
+        background: #676f9d;
+
+        &:focus {
+            width: 500px;
+            padding-left: 13px;
+            border-left: 2px solid #b5659b;
+        }
+
+        &::placeholder {
+            color: #acb7f9;
+        }
+    }
+
+    &__button {
+        margin-top: 20px;
+        padding: 10px 23px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+        box-shadow: 0 0 14px 2px rgb(201 99 169 / 100%);
+        color: #424769;
+        background: #b5659b;
+        cursor: pointer;
+    }
+
+    &__color {
+
+        &__content {
+            margin-bottom: 20px;
+            display: flex;
+        }
+
+        &__item {
+            margin-right: 10px;
+
+            div {
+                cursor: pointer;
+            }
+        }
+
+        &__checked {
+            box-shadow: 0 0 2px 2px rgb(201 99 169 / 100%);
+        }
+    }
+
+    &__photo {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &__input {
+            display: none;
+            opacity: 0;
+        }
+
+        &__icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        &__label {
+            cursor: pointer;
+        }
+    }
+
+    &__photos {
+        margin-bottom: 15px;
+        display: flex;
+
+        &__item {
+            position: relative;
+            width: 130px;
+            margin-right: 10px;
+
+            &__close {
+                z-index: 3;
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                right: 2px;
+                top: 2px;
+                cursor: pointer;
+
+                &__icon {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+
+    &__back-button {
+        width: 30px;
+        height: 30px;
+    }
+}

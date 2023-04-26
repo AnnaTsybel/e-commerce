@@ -1,0 +1,127 @@
+.user {
+    width: 60%;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background: #2d3250;
+
+    &__name {
+        margin: 15px 0 20px;
+        font-size: 40px;
+        font-family: "Raleway", sans-serif;
+    }
+
+    &__edit-button {
+        margin-right: 0;
+        margin-bottom: 20px;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        color: #b5659b;
+        background: none;
+        cursor: pointer;
+    }
+
+    &__photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+
+        &__input {
+            display: none;
+
+            &__wrapper {
+                position: relative;
+                width: 120px;
+                height: 120px;
+                margin-bottom: 20px;
+                overflow: hidden;
+                border-radius: 50%;
+
+                span {
+                    position: absolute;
+                    width: 104px;
+                    height: 15px;
+                    left: 8px;
+                    bottom: 12px;
+                    text-align: center;
+                    font-size: 9.5px;
+                    background: #a96e95bf;
+                }
+            }
+        }
+
+        &__label {
+            cursor: pointer;
+        }
+    }
+
+    &__content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "Raleway", sans-serif;
+
+        &__field {
+            width: 40%;
+            margin-bottom: 10px;
+            font-family: "Raleway", sans-serif;
+
+            &__name {
+                margin-bottom: 6px;
+                font-size: 22px;
+            }
+
+            &__info {
+                font-size: 18px;
+            }
+        }
+    }
+
+    &__label {
+        z-index: 3;
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        font-size: 11px;
+        color: #acb7f9;
+    }
+
+    &__input {
+        width: 200px;
+        padding: 30px 10px 7px;
+        outline: none;
+        border: none;
+        background: #676f9d;
+        font-size: 16px;
+        color: #fff;
+
+        &__wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        &:focus {
+            position: relative;
+
+            & + span:after {
+                z-index: 2;
+                position: absolute;
+                height: 100%;
+                width: 2px;
+                left: 0;
+                bottom: 0;
+                content: "";
+                background: #b5659b;
+            }
+        }
+
+        &::placeholder {
+            color: rgb(199 199 199);
+        }
+    }
+}
