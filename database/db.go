@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	documentize "graduate_work"
+	"graduate_work/products"
 	"graduate_work/users"
 
 	_ "github.com/lib/pq" // using postgres driver.
@@ -46,6 +47,23 @@ func (db *database) CreateSchema(ctx context.Context) error {
 	    role       INTEGER DEFAULT 0 NOT NULL,
 	    password_hash    BYTEA                     NOT NULL,
 	    created_at TIMESTAMP WITH TIME ZONE        NOT NULL
+	);
+    CREATE TABLE IF NOT EXISTS products(
+	    id           BYTEA PRIMARY KEY               NOT NULL,
+	    title        VARCHAR                         NOT NULL,
+	    description  VARCHAR                         NOT NULL,
+	    price        numeric                         NOT NULL,
+	    is_available BOOLEAN DEFAULT FALSE NOT NULL
+	);
+    CREATE TABLE IF NOT EXISTS product_likes(
+	    product_id BYTEA REFERENCES products(id) ON DELETE CASCADE NOT NULL,
+	    user_id    BYTEA REFERENCES users(id) ON DELETE CASCADE NOT NULL,
+	    PRIMARY KEY(product_id, user_id)
+	);
+    CREATE TABLE IF NOT EXISTS product_colors(
+	    product_id BYTEA REFERENCES products(id) ON DELETE CASCADE NOT NULL,
+	    color      VARCHAR DEFAULT '' NOT NULL,
+	    PRIMARY KEY(product_id, color)
 	);`
 
 	_, err := db.conn.ExecContext(ctx, createTableQuery)
@@ -59,4 +77,8 @@ func (db *database) Close() error {
 
 func (db *database) Users() users.DB {
 	return &usersDB{conn: db.conn}
+}
+
+func (db *database) Products() products.DB {
+	return &productsDB{conn: db.conn}
 }

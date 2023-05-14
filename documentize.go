@@ -8,6 +8,7 @@ import (
 	"golang.org/x/sync/errgroup"
 	"graduate_work/console"
 	"graduate_work/pkg/store"
+	"graduate_work/products"
 	"graduate_work/users"
 	"graduate_work/users/userauth"
 	"net"
@@ -17,6 +18,7 @@ type DB interface {
 	CreateSchema(ctx context.Context) error
 
 	Users() users.DB
+	Products() products.DB
 
 	Close() error
 }
@@ -32,9 +34,10 @@ type Config struct {
 type Documentize struct {
 	config *Config
 
-	users *users.Service
-	store *store.Store
-	auth  *userauth.Service
+	users    *users.Service
+	store    *store.Store
+	auth     *userauth.Service
+	products *products.Service
 
 	server *console.Server
 }
@@ -67,6 +70,10 @@ func New(config *Config, db DB) (*Documentize, error) {
 	}
 
 	{
+		app.products = products.New(db.Products(), app.store)
+	}
+
+	{
 		listener, err := net.Listen("tcp", config.ServerAddress)
 		if err != nil {
 			return nil, err
@@ -85,6 +92,7 @@ func New(config *Config, db DB) (*Documentize, error) {
 			listener,
 			app.auth,
 			app.users,
+			app.products,
 		)
 	}
 
