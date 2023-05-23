@@ -1,7 +1,10 @@
 import { ChangeEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { colors } from '../../../../colors';
+import { Color, colors } from '../../../../colors';
+import { ProductsClient } from '@/api/products';
+import { ProductsService } from '@/product/service';
+import { Product } from '@/product';
 
 import { product } from '../../../../mockedData/product';
 
@@ -16,18 +19,46 @@ const MOCK_PRODUCT_PHOTOS
     = [mockProductPhoto, mockProductPhoto, mockProductPhoto, mockProductPhoto];
 
 const ProductCreate = () => {
-    const [currentColor, setCurrentColor] = useState('white');
-    const [file, setFile] = useState<File>();
+    const navigate = useNavigate();
+
+    const [currentColor, setCurrentColor] = useState<Color>(colors[0]);
+    const [file, setFile] = useState<string>('');
+    const [title, setTitle] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    const [price, setPrice] = useState<number>(0);
+
+    const productsClient = new ProductsClient();
+    const productsService = new ProductsService(productsClient);
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            setFile(e.target.files[0]);
+            setFile(URL.createObjectURL(e.target.files[0]));
         }
     };
+
+    const onChangePrice = (e: any) => {
+        if (e.target.value) {
+            setPrice(e.target.value)
+        }
+    }
 
     const deleteProductPhoto = (index: number) => {
         MOCK_PRODUCT_PHOTOS.splice(index, 1);
     };
+
+    const editProduct = async () => {
+        await productsService.update(
+            new Product(product.id,
+                title,
+                description,
+                price,
+                [file],
+                product.isAvailable,
+                [currentColor],
+                product.IsLiked
+            ))
+        navigate(`/product/${product.id}`)
+    }
 
     return (
         <>
@@ -39,15 +70,26 @@ const ProductCreate = () => {
                 <h2 className="product-edit__title">Зміна продукту</h2>
                 <div className="product-edit__input__wrapper" >
                     <label className="product-edit__label">Назва</label>
-                    <input className="product-edit__input" placeholder={product.title} />
+                    <input
+                        className="product-edit__input"
+                        placeholder={product.title}
+                        onChange={e => setTitle(e.target.value)}
+                    />
                     <span></span>
                 </div>
                 <div className="product-edit__input__wrapper" >
                     <label className="product-edit__label">Ціна</label>
-                    <input className="product-edit__input" placeholder={`${product.price}`} />
+                    <input
+                        className="product-edit__input"
+                        placeholder={`${product.price}`}
+                        onChange={onChangePrice} />
                     <span></span>
                 </div>
-                <textarea className="product-edit__textarea" placeholder={product.description} />
+                <textarea
+                    className="product-edit__textarea"
+                    placeholder={product.description}
+                    onChange={e => setDescription(e.target.value)}
+                />
                 <div className="product-edit__color__content">
                     {colors.map((color) =>
                         <div className="product-edit__color__item" key={color}>
@@ -100,7 +142,11 @@ const ProductCreate = () => {
                         className="product-edit__photo__input"
                     />
                 </div>
-                <button className="product-edit__button">
+                <button
+                    className="product-edit__button"
+                    type='button'
+                    onClick={() => editProduct()}
+                >
                     Збрегти зміни
                 </button>
             </form>

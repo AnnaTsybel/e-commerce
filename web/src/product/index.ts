@@ -8,8 +8,17 @@ export class Product {
         public price: number = 0,
         public photo: string[] = [],
         public isAvailable: boolean = false,
-        public color: Color = 'white',
-        public favorite: boolean = false,
+        public color: Color[] = ['white'],
+        public IsLiked: boolean = false,
     ) { };
 }
 
+export class ProductCreation {
+    public constructor(
+        public title: string = '',
+        public description: string = '',
+        public price: number = 0,
+        public photo: string[] = [],
+        public color: Color[] = ['white'],
+    ) { };
+}

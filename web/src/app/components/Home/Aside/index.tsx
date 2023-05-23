@@ -1,7 +1,10 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { catalog } from '@/mockedData/catalog';
-import { user } from '@/mockedData/user';
+import { User } from '@/users';
+import { UsersClient } from '@/api/users';
+import { UsersService } from '@/users/service';
 
 import noUserPhoto from '@img/no-photo-profile.webp';
 
@@ -9,7 +12,20 @@ import './index.scss';
 
 export const Aside = () => {
 
-    const isLoggedIn = true;
+    const isLoggedIn = window.localStorage.getItem('IS_LOGGEDIN');
+
+    const [user, setUser] = useState<User>()
+
+    const usersClient = new UsersClient();
+    const usersService = new UsersService(usersClient);
+
+    useEffect(() => {
+        (async function setClub() {
+            const userData = await usersService.getUser()
+            setUser(userData)
+        }())
+
+    }, [])
 
     return (
         <aside className="aside">
@@ -36,7 +52,7 @@ export const Aside = () => {
                     <p className="aside__category__text">Всі категорії</p>
                 </Link>
             </div>
-            {isLoggedIn
+            {isLoggedIn && user
                 && <div className="aside__user">
                     <Link className="aside__user__info" to={`user/${user.id}`}>
                         <img src={user.avatar ? user.avatar : noUserPhoto}

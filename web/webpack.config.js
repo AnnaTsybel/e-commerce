@@ -75,7 +75,7 @@ module.exports = (env, argv) => {
     return {
         entry: "./src/index.tsx",
         target: "web",
-        watch: !isProduction,
+        watch: true,
         watchOptions: {
             aggregateTimeout: 200,
             poll: 1000,
@@ -84,7 +84,7 @@ module.exports = (env, argv) => {
         output: {
             path: path.resolve(__dirname, "dist/"),
             filename: "[name].[hash].js",
-            publicPath: "/",
+            publicPath: "/static/dist/",
         },
         plugins: isProduction ? PRODUCTION_PLUGINS : DEVELOPMENT_PLUGINS,
         devServer: {

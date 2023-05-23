@@ -1,5 +1,5 @@
-import { lazy } from 'react';
-import { Route, useLocation, Routes } from 'react-router-dom';
+import { lazy, useEffect } from 'react';
+import { Route, useLocation, Routes, useNavigate } from 'react-router-dom';
 import { Footer } from '../app/components/common/Footer';
 
 import { Navbar } from '../app/components/common/Navbar';
@@ -7,7 +7,7 @@ import { Navbar } from '../app/components/common/Navbar';
 const RegistrationPage = lazy(() => import('../app/views/RegistrationPage'));
 const LoginPage = lazy(() => import('../app/views/LoginPage'));
 const Home = lazy(() => import('../app/views/Home'));
-const User = lazy(() => import('../app/views/User'));
+const User = lazy(() => import('../app/views/UserPage'));
 const NotFound = lazy(() => import('../app/views/NotFound'));
 const Product = lazy(() => import('../app/views/Product'));
 const Products = lazy(() => import('../app/views/Products'));
@@ -58,18 +58,6 @@ export class RouteConfig {
             <User />,
             false
         );
-    public static Registration: ComponentRoutes
-        = new ComponentRoutes(
-            '/registration',
-            <RegistrationPage />,
-            false
-        );
-    public static Login: ComponentRoutes
-        = new ComponentRoutes(
-            '/login',
-            <LoginPage />,
-            false
-        );
     public static Product: ComponentRoutes
         = new ComponentRoutes(
             '/product/:id',
@@ -104,8 +92,6 @@ export class RouteConfig {
         RouteConfig.Home,
         RouteConfig.User,
         RouteConfig.NotFound,
-        RouteConfig.Registration,
-        RouteConfig.Login,
         RouteConfig.Product,
         RouteConfig.Products,
         RouteConfig.ProductCreate,
@@ -114,24 +100,49 @@ export class RouteConfig {
     ];
 }
 
+export class AuthRoutesConfig {
+    public static Registration: ComponentRoutes
+        = new ComponentRoutes(
+            '/registration',
+            <RegistrationPage />,
+            false
+        );
+    public static Login: ComponentRoutes
+        = new ComponentRoutes(
+            '/login',
+            <LoginPage />,
+            false
+        );
+    /** Routes is an array of logical router components */
+    public static routes: ComponentRoutes[] = [
+        AuthRoutesConfig.Login,
+        AuthRoutesConfig.Registration,
+    ];
+}
+
 export const GlobalRoutes = () => {
     const location = useLocation();
+    const navigate = useNavigate();
 
-    const isLoggedIn = false;
+    const isLoggedin = window.localStorage.getItem('IS_LOGGINED');
 
-    const setHiddenHeader = () => {
-        return !isLoggedIn
-            && (location.pathname === RouteConfig.Login.path
-                || location.pathname === RouteConfig.Registration.path);
-    };
+    useEffect(() => {
+        if (!isLoggedin && location.pathname !== AuthRoutesConfig.Login.path) {
+            console.log(location.pathname )
+            navigate(AuthRoutesConfig.Registration.path);
+        } else if (!isLoggedin && location.pathname === AuthRoutesConfig.Login.path) {
+            console.log('hello')
+            navigate(AuthRoutesConfig.Login.path);
+        } else {
+            navigate(RouteConfig.Home.path);
+        }
+    }, [isLoggedin]);
 
     return (
-
-        <div className={`page ${setHiddenHeader() ? 'page__auth' : ''}`}>
-            <Navbar />
-            <div className="page__content">
+        <>
+            {!isLoggedin ?
                 <Routes>
-                    {RouteConfig.routes.map(
+                    {AuthRoutesConfig.routes.map(
                         (route: ComponentRoutes, index: number) =>
                             <Route
                                 key={index}
@@ -140,9 +151,22 @@ export const GlobalRoutes = () => {
                             />
                     )}
                 </Routes>
-            </div>
-            <Footer />
-        </div>
-
-    );
+                : <div>
+                    <Navbar />
+                    <div className="page">
+                        <Routes>
+                            {RouteConfig.routes.map(
+                                (route: ComponentRoutes, index: number) =>
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        element={route.component}
+                                    />
+                            )}
+                        </Routes>
+                    </div>
+                    <Footer />
+                </div>
+            }
+        </>)
 };

@@ -12,7 +12,7 @@ export const product = new Product(
     1000,
     ['./static/img/phone-photo.jpeg'],
     true,
-    'purple',
+    ['purple'],
     false
 );
 export const product1 = new Product(
@@ -27,7 +27,7 @@ export const product1 = new Product(
     300000,
     ['./static/img/phone-photo.jpeg'],
     true,
-    'yellow',
+    ['yellow'],
     true
 );
 

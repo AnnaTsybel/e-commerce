@@ -1,8 +1,21 @@
-import { Link } from 'react-router-dom';
+import { UsersClient } from '@/api/users';
+import { RouteConfig } from '@/routes';
+import { UsersService } from '@/users/service';
+import { Link, useNavigate } from 'react-router-dom';
 
 import '../index.scss';
 
 export const Login = () => {
+    const navigate = useNavigate()
+    
+    const usersClient = new UsersClient();
+    const usersService = new UsersService(usersClient);
+
+    const login = async () => {
+        // await usersService.login()
+        navigate(RouteConfig.Home.path)
+
+    }
     return (
         <>
             <div className="auth__switcher">
@@ -22,7 +35,7 @@ export const Login = () => {
                     <input className="auth__input" />
                     <span></span>
                 </div>
-                <button className="auth__button">Увійти</button>
+                <button className="auth__button" type='button' onClick={()=>login()}>Увійти</button>
             </form>
         </>
     );

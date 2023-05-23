@@ -6,6 +6,7 @@ import (
 	documentize "graduate_work"
 	"graduate_work/products"
 	"graduate_work/users"
+	"log"
 
 	_ "github.com/lib/pq" // using postgres driver.
 	"github.com/zeebo/errs"
@@ -66,6 +67,7 @@ func (db *database) CreateSchema(ctx context.Context) error {
 	    PRIMARY KEY(product_id, color)
 	);`
 
+	log.Println("crss")
 	_, err := db.conn.ExecContext(ctx, createTableQuery)
 	return Error.Wrap(err)
 }

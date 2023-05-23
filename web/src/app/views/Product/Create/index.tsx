@@ -1,7 +1,10 @@
 import { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { colors } from '../../../../colors';
+import { Color, colors } from '../../../../colors';
+import { ProductsClient } from '@/api/products';
+import { ProductsService } from '@/product/service';
+import { ProductCreation } from '@/product';
 
 import photoAddIcon from '../../../static/img/Product/photo-add-icon.png';
 import backButtonIcon from '../../../static/img/back-button.png';
@@ -9,14 +12,30 @@ import backButtonIcon from '../../../static/img/back-button.png';
 import '../index.scss';
 
 const ProductCreate = () => {
-    const [currentColor, setCurrentColor] = useState(colors[0]);
-    const [file, setFile] = useState<File>();
+    const [currentColor, setCurrentColor] = useState<Color>(colors[0]);
+    const [file, setFile] = useState<string>('');
+    const [title, setTitle] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    const [price, setPrice] = useState<number>(0);
+
+    const productsClient = new ProductsClient();
+    const productsService = new ProductsService(productsClient);
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
-            setFile(e.target.files[0]);
+        if (e.target.files?.length) {
+            setFile(URL.createObjectURL(e.target.files[0]));
         }
     };
+
+    const createProduct = () => {
+        productsService.create(new ProductCreation(title,description,price,[file],[currentColor]))
+    }
+
+    const onChangePrice =(e:any)=> {
+        if (e.target.value) {
+            setPrice(e.target.value)
+        }
+    }
 
     return (
         <>
@@ -29,15 +48,15 @@ const ProductCreate = () => {
                 <h2 className="product-create__title">Створення продукту</h2>
                 <div className="product-create__input__wrapper" >
                     <label className="product-create__label">Назва</label>
-                    <input className="product-create__input" />
+                    <input className="product-create__input" onChange={e=>setTitle(e.target.value)} />
                     <span></span>
                 </div>
                 <div className="product-create__input__wrapper" >
                     <label className="product-create__label">Ціна</label>
-                    <input className="product-create__input" />
+                    <input className="product-create__input" type='number' onChange={onChangePrice} />
                     <span></span>
                 </div>
-                <textarea className="product-create__textarea" placeholder="Опис" />
+                <textarea className="product-create__textarea" placeholder="Опис" onChange={e=>setDescription(e.target.value)} />
                 <div className="product-create__color__content">
                     {colors.map((color) =>
                         <div className="product-create__color__item" key={color}>
@@ -66,7 +85,11 @@ const ProductCreate = () => {
                         className="product-create__photo__input"
                     />
                 </div>
-                <button className="product-create__button">
+                <button
+                    className="product-create__button"
+                    type='button'
+                    onClick={() => createProduct()}
+                >
                     Створити продукт
                 </button>
             </form>

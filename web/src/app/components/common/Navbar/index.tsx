@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { RouteConfig } from '@/routes';
+import { AuthRoutesConfig, RouteConfig } from '@/routes';
 
 import Catalog from '@components/Catalog';
 
@@ -12,17 +12,29 @@ import searchIcon from '@img/Navbar/search-icon.png';
 import сancelIcon from '@img/Navbar/cancel-icon.png';
 import logoIcon from '@img/Navbar/logo.png';
 
-import { user } from '@/mockedData/user';
+import { User } from '@/users';
 import { catalog } from '@/mockedData/catalog';
 
 import './index.scss';
+import { UsersClient } from '@/api/users';
+import { UsersService } from '@/users/service';
 
 const ITEMS_SHOPPING_CART_AMOUNT = 12;
 
 export const Navbar = () => {
     const [isCatalogOpened, setCatalogOpened] = useState<boolean>(false);
+    const [user,setUser]=useState<User>()
 
-    const isLoggedIn = false;
+    const usersClient = new UsersClient();
+    const usersService = new UsersService(usersClient);
+
+    useEffect(() => {
+        (async function setClub() { 
+                const userData =await usersService.getUser()
+        setUser(userData)
+        }())
+    
+    },[])
 
     return (
         <header className="header">
@@ -50,8 +62,8 @@ export const Navbar = () => {
                         Знайти
                     </button>
                 </div>
-                {isLoggedIn
-                    ? <Link className="header__user" to={RouteConfig.User.path}>
+                {user &&
+                     <Link className="header__user" to={RouteConfig.User.path}>
                         <div className="header__user__icon">
                             <img src={userProfileIcon}
                                 alt="user profile"
@@ -59,14 +71,6 @@ export const Navbar = () => {
                         </div>
                         <p className="header__user__text">{user.name} {user.surname}</p>
                     </Link>
-                    : < Link className="header__user" to={RouteConfig.Registration.path}>
-                        <span className="header__user__icon">
-                            <img src={userProfileIcon}
-                                alt="user profile"
-                                className="header__user__icon__image" />
-                        </span>
-                        <p className="header__user__text">Увійти</p>
-                    </Link >
                 }
                 <div className="header__shopping-cart">
                     <Link to="/products/favorite" className="header__shopping-cart__icon">
