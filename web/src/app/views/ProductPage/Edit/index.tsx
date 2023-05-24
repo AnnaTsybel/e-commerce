@@ -12,6 +12,7 @@ import closeIcon from '@img/Product/remove-icon.png';
 import backButtonIcon from '@img/back-button.png';
 
 import '../index.scss';
+import { convertToBase64 } from '@/app/internal/convertImage';
 
 const MOCK_PRODUCT_PHOTOS
     = [mockProductPhoto, mockProductPhoto, mockProductPhoto, mockProductPhoto];
@@ -28,21 +29,35 @@ const ProductCreate = () => {
 
     const getLastItem = (thePath: string) => thePath.substring(thePath.lastIndexOf('/') + LAST_ITEM_PATH_INCREMENT);
 
-    const [file, setFile] = useState<string>('');
+    const [files, setFiles] = useState<string[]>();
 
     const [currentColor, setCurrentColor] = useState<Color>(colors[DEFAULT_COLOR_INDEX]);
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [price, setPrice] = useState<number>(DEFAULT_PRICE);
+    const [photos, setPhotos] = useState<string[]>();
 
     const [product, setProduct] = useState<Product>();
 
     const productsClient = new ProductsClient();
     const productsService = new ProductsService(productsClient);
 
-    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files) {
-            setFile(URL.createObjectURL(e.target.files[FIRST_PHOTO_INDEX]));
+    const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files?.length) {
+            let photosData = [];
+            let filesData = [];
+
+            const uploadedFiles = Array.from(e.target.files);
+
+            for await (const uploadedFile of uploadedFiles) {
+                photosData.push(URL.createObjectURL(uploadedFile))
+
+                const convertedFile: string = await convertToBase64(uploadedFile);
+                filesData.push(convertedFile)
+            }
+
+            setPhotos(photosData);
+            setFiles(filesData)
         }
     };
 
@@ -131,7 +146,7 @@ const ProductCreate = () => {
                     </div>
 
                     <div className="product-edit__photos">
-                        {product.photo
+                        {product.photos
                             && MOCK_PRODUCT_PHOTOS.map((photo, index) =>
                                 <div
                                     className="product-edit__photos__item" key={`${photo}-${index}`}
@@ -169,6 +184,8 @@ const ProductCreate = () => {
                             id="product-photo" name="product-photo"
                             accept="image/png, image/jpeg"
                             className="product-edit__photo__input"
+                            multiple
+                            hidden
                         />
                     </div>
                     <button

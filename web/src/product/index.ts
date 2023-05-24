@@ -8,7 +8,7 @@ export class Product {
         public title: string = '',
         public description: string = '',
         public price: number = DEFAULT_PRICE,
-        public photo: string[] = [],
+        public photos: string[] = [],
         public isAvailable: boolean = false,
         public color: Color[] = ['white'],
         public IsLiked: boolean = false,
@@ -20,7 +20,7 @@ export class ProductCreation {
         public title: string = '',
         public description: string = '',
         public price: number = DEFAULT_PRICE,
-        public photo: string[] = [],
+        public photos: string[] = [],
         public color: Color[] = ['white'],
     ) { };
 }
@@ -34,5 +34,6 @@ export class ProductEdit {
         public isAvailable: boolean = false,
         public color: Color[] = ['white'],
         public IsLiked: boolean = false,
+        public photos: string[] = [],
     ) { };
 }

@@ -5,6 +5,7 @@ import './index.scss';
 import { UsersClient } from '@/api/users';
 import { UsersService } from '@/users/service';
 import { Gender, User, UserUpdateData } from '@/users';
+import { convertToBase64 } from '@/app/internal/convertImage';
 
 const UserPage = () => {
     const [isEditing, setIsEditing] = useState(false);
@@ -14,6 +15,16 @@ const UserPage = () => {
     const [surname, setSurname] = useState<string>();
     const [phonenumber, setPhonenumber] = useState<string>();
     const [gender, setGender] = useState<Gender>();
+    const [photo, setPhoto] = useState<string>(userNoPhoto)
+    const [file, setFile] = useState<string>(userNoPhoto)
+
+    const handleFileChange = async (e: any) => {
+        if (e.target.files?.length) {
+            setPhoto(URL.createObjectURL(e.target.files[0]));
+            const convertedFile: string = await convertToBase64(e.target.files[0]);
+            setFile(convertedFile)
+        }
+    }
 
     const usersClient = new UsersClient();
     const usersService = new UsersService(usersClient);
@@ -52,13 +63,18 @@ const UserPage = () => {
                             <div className="user__photo__input__wrapper" >
                                 <label className="user__photo__label" htmlFor="user-photo">
                                     <img
-                                        src={user.avatar ? user.avatar : userNoPhoto}
+                                        src={photo}
                                         className="user__photo"
                                         alt="user"
                                     />
                                 </label>
-                                <input className="user__photo__input" type="file" id="user-photo"
-                                    accept="image/png, image/jpeg" />
+                                <input
+                                    className="user__photo__input"
+                                    type="file"
+                                    id="user-photo"
+                                    accept="image/png, image/jpeg"
+                                    onChange={handleFileChange}
+                                />
                                 <span>Оберіть нове фото</span>
                             </div>
                             <div className="user__input__wrapper" >

@@ -9,34 +9,57 @@ import { ProductsService } from '@/product/service';
 import { ProductCreation } from '@/product';
 
 import '../index.scss';
+import { convertToBase64 } from '@/app/internal/convertImage';
 
 const DEFAULT_COLOR_INDEX = 0;
 const DEFAULT_PRICE = 0;
 const FIRST_PHOTO_INDEX = 0;
 
 const ProductCreate = () => {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
+
     const [currentColor, setCurrentColor] = useState<Color>(colors[DEFAULT_COLOR_INDEX]);
-    const [file, setFile] = useState<string>('');
+    const [photos, setPhotos] = useState<string[]>();
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [price, setPrice] = useState<number>(DEFAULT_PRICE);
+    const [files, setFiles] = useState<string[]>();
 
     const productsClient = new ProductsClient();
     const productsService = new ProductsService(productsClient);
 
-    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.length) {
-            setFile(URL.createObjectURL(e.target.files[FIRST_PHOTO_INDEX]));
+            let photosData = [];
+            let filesData = [];
+
+            const uploadedFiles = Array.from(e.target.files);
+
+            for await (const uploadedFile of uploadedFiles) {
+                photosData.push(URL.createObjectURL(uploadedFile))
+
+                const convertedFile: string = await convertToBase64(uploadedFile);
+                filesData.push(convertedFile)
+            }
+
+            setPhotos(photosData);
+            setFiles(filesData)
         }
     };
 
-    const createProduct = () => {
-        productsService.create(new ProductCreation(title, description, price, [file], [currentColor]));
+    const createProduct = async () => {
+        await productsService.create(new ProductCreation(
+            title,
+            description,
+            price,
+            photos,
+            [currentColor]
+        ));
+
         navigate('/products');
     };
 
-    const onChangePrice =(e:any) => {
+    const onChangePrice = (e: any) => {
         if (e.target.value) {
             setPrice(Number(e.target.value));
         }
@@ -96,6 +119,8 @@ const ProductCreate = () => {
                         id="product-photo" name="product-photo"
                         accept="image/png, image/jpeg"
                         className="product-create__photo__input"
+                        multiple
+                        hidden
                     />
                 </div>
                 <button
