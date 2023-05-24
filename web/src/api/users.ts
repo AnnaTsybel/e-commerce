@@ -1,8 +1,8 @@
 // Copyright (C) 2021 Creditor Corp. Group.
 // See LICENSE for copying information.
 
-import { UserRegisterData, User } from '@/users';
 import { APIClient } from '.';
+import { User, UserRegisterData, UserUpdateData } from '@/users';
 
 /**
  * UsersClient is a http implementation of users API.
@@ -35,9 +35,10 @@ export class UsersClient extends APIClient {
             await this.handleError(response);
         }
     }
+
     /** Gets user */
     public async getUser(): Promise<User> {
-        const path = '/api/v0/profile';
+        const path = '/api/v0/users';
         const response = await this.http.get(path);
 
         if (!response.ok) {
@@ -54,7 +55,16 @@ export class UsersClient extends APIClient {
             user.status,
             user.avatar,
             user.gender
-        )
+        );
     }
 
+    /** updates user */
+    public async update(user: UserUpdateData): Promise<void> {
+        const path = '/api/v0/users';
+        const response = await this.http.put(path, JSON.stringify(user));
+
+        if (!response.ok) {
+            await this.handleError(response);
+        }
+    }
 }

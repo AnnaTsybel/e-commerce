@@ -13,14 +13,10 @@ html {
 }
 
 .page {
-    min-height: calc(100vh - 50px);
-    padding-top: 100px;
     background: #424769;
-
-    &__content {
-        min-height: calc(100vh - 150px);
-        padding: 30px;
-    }
+    min-height: calc(100vh - 50px);
+    padding: 30px;
+    padding-top: 150px;
 
     &__auth {
         padding-top: 0;

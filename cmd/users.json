@@ -1,0 +1,68 @@
+[
+    {
+        "id":"2d395c68-f9e6-11ed-be56-0242ac120002",
+        "name": "Анна",
+        "surname": "Шевченко",
+        "phoneNumber": "+380966663336",
+        "email": "ann@gmail.com",
+        "status":"admin",
+        "photo": "",
+        "gender": "woman",
+        "password": "YVm2pE4B"
+    },
+    {
+        "id":"325e89d4-f9e6-11ed-be56-0242ac120002",
+        "name": "Микита",
+        "surname": "Бондур",
+        "phoneNumber": "+380924663336",
+        "email": "mykyta@gmail.com",
+        "status":"admin",
+        "photo": "",
+        "gender": "man",
+        "password": "g6uPFwcXAXvm7E5D"
+    },
+    {
+        "id":"396b5b6c-f9e6-11ed-be56-0242ac120002",
+        "name": "Ігор",
+        "surname": "Кожедуб",
+        "phoneNumber": "+380966403336",
+        "email": "ann@gmail.com",
+        "status":"user",
+        "photo": "",
+        "gender": "man",
+        "password": "PvqJwAxJ"
+    },
+    {
+        "id":"3f26b682-f9e6-11ed-be56-0242ac120002",
+        "name": "Олена",
+        "surname": "Тельнова",
+        "phoneNumber": "+380987663336",
+        "email": "olena@gmail.com",
+        "status":"user",
+        "photo": "",
+        "gender": "woman",
+        "password": "2qTHSr4TUaZ5&Lty"
+    },
+    {
+        "id":"464d5236-f9e6-11ed-be56-0242ac120002",
+        "name": "Василь",
+        "surname": "Кулінов",
+        "phoneNumber": "+380966663336",
+        "email": "vasya@gmail.com",
+        "status":"user",
+        "photo": "",
+        "gender": "man",
+        "password": "GUvIydtZpd3B5NYR"
+    },
+    {
+        "id":"4e7a2830-f9e6-11ed-be56-0242ac120002",
+        "name": "Богдан",
+        "surname": "Панасюк",
+        "phoneNumber": "+380925663336",
+        "email": "bohdan@gmail.com",
+        "status":"admin",
+        "photo": "",
+        "gender": "man",
+        "password": "XgxMFVfmDNmr7edC"
+    }
+]

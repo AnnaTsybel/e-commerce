@@ -1,8 +1,8 @@
 // Copyright (C) 2021 Creditor Corp. Group.
 // See LICENSE for copying information.
 
+import { User, UserRegisterData, UserUpdateData } from '.';
 import { UsersClient } from '@/api/users';
-import { User, UserRegisterData } from '.';
 
 /**
  * Exposes all users related logic.
@@ -24,5 +24,10 @@ export class UsersService {
     /** gets user info */
     public async getUser(): Promise<User> {
         return await this.users.getUser();
+    }
+
+    /** updates user info */
+    public async update(user: UserUpdateData): Promise<void> {
+        await this.users.update(user);
     }
 }

@@ -1,13 +1,10 @@
 
 import './index.scss';
 
-export const Footer = () => {
+export const Footer = () =>
+    <footer className="footer">
+        <div className="footer__content">
+            <p className="footer__text">©2023 Anna-Ecommerce</p>
+        </div>
+    </footer>;
 
-    return (
-        <footer className="footer">
-            <div className="footer__content">
-                <p className="footer__text">©2023 Anna-Ecommerce</p>
-            </div>
-        </footer>
-    );
-};

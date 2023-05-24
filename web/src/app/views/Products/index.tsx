@@ -14,8 +14,8 @@ import { ProductsService } from '@/product/service';
 import './index.scss';
 
 const Products = () => {
-    const [user, setUser] = useState<User>()
-    const [products, setProducts] = useState<Product[]>()
+    const [user, setUser] = useState<User>();
+    const [products, setProducts] = useState<Product[]>();
 
     const usersClient = new UsersClient();
     const usersService = new UsersService(usersClient);
@@ -25,13 +25,13 @@ const Products = () => {
 
     useEffect(() => {
         (async function setData() {
-            const userData = await usersService.getUser()
-            setUser(userData)
+            const userData = await usersService.getUser();
+            setUser(userData);
 
-            const productsData = await productsService.list()
-            setProducts(productsData)
-        }())
-    }, [])
+            const productsData = await productsService.list();
+            setProducts(productsData);
+        }());
+    }, []);
 
     return (
         <div className="products">
@@ -41,12 +41,17 @@ const Products = () => {
                     {user && user.status === 'admin'
                         && <Link to="/product/create" className="products__cards__button">
                             Add Product
-                        </Link>}
-                    <div className="products__cards__content">
-                        {products?.map((product: Product, index: number) =>
-                            <ProductItem product={product} key={`${product.id}-${index}`} />
-                        )}
-                    </div>
+                        </Link>
+                    }
+                    {products?.length ?
+                        <div className="products__cards__content">
+                            {products?.map((product: Product, index: number) =>
+                                <ProductItem product={product} key={`${product.id}-${index}`} />
+                            )}
+                        </div>
+                        :
+                        <h2 className="products__no-items">No products yet</h2>
+                    }
                 </div>
             </div>
         </div>

@@ -5,6 +5,19 @@
     flex-direction: column;
     background: #2d3250;
 
+    & .product__color__icon {
+        content: " ";
+        height: 20px;
+        width: 20px;
+        border: 1px solid black;
+        margin: 0;
+        margin-right: 4px;
+
+        &__checked {
+            box-shadow: 0 0 2px 2px rgb(201 99 169 / 100%);
+        }
+    }
+
     &__title {
         margin-bottom: 20px;
         text-align: center;

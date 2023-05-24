@@ -4,26 +4,38 @@ import userNoPhoto from '@img/no-photo-profile.webp';
 import './index.scss';
 import { UsersClient } from '@/api/users';
 import { UsersService } from '@/users/service';
-import { User } from '@/users';
+import { Gender, User, UserUpdateData } from '@/users';
 
 const UserPage = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [user, setUser] = useState<User>();
 
-    const sendChanges = () => {
-        setIsEditing(false);
-    };
+    const [name, setName] = useState<string>();
+    const [surname, setSurname] = useState<string>();
+    const [phonenumber, setPhonenumber] = useState<string>();
+    const [gender, setGender] = useState<Gender>();
 
     const usersClient = new UsersClient();
     const usersService = new UsersService(usersClient);
 
+    const sendChanges = () => {
+        setIsEditing(false);
+        if (user) {
+            usersService.update(new UserUpdateData(user.id, name, surname, phonenumber, gender));
+        }
+    };
+
     useEffect(() => {
         (async function setClub() {
-            const userData = await usersService.getUser()
-            setUser(userData)
-        }())
+            const userData = await usersService.getUser();
+            setUser(userData);
 
-    }, [])
+            setName(userData.name);
+            setSurname(userData.surname);
+            setGender(userData.gender);
+            setPhonenumber(userData.phoneNumber);
+        }());
+    }, []);
 
     return (
         <div className="user">
@@ -51,29 +63,39 @@ const UserPage = () => {
                             </div>
                             <div className="user__input__wrapper" >
                                 <label className="user__label">Імʼя</label>
-                                <input className="user__input" placeholder={user.name} />
+                                <input
+                                    className="user__input"
+                                    defaultValue={user.name}
+                                    onChange={e => setName(e.target.value)}
+                                />
                                 <span></span>
                             </div>
                             <div className="user__input__wrapper" >
                                 <label className="user__label">Прізвище</label>
-                                <input className="user__input" placeholder={user.surname} />
-                                <span></span>
-                            </div>
-                            <div className="user__input__wrapper" >
-                                <label className="user__label">Пошта</label>
-                                <input className="user__input" placeholder={user.email} />
+                                <input
+                                    className="user__input"
+                                    defaultValue={user.surname}
+                                    onChange={e => setSurname(e.target.value)}
+                                />
                                 <span></span>
                             </div>
                             <div className="user__input__wrapper" >
                                 <label className="user__label">Мобільний</label>
-                                <input className="user__input" placeholder={user.phoneNumber} />
+                                <input
+                                    className="user__input"
+                                    defaultValue={user.phoneNumber}
+                                    onChange={e => setPhonenumber(e.target.value)}
+                                />
                                 <span></span>
                             </div>
                             <div className="user__input__wrapper" >
-                                <label className="user__label">Стать</label>
+                                <label
+                                    className="user__label">Стать</label>
                                 <input
                                     className="user__input"
-                                    placeholder={user.gender === 'man' ? 'чоловік' : 'жінка'} />
+                                    defaultValue={user.gender === 'man' ? 'чоловік' : 'жінка'}
+                                    onChange={e => setName(e.target.value)}
+                                />
                                 <span></span>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
+import { Product, ProductCreation, ProductEdit } from '.';
 import { ProductsClient } from '@/api/products';
-import { Product, ProductCreation } from '.';
 
 /**
  * Exposes all products related logic.
@@ -11,8 +11,8 @@ export class ProductsService {
         this.products = products;
     }
     /** product */
-    public async product(): Promise<Product> {
-        return await this.products.product();
+    public async product(productId: string): Promise<Product> {
+        return await this.products.product(productId);
     }
 
     /** products list */
@@ -31,17 +31,17 @@ export class ProductsService {
     }
 
     /** updates product */
-    public async update(product: Product): Promise<void> {
+    public async update(product: ProductEdit): Promise<void> {
         await this.products.update(product);
     }
 
     /** likes product */
-    public async likeProduct(productId: string, userId: string): Promise<void> {
-        await this.products.likeProduct(productId, userId);
+    public async likeProduct(productId: string): Promise<void> {
+        await this.products.likeProduct(productId);
     }
 
     /** unlikes product */
-    public async unlikeProduct(productId: string, userId: string): Promise<void> {
-        await this.products.unlikeProduct(productId, userId);
+    public async unlikeProduct(productId: string): Promise<void> {
+        await this.products.unlikeProduct(productId);
     }
 }

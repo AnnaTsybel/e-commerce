@@ -9,26 +9,37 @@ import './index.scss';
 
 const sliderImages = [
     {
-        photo: sliderPhoto1
+        photo: sliderPhoto1,
     },
     {
-        photo: sliderPhoto2
+        photo: sliderPhoto2,
     },
     {
-        photo: sliderPhoto3
+        photo: sliderPhoto3,
     },
 ];
 
+const DEFAULT_SLIDE = 0;
+const FIRST_SLIDE = 0;
+const STEP = 1;
+const INDEX_SLIDER_DECREMENTING_LENGTH = 1;
+
 export const Slider = () => {
-    const [current, setCurrent] = useState(0);
+    const [current, setCurrent] = useState<number>(DEFAULT_SLIDE);
     const sliderImagesLength = sliderImages.length;
 
     const nextSlide = () => {
-        setCurrent(current === sliderImagesLength - 1 ? 0 : current + 1);
+        setCurrent(current === sliderImagesLength - INDEX_SLIDER_DECREMENTING_LENGTH ?
+            FIRST_SLIDE
+            :
+            current + STEP);
     };
 
     const prevSlide = () => {
-        setCurrent(current === 0 ? sliderImagesLength - 1 : current - 1);
+        setCurrent(current === FIRST_SLIDE ?
+            sliderImagesLength - INDEX_SLIDER_DECREMENTING_LENGTH
+            :
+            current - STEP);
     };
 
     return (
@@ -44,13 +55,13 @@ export const Slider = () => {
                     <div key={`slider-image--${index}`}
                         className={` slider__item ${index === current ? 'active' : ''}`}
                     >
-                        {index === current && (
+                        {index === current &&
                             <img
                                 src={sliderImage.photo}
                                 alt="slider item"
                                 className="slider__item__image"
                             />
-                        )}
+                        }
                     </div>
                 )}
             </div>

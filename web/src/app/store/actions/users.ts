@@ -28,13 +28,13 @@ const usersService = new UsersService(usersClient);
 
 /** thunk that implements user registration */
 export const registerUser = (user: UserRegisterData) =>
-    async function (dispatch: Dispatch) {
+    async function(dispatch: Dispatch) {
         await usersService.register(user);
         dispatch(register(user));
     };
 
 export const setCurrentUser = () =>
-    async function (dispatch: Dispatch) {
+    async function(dispatch: Dispatch) {
         const user = await usersService.getUser();
         dispatch(setUser(user));
     };

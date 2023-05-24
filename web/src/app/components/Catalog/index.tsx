@@ -9,8 +9,8 @@ import './index.scss';
 const INDEX_FIRST_ITEM = 0;
 
 const Catalog: React.FC<{
-    catalog: any,
-    setCatalogOpened: Dispatch<SetStateAction<boolean>>
+    catalog: any;
+    setCatalogOpened: Dispatch<SetStateAction<boolean>>;
 }>
     = ({ catalog, setCatalogOpened }) => {
         const [currentCategory, setCurrentCategory] = useState(catalog[INDEX_FIRST_ITEM]);
@@ -48,7 +48,6 @@ const Catalog: React.FC<{
                 </div>
             </div>
         );
-
     };
 
 export default Catalog;

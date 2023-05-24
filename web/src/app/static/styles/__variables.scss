@@ -1,1 +1,40 @@
 $highlight-color: #b5659b;
+
+.product__color__icon {
+    content: " ";
+    height: 20px;
+    width: 20px;
+    border: 1px solid black;
+}
+
+.product__color__icon.product__white__icon {
+    background: white;
+}
+
+.product__gray__icon {
+    background: gray;
+}
+
+.product__blue__icon {
+    background: blue;
+}
+
+.product__red__icon {
+    background: red;
+}
+
+.product__black__icon {
+    background: black;
+}
+
+.product__purple__icon {
+    background: purple;
+}
+
+.product__yellow__icon {
+    background: yellow;
+}
+
+.product__green__icon {
+    background: green;
+}

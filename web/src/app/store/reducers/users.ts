@@ -1,13 +1,13 @@
 // Copyright (C) 2021 Creditor Corp. Group.
 // See LICENSE for copying information.
 
+import {
+    SET_USER,
+} from '../actions/users';
 import { UsersClient } from '@/api/users';
 import { User } from '@/users';
 import { UsersService } from '@/users/service';
 
-import {
-    SET_USER,
-} from '../actions/users';
 
 /**
  * UsersState is a representation of users reducer state.
@@ -29,11 +29,11 @@ export const usersReducer = (
     action: any = {}
 ) => {
     switch (action.type) {
-        case SET_USER:
-            state.user = action.user;
-            break;
-        default:
-            break;
+    case SET_USER:
+        state.user = action.user;
+        break;
+    default:
+        break;
     };
 
     return { ...state };

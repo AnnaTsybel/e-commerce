@@ -1,6 +1,14 @@
 .product {
     padding: 30px 40px;
 
+    &__color__icon {
+        content: " ";
+        height: 20px;
+        width: 20px;
+        border: 1px solid black;
+        margin: 0 auto 4px;
+    }
+
     &__content {
         display: flex;
         justify-content: space-between;

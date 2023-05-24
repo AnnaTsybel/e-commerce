@@ -1,41 +1,46 @@
 import { ChangeEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Color, colors } from '../../../../colors';
+import photoAddIcon from '../../../static/img/Product/photo-add-icon.png';
+import backButtonIcon from '../../../static/img/back-button.png';
 import { ProductsClient } from '@/api/products';
 import { ProductsService } from '@/product/service';
 import { ProductCreation } from '@/product';
 
-import photoAddIcon from '../../../static/img/Product/photo-add-icon.png';
-import backButtonIcon from '../../../static/img/back-button.png';
-
 import '../index.scss';
 
+const DEFAULT_COLOR_INDEX = 0;
+const DEFAULT_PRICE = 0;
+const FIRST_PHOTO_INDEX = 0;
+
 const ProductCreate = () => {
-    const [currentColor, setCurrentColor] = useState<Color>(colors[0]);
+    const navigate=useNavigate();
+    const [currentColor, setCurrentColor] = useState<Color>(colors[DEFAULT_COLOR_INDEX]);
     const [file, setFile] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-    const [price, setPrice] = useState<number>(0);
+    const [price, setPrice] = useState<number>(DEFAULT_PRICE);
 
     const productsClient = new ProductsClient();
     const productsService = new ProductsService(productsClient);
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.length) {
-            setFile(URL.createObjectURL(e.target.files[0]));
+            setFile(URL.createObjectURL(e.target.files[FIRST_PHOTO_INDEX]));
         }
     };
 
     const createProduct = () => {
-        productsService.create(new ProductCreation(title,description,price,[file],[currentColor]))
-    }
+        productsService.create(new ProductCreation(title, description, price, [file], [currentColor]));
+        navigate('/products');
+    };
 
-    const onChangePrice =(e:any)=> {
+    const onChangePrice =(e:any) => {
         if (e.target.value) {
-            setPrice(e.target.value)
+            setPrice(Number(e.target.value));
         }
-    }
+    };
 
     return (
         <>
@@ -48,20 +53,28 @@ const ProductCreate = () => {
                 <h2 className="product-create__title">Створення продукту</h2>
                 <div className="product-create__input__wrapper" >
                     <label className="product-create__label">Назва</label>
-                    <input className="product-create__input" onChange={e=>setTitle(e.target.value)} />
+                    <input className="product-create__input" onChange={e => setTitle(e.target.value)} />
                     <span></span>
                 </div>
                 <div className="product-create__input__wrapper" >
                     <label className="product-create__label">Ціна</label>
-                    <input className="product-create__input" type='number' onChange={onChangePrice} />
+                    <input
+                        className="product-create__input"
+                        type="number"
+                        onChange={onChangePrice}
+                    />
                     <span></span>
                 </div>
-                <textarea className="product-create__textarea" placeholder="Опис" onChange={e=>setDescription(e.target.value)} />
+                <textarea
+                    className="product-create__textarea"
+                    placeholder="Опис"
+                    onChange={e => setDescription(e.target.value)}
+                />
                 <div className="product-create__color__content">
                     {colors.map((color) =>
                         <div className="product-create__color__item" key={color}>
                             <div
-                                className={`product__${color}__icon 
+                                className={`product__color__icon product__${color}__icon 
                                 ${currentColor === color ? 'product-create__color__checked' : ''}`}
                                 onClick={() => setCurrentColor(color)} />
                             <p className="product-create__color__item__text">{color}</p>
@@ -87,7 +100,7 @@ const ProductCreate = () => {
                 </div>
                 <button
                     className="product-create__button"
-                    type='button'
+                    type="button"
                     onClick={() => createProduct()}
                 >
                     Створити продукт

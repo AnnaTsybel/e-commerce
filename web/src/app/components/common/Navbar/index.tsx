@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { AuthRoutesConfig, RouteConfig } from '@/routes';
 
 import Catalog from '@components/Catalog';
 
@@ -11,6 +10,7 @@ import favoriteIcon from '@img/Navbar/not-favorite-icon.png';
 import searchIcon from '@img/Navbar/search-icon.png';
 import сancelIcon from '@img/Navbar/cancel-icon.png';
 import logoIcon from '@img/Navbar/logo.png';
+import { AuthRoutesConfig, RouteConfig } from '@/routes';
 
 import { User } from '@/users';
 import { catalog } from '@/mockedData/catalog';
@@ -23,18 +23,17 @@ const ITEMS_SHOPPING_CART_AMOUNT = 12;
 
 export const Navbar = () => {
     const [isCatalogOpened, setCatalogOpened] = useState<boolean>(false);
-    const [user,setUser]=useState<User>()
+    const [user, setUser]=useState<User>();
 
     const usersClient = new UsersClient();
     const usersService = new UsersService(usersClient);
 
     useEffect(() => {
-        (async function setClub() { 
-                const userData =await usersService.getUser()
-        setUser(userData)
-        }())
-    
-    },[])
+        (async function setClub() {
+            const userData =await usersService.getUser();
+            setUser(userData);
+        }());
+    }, []);
 
     return (
         <header className="header">
@@ -63,7 +62,7 @@ export const Navbar = () => {
                     </button>
                 </div>
                 {user &&
-                     <Link className="header__user" to={RouteConfig.User.path}>
+                    <Link className="header__user" to={`/user/${user.id}`}>
                         <div className="header__user__icon">
                             <img src={userProfileIcon}
                                 alt="user profile"

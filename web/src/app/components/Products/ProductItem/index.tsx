@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { Product } from '../../../../product';
 
 import productPhoto from '@img/mocked/phone-photo.jpeg';
 import notLikedProduct from '@img/Product/not-favorite-icon.png';
 import likedProduct from '@img/Product/favorite-icon.png';
 import deleteIcon from '@img/Product/delete-icon.png';
 import editIcon from '@img/Product/edit-icon.png';
+import { Product } from '../../../../product';
 
 import './index.scss';
 import { UsersClient } from '@/api/users';
@@ -18,7 +18,7 @@ import { ProductsService } from '@/product/service';
 
 export const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
     const [isFavorite, setIsFavorite] = useState(product.IsLiked);
-    const [user, setUser] = useState<User>()
+    const [user, setUser] = useState<User>();
 
     const usersClient = new UsersClient();
     const usersService = new UsersService(usersClient);
@@ -26,30 +26,29 @@ export const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
     const productsClient = new ProductsClient();
     const productsService = new ProductsService(productsClient);
 
-    const deleteProduct = async () => {
-        await productsService.delete(product.id)
+    const deleteProduct = async() => {
+        await productsService.delete(product.id);
     };
 
     const editProduct = (id: string) => {
-        window.location.replace(`/product/${id}/edit`);
+        window.location.replace(`/product-edit/${id}`);
     };
 
     useEffect(() => {
         (async function setClub() {
-            const userData = await usersService.getUser()
-            setUser(userData)
-        }())
+            const userData = await usersService.getUser();
+            setUser(userData);
+        }());
+    }, []);
 
-    }, [])
-
-    const handleLikes = async () => {
+    const handleLikes = async() => {
         if (isFavorite && user) {
-            await productsService.unlikeProduct(product.id, user.id)
+            await productsService.unlikeProduct(product.id);
         } else if (user) {
-            await productsService.likeProduct(product.id, user.id)
+            await productsService.likeProduct(product.id);
         }
-        setIsFavorite(!isFavorite)
-    }
+        setIsFavorite(!isFavorite);
+    };
 
     return (
         <div className="product-item">
