@@ -1,40 +1,40 @@
-// Copyright (C) 2021 Creditor Corp. Group.
+// Copyright (C) 2022 Creditor Corp. Group.
 // See LICENSE for copying information.
 
 import { Dispatch } from 'redux';
 
-import { User, UserRegisterData } from '@/users';
 import { UsersClient } from '@/api/users';
 import { UsersService } from '@/users/service';
-
-/** action types implementation */
-export const REGISTER = 'REGISTER';
-export const LOGIN = 'LOGIN';
-export const SET_USER = 'SET_USER';
-/** register action contains type and data for user registration */
-export const register = (user: UserRegisterData) => ({
-    type: REGISTER,
-    user,
-});
-
-/** register action contains type and data for user registration */
-export const setUser = (user: User) => ({
-    type: SET_USER,
-    user,
-});
+import { userSlice } from '@/app/store/reducers/users';
+import { BadRequestError } from '@/api';
+import { setErrorMessage } from '@/app/store/reducers/error';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { UserRegisterData, UserUpdateData } from '@/users';
 
 const usersClient = new UsersClient();
-const usersService = new UsersService(usersClient);
+export const usersService = new UsersService(usersClient);
 
-/** thunk that implements user registration */
-export const registerUser = (user: UserRegisterData) =>
-    async function(dispatch: Dispatch) {
-        await usersService.register(user);
-        dispatch(register(user));
-    };
+export const register = createAsyncThunk(
+    '/auth/register',
+    async function (user: UserRegisterData) {
+        await usersService.register(user)
+    }
+);
 
-export const setCurrentUser = () =>
-    async function(dispatch: Dispatch) {
+export const updateUser = createAsyncThunk(
+    '/users',
+    async function (user: UserUpdateData) {
+        await usersService.update(user)
+    }
+);
+
+export const getUser = () => async function (dispatch: Dispatch) {
+    try {
         const user = await usersService.getUser();
-        dispatch(setUser(user));
-    };
+        dispatch(userSlice.actions.setUser(user));
+    } catch (error: any) {
+        if (error instanceof BadRequestError) {
+            dispatch(setErrorMessage('No valid user info'));
+        }
+    }
+};

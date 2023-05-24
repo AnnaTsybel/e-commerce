@@ -1,26 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { Slider } from '@components/Home/Slider';
 import { ProductBlock } from '@components/Products/ProductsBlock';
 import { Aside } from '@components/Home/Aside';
 
 import { Product } from '@/product';
-import { ProductsClient } from '@/api/products';
-import { ProductsService } from '@/product/service';
+import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
+import { RootState } from '@/app/store';
+import { getUser } from '@/app/store/actions/users';
+import { productsList } from '@/app/store/actions/products';
 
 import './index.scss';
 
 const Home = () => {
-    const [products, setProducts] = useState<Product[]>();
+     const dispatch = useAppDispatch();
 
-    const productsClient = new ProductsClient();
-    const productsService = new ProductsService(productsClient);
+    const products: Product[] | null = useAppSelector((state: RootState) => state.productsReducer.products);
 
     useEffect(() => {
-        (async function setData() {
-            const productsData = await productsService.list();
-            setProducts(productsData);
-        }());
+        dispatch(getUser())
+        dispatch(productsList())
     }, []);
 
     return (

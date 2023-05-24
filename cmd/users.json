@@ -16,7 +16,7 @@
         "surname": "Бондур",
         "phoneNumber": "+380924663336",
         "email": "mykyta@gmail.com",
-        "status":"admin",
+        "role":"admin",
         "photo": "",
         "gender": "man",
         "password": "g6uPFwcXAXvm7E5D"
@@ -27,7 +27,7 @@
         "surname": "Кожедуб",
         "phoneNumber": "+380966403336",
         "email": "ann@gmail.com",
-        "status":"user",
+        "role":"user",
         "photo": "",
         "gender": "man",
         "password": "PvqJwAxJ"
@@ -38,7 +38,7 @@
         "surname": "Тельнова",
         "phoneNumber": "+380987663336",
         "email": "olena@gmail.com",
-        "status":"user",
+        "role":"user",
         "photo": "",
         "gender": "woman",
         "password": "2qTHSr4TUaZ5&Lty"
@@ -49,7 +49,7 @@
         "surname": "Кулінов",
         "phoneNumber": "+380966663336",
         "email": "vasya@gmail.com",
-        "status":"user",
+        "role":"user",
         "photo": "",
         "gender": "man",
         "password": "GUvIydtZpd3B5NYR"
@@ -60,7 +60,7 @@
         "surname": "Панасюк",
         "phoneNumber": "+380925663336",
         "email": "bohdan@gmail.com",
-        "status":"admin",
+        "role":"admin",
         "photo": "",
         "gender": "man",
         "password": "XgxMFVfmDNmr7edC"

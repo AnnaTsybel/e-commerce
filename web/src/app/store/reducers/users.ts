@@ -1,40 +1,30 @@
-// Copyright (C) 2021 Creditor Corp. Group.
-// See LICENSE for copying information.
+import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
+import { User } from '@/users'
 
-import {
-    SET_USER,
-} from '../actions/users';
-import { UsersClient } from '@/api/users';
-import { User } from '@/users';
-import { UsersService } from '@/users/service';
+/** Exposes channels state */
+class UsersState {
+    /** class implementation */
+    constructor(
+        public user: User = new User(),
+    ) { }
+}
 
+const initialState: UsersState = {
+    user: new User()
+}
 
-/**
- * UsersState is a representation of users reducer state.
- */
-export class UsersState {
-    public readonly userService: UsersService;
-    public user: User = new User();
-    /** UsersState contains service implementation of users  */
-    public constructor(userService: UsersService) {
-        this.userService = userService;
-    };
-};
+export const userSlice = createSlice({
+    name: 'usersReducer',
+    initialState,
+    reducers: {
+        setUser: (state, action: PayloadAction<User>) => {
+            state.user = action.payload
+        }
+    },
+})
 
-const usersClient = new UsersClient();
-const usersService = new UsersService(usersClient);
+// Action creators are generated for each case reducer function
+export const { setUser } = userSlice.actions
 
-export const usersReducer = (
-    state = new UsersState(usersService),
-    action: any = {}
-) => {
-    switch (action.type) {
-    case SET_USER:
-        state.user = action.user;
-        break;
-    default:
-        break;
-    };
-
-    return { ...state };
-};
+export default userSlice.reducer

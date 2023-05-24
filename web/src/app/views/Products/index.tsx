@@ -1,36 +1,27 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { ProductsFilter } from '@components/Products/ProductsFilter';
 import { ProductItem } from '@components/Products/ProductItem';
+import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
+import { RootState } from '@/app/store';
+import { getUser } from '@/app/store/actions/users';
+import { productsList } from '@/app/store/actions/products';
 
 import { Product } from '@/product';
-import { UsersClient } from '@/api/users';
-import { UsersService } from '@/users/service';
 import { User } from '@/users';
-import { ProductsClient } from '@/api/products';
-import { ProductsService } from '@/product/service';
 
 import './index.scss';
 
 const Products = () => {
-    const [user, setUser] = useState<User>();
-    const [products, setProducts] = useState<Product[]>();
+    const dispatch = useAppDispatch();
 
-    const usersClient = new UsersClient();
-    const usersService = new UsersService(usersClient);
-
-    const productsClient = new ProductsClient();
-    const productsService = new ProductsService(productsClient);
+    const user: User | null = useAppSelector((state: RootState) => state.usersReducer.user);
+    const products: Product[] | null = useAppSelector((state: RootState) => state.productsReducer.products);
 
     useEffect(() => {
-        (async function setData() {
-            const userData = await usersService.getUser();
-            setUser(userData);
-
-            const productsData = await productsService.list();
-            setProducts(productsData);
-        }());
+        dispatch(getUser())
+        dispatch(productsList())
     }, []);
 
     return (

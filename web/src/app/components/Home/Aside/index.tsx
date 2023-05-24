@@ -1,27 +1,14 @@
-import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import noUserPhoto from '@img/no-photo-profile.webp';
 import { catalog } from '@/mockedData/catalog';
-import { User } from '@/users';
-import { UsersClient } from '@/api/users';
-import { UsersService } from '@/users/service';
+import { useAppSelector } from '@/app/hooks/useReduxToolkit';
+import { RootState } from '@/app/store';
 
-
-import './index.scss';
+import { User } from '@/users';import './index.scss';
 
 export const Aside = () => {
-    const [user, setUser] = useState<User>();
-
-    const usersClient = new UsersClient();
-    const usersService = new UsersService(usersClient);
-
-    useEffect(() => {
-        (async function setClub() {
-            const userData = await usersService.getUser();
-            setUser(userData);
-        }());
-    }, []);
+   const user: User | null = useAppSelector((state: RootState) => state.usersReducer.user);
 
     return (
         <aside className="aside">
