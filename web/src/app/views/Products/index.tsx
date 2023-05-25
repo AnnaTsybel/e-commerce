@@ -20,8 +20,8 @@ const Products = () => {
     const products: Product[] | null = useAppSelector((state: RootState) => state.productsReducer.products);
 
     useEffect(() => {
-        dispatch(getUser())
-        dispatch(productsList())
+        dispatch(getUser());
+        dispatch(productsList());
     }, []);
 
     return (
@@ -29,8 +29,8 @@ const Products = () => {
             <div className="products__content">
                 <ProductsFilter />
                 <div className="products__cards">
-                    {user && user.status === 'admin'
-                        && <Link to="/product/create" className="products__cards__button">
+                    {user.role &&
+                        <Link to="/product/create" className="products__cards__button">
                             Add Product
                         </Link>
                     }

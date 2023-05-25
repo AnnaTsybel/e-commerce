@@ -1,11 +1,7 @@
 import { Link } from 'react-router-dom';
-import {  useState } from 'react';
+import { useState } from 'react';
 
 import Catalog from '@components/Catalog';
-import { useAppSelector } from '@/app/hooks/useReduxToolkit';
-import { RootState } from '@/app/store';
-import { RouteConfig } from '@/routes';
-import { User } from '@/users';
 
 import userProfileIcon from '@img/Navbar/user-icon.png';
 import catalogIcon from '@img/Navbar/catalog-icon.png';
@@ -13,6 +9,10 @@ import favoriteIcon from '@img/Navbar/not-favorite-icon.png';
 import searchIcon from '@img/Navbar/search-icon.png';
 import сancelIcon from '@img/Navbar/cancel-icon.png';
 import logoIcon from '@img/Navbar/logo.png';
+import { User } from '@/users';
+import { RouteConfig } from '@/routes';
+import { RootState } from '@/app/store';
+import { useAppSelector } from '@/app/hooks/useReduxToolkit';
 
 import { catalog } from '@/mockedData/catalog';
 
@@ -51,16 +51,14 @@ export const Navbar = () => {
                         Знайти
                     </button>
                 </div>
-                {user &&
-                    <Link className="header__user" to={`/user/${user.id}`}>
-                        <div className="header__user__icon">
-                            <img src={userProfileIcon}
-                                alt="user profile"
-                                className="header__user__icon__image" />
-                        </div>
-                        <p className="header__user__text">{user.name} {user.surname}</p>
-                    </Link>
-                }
+                <Link className="header__user" to={`/user/${user.id}`}>
+                    <div className="header__user__icon">
+                        <img src={userProfileIcon}
+                            alt="user profile"
+                            className="header__user__icon__image" />
+                    </div>
+                    <p className="header__user__text">{user.name} {user.surname}</p>
+                </Link>
                 <div className="header__shopping-cart">
                     <Link to="/products/favorite" className="header__shopping-cart__icon">
                         <img src={favoriteIcon}

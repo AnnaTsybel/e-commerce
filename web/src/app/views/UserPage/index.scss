@@ -8,6 +8,20 @@
     align-items: flex-end;
     background: #2d3250;
 
+    &__logout {
+        width: 180px;
+        background: #b5659b;
+        cursor: pointer;
+        border-radius: 4px;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 10px 15px;
+        font-size: 17px;
+        display: block;
+        margin: 20px auto 0;
+    }
+
     &__name {
         margin: 15px 0 20px;
         font-size: 40px;

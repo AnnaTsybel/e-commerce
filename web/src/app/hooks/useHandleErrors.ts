@@ -25,13 +25,13 @@ const ERROR_STATUS: { [key: number]: string } = {
 /* custom hook for error handling*/
 export const useHandleError = (errorStatus: string) => {
     switch (errorStatus?.toLocaleLowerCase()) {
-        case ERROR_STATUS[BAD_REQUEST_ERROR]:
-            throw new BadRequestError();
-        case ERROR_STATUS[NOT_FOUND_ERROR]:
-            throw new NotFoundError();
-        case ERROR_STATUS[UNAUTHORISED_ERROR]:
-            throw new UnauthorizedError();
-        case ERROR_STATUS[INTERNAL_ERROR]:
-        default: throw new InternalError();
+    case ERROR_STATUS[BAD_REQUEST_ERROR]:
+        throw new BadRequestError();
+    case ERROR_STATUS[NOT_FOUND_ERROR]:
+        throw new NotFoundError();
+    case ERROR_STATUS[UNAUTHORISED_ERROR]:
+        throw new UnauthorizedError();
+    case ERROR_STATUS[INTERNAL_ERROR]:
+    default: throw new InternalError();
     }
 };

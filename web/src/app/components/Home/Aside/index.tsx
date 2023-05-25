@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom';
 
 import noUserPhoto from '@img/no-photo-profile.webp';
-import { catalog } from '@/mockedData/catalog';
 import { useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { RootState } from '@/app/store';
+import { catalog } from '@/mockedData/catalog';
+import { User } from '@/users';
 
-import { User } from '@/users';import './index.scss';
+
+import './index.scss';
 
 export const Aside = () => {
-   const user: User | null = useAppSelector((state: RootState) => state.usersReducer.user);
+    const user: User | null = useAppSelector((state: RootState) => state.usersReducer.user);
 
     return (
         <aside className="aside">

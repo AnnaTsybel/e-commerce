@@ -1,6 +1,8 @@
 export type Gender = 'man' | 'woman' | '';
 export type UserStatus = 'admin' | 'user';
 
+const DEFAULT_ROLE = 0;
+
 export class User {
     public constructor(
         public id: string = '00000000-0000 - 0000 - 0000 - 000000000000',
@@ -8,9 +10,11 @@ export class User {
         public surname: string = '',
         public phoneNumber: string = '',
         public email: string = '',
-        public status: UserStatus = 'admin',
+        public role: number = DEFAULT_ROLE,
         public avatar: string = '',
-        public gender: Gender = ''
+        public passwordHash: string = '',
+        public gender: Gender = '',
+        public createdAt: string = ''
     ) { };
 }
 

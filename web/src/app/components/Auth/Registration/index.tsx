@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { UsersClient } from '@/api/users';
 import { RouteConfig } from '@/routes';
 import { UserRegisterData } from '@/users';
-import { UsersService } from '@/users/service';
+import { useAppDispatch } from '@/app/hooks/useReduxToolkit';
+import { getUser, register } from '@/app/store/actions/users';
 
 import '../index.scss';
 
 export const Registration = () => {
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const [name, setName] = useState<string>('');
@@ -18,20 +18,19 @@ export const Registration = () => {
     const [phoneNumber, setPhoneNumber] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const usersClient = new UsersClient();
-    const usersService = new UsersService(usersClient);
-
-    const register = async() => {
-        await usersService.register(new UserRegisterData(
+    const registerUser = () => {
+        dispatch(register(new UserRegisterData(
             name,
             surname,
             phoneNumber,
             email,
             'man',
             password
-        ));
+        )));
 
         window.localStorage.setItem('IS_LOGGEDIN', JSON.stringify(true));
+
+        dispatch(getUser());
 
         navigate(RouteConfig.Home.path);
     };
@@ -89,6 +88,7 @@ export const Registration = () => {
                     <input
                         className="auth__input"
                         onChange={e => setPassword(e.target.value)}
+                        type="password"
                         required
                     />
                     <span></span>
@@ -96,7 +96,7 @@ export const Registration = () => {
                 <button
                     className="auth__button"
                     type="button"
-                    onClick={() => register()}
+                    onClick={() => registerUser()}
                 >
                     Реєстрація
                 </button>

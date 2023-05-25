@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Slider } from '@components/Home/Slider';
 import { ProductBlock } from '@components/Products/ProductsBlock';
@@ -9,17 +10,19 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { RootState } from '@/app/store';
 import { getUser } from '@/app/store/actions/users';
 import { productsList } from '@/app/store/actions/products';
+import { User } from '@/users';
 
 import './index.scss';
 
 const Home = () => {
-     const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
 
     const products: Product[] | null = useAppSelector((state: RootState) => state.productsReducer.products);
+    const user: User | null = useAppSelector((state: RootState) => state.usersReducer.user);
 
     useEffect(() => {
-        dispatch(getUser())
-        dispatch(productsList())
+        dispatch(getUser());
+        dispatch(productsList());
     }, []);
 
     return (
@@ -27,25 +30,17 @@ const Home = () => {
             <Aside />
             <div className="home__content">
                 <Slider />
-                {products &&
-                    <>
-                        <ProductBlock
-                            products={products}
-                            title="Ви нещодавно дивилися"
-                            showMoreLink="/products/seen" />
-                        <ProductBlock
-                            products={products}
-                            title="Рекомендовані товари"
-                            showMoreLink="/products/recomendations" />
-                        <ProductBlock
-                            products={products}
-                            title="Популярні товари"
-                            showMoreLink="/products/popular" />
-                    </>
+                {user.role &&
+                    <Link to="/product/create" className="home__add-product">
+                        Add Product
+                    </Link>
                 }
+                <ProductBlock
+                    products={products}
+                    title="Рекомендовані товари" />
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Home;

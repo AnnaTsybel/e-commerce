@@ -1,60 +1,61 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Color, colors } from '../../../../colors';
-import photoAddIcon from '../../../static/img/Product/photo-add-icon.png';
-import backButtonIcon from '../../../static/img/back-button.png';
-import { ProductsClient } from '@/api/products';
-import { ProductsService } from '@/product/service';
+import closeIcon from '@img/Product/remove-icon.png';
+import photoAddIcon from '@img/Product/photo-add-icon.png';
+import backButtonIcon from '@img/back-button.png';
 import { ProductCreation } from '@/product';
+import { convertToBase64 } from '@/app/internal/convertImage';
+import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
+import { create } from '@/app/store/actions/products';
+import { RootState } from '@/app/store';
+import { addProductPhotos, deleteProductPhoto, setProductPhotos } from '@/app/store/reducers/products';
+import { Color, colors } from '@/colors';
 
 import '../index.scss';
-import { convertToBase64 } from '@/app/internal/convertImage';
 
 const DEFAULT_COLOR_INDEX = 0;
 const DEFAULT_PRICE = 0;
-const FIRST_PHOTO_INDEX = 0;
 
 const ProductCreate = () => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
+    const productPhotos: string[] | [] = useAppSelector((state: RootState) => state.productsReducer.productPhotos);
 
     const [currentColor, setCurrentColor] = useState<Color>(colors[DEFAULT_COLOR_INDEX]);
-    const [photos, setPhotos] = useState<string[]>();
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [price, setPrice] = useState<number>(DEFAULT_PRICE);
     const [files, setFiles] = useState<string[]>();
 
-    const productsClient = new ProductsClient();
-    const productsService = new ProductsService(productsClient);
-
-    const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = async(e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.length) {
-            let photosData = [];
-            let filesData = [];
+            const photosData = [];
+            const filesData = [];
 
             const uploadedFiles = Array.from(e.target.files);
 
             for await (const uploadedFile of uploadedFiles) {
-                photosData.push(URL.createObjectURL(uploadedFile))
+                photosData.push(URL.createObjectURL(uploadedFile));
 
                 const convertedFile: string = await convertToBase64(uploadedFile);
-                filesData.push(convertedFile)
+                filesData.push(convertedFile);
             }
 
-            setPhotos(photosData);
-            setFiles(filesData)
+            dispatch(addProductPhotos(photosData));
+            setFiles(filesData);
         }
     };
 
-    const createProduct = async () => {
-        await productsService.create(new ProductCreation(
+    const createProduct = () => {
+        dispatch(create(new ProductCreation(
             title,
             description,
             price,
-            photos,
+            productPhotos,
             [currentColor]
-        ));
+        )));
 
         navigate('/products');
     };
@@ -64,6 +65,14 @@ const ProductCreate = () => {
             setPrice(Number(e.target.value));
         }
     };
+
+    const deletePhoto = (index: number) => {
+        dispatch(deleteProductPhoto(productPhotos[index]));
+    };
+
+    useEffect(() => {
+        dispatch(setProductPhotos([]));
+    }, []);
 
     return (
         <>
@@ -103,9 +112,30 @@ const ProductCreate = () => {
                             <p className="product-create__color__item__text">{color}</p>
                         </div>)}
                 </div>
+                <div className="product-create__photos__container">
+                    <div className="product-create__photos">
+                        {productPhotos.map((photo, index) =>
+                            <div
+                                className="product-create__photos__item"
+                                key={`${photo}-${index}`}
+                                onClick={() => deletePhoto(index)}
+                                style={{ backgroundImage: `url(${photo})` }}
+                            >
+                                <span className="product-create__photos__item__close">
+                                    <img
+                                        src={closeIcon}
+                                        alt="close"
+                                        className="product-create__photos__item__close__icon"
+                                    />
+                                </span>
+                            </div>
+                        )}
+                    </div>
+                </div>
                 <div className="product-create__photo" >
                     <p>Оберіть фото продукту</p>
-                    <label className="product-create__photo__label"
+                    <label
+                        className="product-create__photo__label"
                         htmlFor="product-photo">
                         <img
                             src={photoAddIcon}

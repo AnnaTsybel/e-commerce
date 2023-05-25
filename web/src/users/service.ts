@@ -30,4 +30,9 @@ export class UsersService {
     public async update(user: UserUpdateData): Promise<void> {
         await this.users.update(user);
     }
+
+    /** logouts */
+    public async logout(): Promise<void> {
+        await this.users.logout();
+    }
 }

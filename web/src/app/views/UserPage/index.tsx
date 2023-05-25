@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import userNoPhoto from '@img/no-photo-profile.webp';
+import { AuthRoutesConfig } from '@/routes';
 import { Gender, User, UserUpdateData } from '@/users';
 import { convertToBase64 } from '@/app/internal/convertImage';
-import { getUser, updateUser } from '@/app/store/actions/users';
+import { getUser, logout, updateUser } from '@/app/store/actions/users';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { RootState } from '@/app/store';
 
-import userNoPhoto from '@img/no-photo-profile.webp';
-
 import './index.scss';
+
+const PHOTO_INDEX = 0;
 
 const UserPage = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const user: User | null = useAppSelector((state: RootState) => state.usersReducer.user);
 
@@ -21,16 +25,16 @@ const UserPage = () => {
     const [surname, setSurname] = useState<string>();
     const [phonenumber, setPhonenumber] = useState<string>();
     const [gender, setGender] = useState<Gender>();
-    const [photo, setPhoto] = useState<string>(userNoPhoto)
-    const [file, setFile] = useState<string>(userNoPhoto)
+    const [photo, setPhoto] = useState<string>(userNoPhoto);
+    const [file, setFile] = useState<string>(userNoPhoto);
 
-    const handleFileChange = async (e: any) => {
+    const handleFileChange = async(e: any) => {
         if (e.target.files?.length) {
-            setPhoto(URL.createObjectURL(e.target.files[0]));
-            const convertedFile: string = await convertToBase64(e.target.files[0]);
-            setFile(convertedFile)
+            setPhoto(URL.createObjectURL(e.target.files[PHOTO_INDEX]));
+            const convertedFile: string = await convertToBase64(e.target.files[PHOTO_INDEX]);
+            setFile(convertedFile);
         }
-    }
+    };
 
     const sendChanges = () => {
         setIsEditing(false);
@@ -41,11 +45,17 @@ const UserPage = () => {
             surname,
             phonenumber,
             gender
-        )))
+        )));
+    };
+
+    const logoutUser = () => {
+        dispatch(logout());
+
+        navigate(AuthRoutesConfig.Registration.path);
     };
 
     useEffect(() => {
-        dispatch(getUser())
+        dispatch(getUser());
     }, []);
 
     return (
@@ -114,7 +124,6 @@ const UserPage = () => {
                             <span></span>
                         </div>
                     </div>
-
                 </>
                 : <>
 
@@ -148,6 +157,9 @@ const UserPage = () => {
                             </p>
                         </div>
                     </div>
+                    <button className="user__logout" onClick={() => logoutUser()}>
+                        Вийти з акаунту
+                    </button>
 
                 </>
             }

@@ -10,4 +10,20 @@
     &__content {
         width: 70%;
     }
+
+    &__add-product {
+        padding: 10px 23px;
+        margin: 30px auto 40px;
+        display: block;
+        width: 150px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        background: #b5659b;
+        color: white;
+        cursor: pointer;
+    }
 }

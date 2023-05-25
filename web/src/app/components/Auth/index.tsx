@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 
-
 import authPageBg from '@img/Auth/registration-bg.jpg';
 import homeIcon from '@img/Auth/home-icon.png';
 import { RouteConfig } from '../../../routes';

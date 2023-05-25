@@ -5,7 +5,6 @@ export const convertToBase64 = (file: File): Promise<any> => new Promise((resolv
     fileReader.readAsDataURL(file);
     fileReader.onload = () => {
         resolve(fileReader.result);
-        console.log(fileReader.result)
     };
     fileReader.onerror = (error) => {
         reject(error);

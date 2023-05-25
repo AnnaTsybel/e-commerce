@@ -67,4 +67,14 @@ export class UsersClient extends APIClient {
             await this.handleError(response);
         }
     }
+
+    /** logout */
+    public async logout(): Promise<void> {
+        const path = '/api/v0/auth/logout';
+        const response = await this.http.post(path);
+
+        if (!response.ok) {
+            await this.handleError(response);
+        }
+    }
 }
