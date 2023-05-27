@@ -14,17 +14,22 @@ type DB interface {
 	LikeProduct(ctx context.Context, productID, userID uuid.UUID) error
 	UnlikeProduct(ctx context.Context, productID, userID uuid.UUID) error
 	GetLikedUserProduct(ctx context.Context, productID, userID uuid.UUID) (bool, error)
-	CreateProductColor(ctx context.Context, productID uuid.UUID, color string) error
-	ListProductColors(ctx context.Context, productID uuid.UUID) ([]string, error)
-	DeleteProductColor(ctx context.Context, productID uuid.UUID, color string) error
+}
+
+type ImageWithName struct {
+	Name  string `json:"name"`
+	Image string `json:"image"`
 }
 
 type Product struct {
-	ID          uuid.UUID `json:"id"`
-	Title       string    `json:"title"`
-	Description string    `json:"description"`
-	Price       float32   `json:"price"`
-	Colors      []string  `json:"colors"`
-	IsLiked     bool      `json:"isLiked"`
-	IsAvailable bool      `json:"isAvailable"`
+	ID             uuid.UUID       `json:"id"`
+	Title          string          `json:"title"`
+	Description    string          `json:"description"`
+	Price          float32         `json:"price"`
+	Color          string          `json:"color"`
+	Brand          string          `json:"brand"`
+	IsLiked        bool            `json:"isLiked"`
+	IsAvailable    bool            `json:"isAvailable"`
+	ImagesWithName []ImageWithName `json:"imagesWithName"`
+	NumOfImages    int             `json:"numOfImages"`
 }

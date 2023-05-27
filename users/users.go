@@ -14,6 +14,7 @@ type DB interface {
 	UpdatePassword(ctx context.Context, id uuid.UUID, password []byte) error
 	UpdateEmail(ctx context.Context, id uuid.UUID, newEmail string) error
 	UpdateUser(ctx context.Context, id uuid.UUID, user CreateUserFields) error
+	SearchSimilarUsers(ctx context.Context, dataOfBirthFrom time.Time, dataOfBirthTo time.Time, gender string) ([]User, error)
 }
 
 type Role int
@@ -32,6 +33,7 @@ type User struct {
 	Email        string    `json:"email"`
 	PasswordHash []byte    `json:"passwordHash"`
 	Role         Role      `json:"role"`
+	DateOfBirth  time.Time `json:"dateOfBirth"`
 	CreatedAt    time.Time `json:"createdAt"`
 }
 
@@ -47,12 +49,14 @@ func (user *User) EncodePass() error {
 
 // CreateUserFields for crete user.
 type CreateUserFields struct {
-	Email       string `json:"email"`
-	Password    string `json:"password"`
-	Name        string `json:"name"`
-	Surname     string `json:"surname"`
-	PhoneNumber string `json:"phoneNumber"`
-	Gender      string `json:"gender"`
+	Email       string    `json:"email"`
+	Password    string    `json:"password"`
+	Name        string    `json:"name"`
+	Surname     string    `json:"surname"`
+	PhoneNumber string    `json:"phoneNumber"`
+	Gender      string    `json:"gender"`
+	DateOfBirth time.Time `json:"dateOfBirth"`
+	Avatar      string    `json:"avatar"`
 }
 
 // Password for old/new passwords.

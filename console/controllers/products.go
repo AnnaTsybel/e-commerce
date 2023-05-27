@@ -186,6 +186,23 @@ func (controller *Products) LikeProduct(w http.ResponseWriter, r *http.Request) 
 	}
 }
 
+//func (controller *Products) ListLikedProducts(w http.ResponseWriter, r *http.Request) {
+//	w.Header().Set("Content-Type", "application/json")
+//	ctx := r.Context()
+//
+//	claimsMap, err := goauth.GetClaims(ctx)
+//	if err != nil {
+//		controller.serveError(w, http.StatusUnauthorized, ErrProducts.Wrap(err))
+//		return
+//	}
+//
+//	claims, err := userauth.GetStructClaims(claimsMap)
+//	if err != nil {
+//		controller.serveError(w, http.StatusUnauthorized, ErrProducts.Wrap(err))
+//		return
+//	}
+//}
+
 func (controller *Products) UnlikeProduct(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	ctx := r.Context()

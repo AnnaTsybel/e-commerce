@@ -3,13 +3,11 @@ package database
 import (
 	"context"
 	"database/sql"
+	_ "github.com/lib/pq" // using postgres driver.
+	"github.com/zeebo/errs"
 	documentize "graduate_work"
 	"graduate_work/products"
 	"graduate_work/users"
-	"log"
-
-	_ "github.com/lib/pq" // using postgres driver.
-	"github.com/zeebo/errs"
 )
 
 var (
@@ -47,6 +45,7 @@ func (db *database) CreateSchema(ctx context.Context) error {
 	    email      VARCHAR                         NOT NULL,
 	    role       INTEGER DEFAULT 0 NOT NULL,
 	    password_hash    BYTEA                     NOT NULL,
+	    date_of_birth TIMESTAMP WITH TIME ZONE        NOT NULL,
 	    created_at TIMESTAMP WITH TIME ZONE        NOT NULL
 	);
     CREATE TABLE IF NOT EXISTS products(
@@ -54,20 +53,16 @@ func (db *database) CreateSchema(ctx context.Context) error {
 	    title        VARCHAR                         NOT NULL,
 	    description  VARCHAR                         NOT NULL,
 	    price        numeric                         NOT NULL,
+	    color        VARCHAR DEFAULT '' NOT NULL,
+	    brand        VARCHAR DEFAULT '' NOT NULL,
 	    is_available BOOLEAN DEFAULT FALSE NOT NULL
 	);
     CREATE TABLE IF NOT EXISTS product_likes(
 	    product_id BYTEA REFERENCES products(id) ON DELETE CASCADE NOT NULL,
 	    user_id    BYTEA REFERENCES users(id) ON DELETE CASCADE NOT NULL,
 	    PRIMARY KEY(product_id, user_id)
-	);
-    CREATE TABLE IF NOT EXISTS product_colors(
-	    product_id BYTEA REFERENCES products(id) ON DELETE CASCADE NOT NULL,
-	    color      VARCHAR DEFAULT '' NOT NULL,
-	    PRIMARY KEY(product_id, color)
 	);`
 
-	log.Println("crss")
 	_, err := db.conn.ExecContext(ctx, createTableQuery)
 	return Error.Wrap(err)
 }

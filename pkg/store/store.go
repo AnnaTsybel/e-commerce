@@ -2,8 +2,10 @@ package store
 
 import (
 	"context"
+	"errors"
 	"github.com/zeebo/errs"
 	"io"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 )
@@ -36,27 +38,57 @@ func (store *Store) MakeDirectory(ctx context.Context, path string) error {
 }
 
 func (store *Store) Create(ctx context.Context, filename string, reader io.Reader) error {
-	err := os.MkdirAll(filepath.Join(store.config.OutputPath, filename), os.ModePerm)
-	if err != nil {
-		return ErrFileStore.Wrap(err)
+	relatedPath, fileName := filepath.Split(filename)
+	if fileName == "" {
+		return errs.New("file name is empty")
 	}
 
-	file, err := os.Create(filepath.Join(store.config.OutputPath, filename))
+	path := filepath.Join(store.config.OutputPath, relatedPath)
+	err := os.MkdirAll(path, os.ModePerm)
 	if err != nil {
-		return ErrFileStore.Wrap(err)
+		return err
 	}
 
-	defer func() {
-		err = ErrFileStore.Wrap(file.Close())
-	}()
+	file, err := os.Create(filepath.Join(path, fileName))
+	if err != nil {
+		return err
+	}
 
 	_, err = io.Copy(file, reader)
 
-	return ErrFileStore.Wrap(err)
+	return errs.Combine(err, file.Close())
 }
 
 func (store *Store) Delete(ctx context.Context, filename string, reader io.Reader) error {
 	outputPath := filepath.Join(store.config.OutputPath, filename)
 
 	return ErrFileStore.Wrap(os.Remove(outputPath))
+}
+
+// Count returns count of files from local file system store.
+func (store *Store) Count(ctx context.Context, relatedPath string) (int, error) {
+	path := filepath.Join(store.config.OutputPath, relatedPath)
+	files, err := ioutil.ReadDir(path)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return 0, errors.New("folder does not exists")
+		}
+		return 0, err
+	}
+
+	return len(files), nil
+}
+
+// DeleteFolder deletes folder from local file system store.
+func (store *Store) DeleteFolder(ctx context.Context, relatedPath string) error {
+	path := filepath.Join(store.config.OutputPath, relatedPath)
+
+	if err := os.RemoveAll(path); err != nil {
+		if os.IsNotExist(err) {
+			return errors.New("folder does not exists")
+		}
+		return err
+	}
+
+	return nil
 }

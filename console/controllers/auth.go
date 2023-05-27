@@ -47,7 +47,12 @@ func (auth *Auth) Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token, err := auth.userAuth.Register(ctx, request.Email, request.Password, request.Name)
+	if request.Email == "" || request.Password == "" {
+		auth.serveError(w, http.StatusBadRequest, AuthError.New("did not enter email address or password"))
+		return
+	}
+
+	token, err := auth.userAuth.Register(ctx, request)
 	if err != nil {
 		log.Println("unable to register new user", AuthError.Wrap(err))
 		auth.serveError(w, http.StatusInternalServerError, AuthError.Wrap(err))
