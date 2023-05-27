@@ -1,11 +1,14 @@
 package users
 
 import (
+	"bytes"
 	"context"
+	"encoding/base64"
 	"github.com/google/uuid"
 	"graduate_work/pkg/store"
 	"io"
 	"path/filepath"
+	"time"
 )
 
 type Service struct {
@@ -21,8 +24,18 @@ func New(db DB, store *store.Store) *Service {
 	}
 }
 
-func (service *Service) Create(ctx context.Context, user User) error {
-	return service.db.Create(ctx, user)
+func (service *Service) Create(ctx context.Context, user User, avatar string) error {
+	err := service.db.Create(ctx, user)
+	if err != nil {
+		return err
+	}
+
+	img, err := base64.StdEncoding.DecodeString(avatar)
+	if err != nil {
+		return err
+	}
+
+	return service.CreateAvatar(ctx, user.ID, bytes.NewBuffer(img))
 }
 
 func (service *Service) Get(ctx context.Context, id uuid.UUID) (User, error) {
@@ -43,4 +56,17 @@ func (service *Service) DeleteAvatar(ctx context.Context, userID uuid.UUID, read
 
 func (service *Service) UpdateUser(ctx context.Context, id uuid.UUID, updatedUser CreateUserFields) error {
 	return service.db.UpdateUser(ctx, id, updatedUser)
+}
+
+func (service *Service) SearchSimilarUsers(ctx context.Context, id uuid.UUID) ([]User, error) {
+	user, err := service.db.Get(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	year, month, day := user.DateOfBirth.Date()
+	from := time.Date(year-5, month, day, 0, 0, 0, 0, time.UTC)
+	to := time.Date(year+5, month, day, 0, 0, 0, 0, time.UTC)
+
+	return service.db.SearchSimilarUsers(ctx, from, to, user.Gender)
 }

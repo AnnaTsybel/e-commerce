@@ -21,32 +21,37 @@ func (productsDB *productsDB) Create(ctx context.Context, product products.Produ
                   title, 
                   description,
                   price,
+                  color,
+                  brand,
                   is_available
                ) VALUES (
                    $1,
                    $2,
                    $3,
                    $4,
-                   $5
+                   $5,
+                   $6,
+                   $7
                )`
 
 	_, err := productsDB.conn.ExecContext(ctx, query,
-		product.ID, product.Title, product.Description, product.Price, product.IsAvailable)
+		product.ID, product.Title, product.Description, product.Price, product.Color, product.Brand, product.IsAvailable)
 	return err
 }
 
 func (productsDB *productsDB) Get(ctx context.Context, id uuid.UUID) (products.Product, error) {
-	query := `SELECT id, title, description, price, is_available
+	query := `SELECT id, title, description, price, color, brand, is_available
 	          FROM products
 	          WHERE id = $1`
 
 	var product products.Product
-	err := productsDB.conn.QueryRowContext(ctx, query, id).Scan(&product.ID, &product.Title, &product.Description, &product.Price, &product.IsAvailable)
+	err := productsDB.conn.QueryRowContext(ctx, query, id).Scan(
+		&product.ID, &product.Title, &product.Description, &product.Price, &product.Color, &product.Brand, &product.IsAvailable)
 	return product, err
 }
 
 func (productsDB *productsDB) List(ctx context.Context) ([]products.Product, error) {
-	rows, err := productsDB.conn.QueryContext(ctx, "SELECT id, title, description, price, is_available FROM products")
+	rows, err := productsDB.conn.QueryContext(ctx, "SELECT id, title, description, price, color, brand, is_available FROM products")
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +63,7 @@ func (productsDB *productsDB) List(ctx context.Context) ([]products.Product, err
 	var data []products.Product
 	for rows.Next() {
 		var product products.Product
-		err = rows.Scan(&product.ID, &product.Title, &product.Description, &product.Price, &product.IsAvailable)
+		err = rows.Scan(&product.ID, &product.Title, &product.Description, &product.Price, &product.Color, &product.Brand, &product.IsAvailable)
 		if err != nil {
 			return nil, err
 		}
@@ -74,8 +79,8 @@ func (productsDB *productsDB) List(ctx context.Context) ([]products.Product, err
 func (productsDB *productsDB) Update(ctx context.Context, product products.Product) error {
 	result, err := productsDB.conn.ExecContext(
 		ctx,
-		"UPDATE products SET id=$1, title=$2, description=$3, price=$4, is_available=$6 WHERE id=$7",
-		product.ID, product.Title, product.Description, product.Price, product.IsAvailable, product.ID)
+		"UPDATE products SET id=$1, title=$2, description=$3, price=$4, is_available=$5, color=$6, brand=$7 WHERE id=$8",
+		product.ID, product.Title, product.Description, product.Price, product.IsAvailable, product.Color, product.Brand, product.ID)
 	if err != nil {
 		return err
 	}
@@ -147,65 +152,4 @@ func (productsDB *productsDB) GetLikedUserProduct(ctx context.Context, productID
 		return false, err
 	}
 	return true, err
-}
-
-func (productsDB *productsDB) CreateProductColor(ctx context.Context, productID uuid.UUID, color string) error {
-	query := `INSERT INTO product_colors(
-                  product_id, 
-                  color
-               ) VALUES (
-                   $1,
-                   $2
-               )`
-
-	_, err := productsDB.conn.ExecContext(ctx, query,
-		productID, color)
-	return err
-}
-
-func (productsDB *productsDB) ListProductColors(ctx context.Context, productID uuid.UUID) ([]string, error) {
-	rows, err := productsDB.conn.QueryContext(
-		ctx,
-		"SELECT color FROM product_colors WHERE product_id = $1",
-		productID,
-	)
-	if err != nil {
-		return nil, err
-	}
-
-	defer func() {
-		err = errs.Combine(err, rows.Close())
-	}()
-
-	var colors []string
-	for rows.Next() {
-		var color string
-		err = rows.Scan(&color)
-		if err != nil {
-			return nil, err
-		}
-
-		colors = append(colors, color)
-	}
-	if err = rows.Err(); err != nil {
-		return nil, err
-	}
-	return colors, nil
-}
-
-func (productsDB *productsDB) DeleteProductColor(ctx context.Context, productID uuid.UUID, color string) error {
-	query := `DELETE FROM product_colors 
-	          WHERE product_id = $1 AND color = $2`
-
-	result, err := productsDB.conn.ExecContext(ctx, query, productID, color)
-	if err != nil {
-		return err
-	}
-
-	rowNum, err := result.RowsAffected()
-	if err == nil && rowNum == 0 {
-		return errors.New("product color does not exist")
-	}
-
-	return err
 }

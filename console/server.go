@@ -93,11 +93,15 @@ func NewServer(config Config, listener net.Listener, userAuth *userauth.Service,
 	productsRouter.HandleFunc("/{id}", productsController.Update).Methods(http.MethodPut)
 	productsRouter.HandleFunc("/{id}", productsController.Delete).Methods(http.MethodDelete)
 	productsRouter.HandleFunc("/{id}/like", productsController.LikeProduct).Methods(http.MethodPost)
+	productsRouter.HandleFunc("/{id}/like", productsController.LikeProduct).Methods(http.MethodGet)
 	productsRouter.HandleFunc("/{id}/like", productsController.UnlikeProduct).Methods(http.MethodDelete)
 
 	fs := http.FileServer(http.Dir(server.config.StaticDir))
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static", fs))
 	router.PathPrefix("/").HandlerFunc(server.appHandler)
+
+	imagesServer := http.FileServer(http.Dir(server.config.PhotosDir))
+	router.PathPrefix("/images/").Handler(http.StripPrefix("/images/", imagesServer))
 
 	server.server = http.Server{
 		Handler: router,

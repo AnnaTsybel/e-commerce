@@ -165,17 +165,22 @@ func (service *Service) LoginToken(ctx context.Context, email string, password s
 }
 
 // Register - register a new user.
-func (service *Service) Register(ctx context.Context, email, password, name string) (string, error) {
-	_, err := service.users.GetByEmail(ctx, email)
+func (service *Service) Register(ctx context.Context, userToCreate users.CreateUserFields) (string, error) {
+	_, err := service.users.GetByEmail(ctx, userToCreate.Email)
 	if err == nil {
 		return "", errors.New("email already in use")
 	}
 
 	user := users.User{
 		ID:           uuid.New(),
-		Email:        email,
-		PasswordHash: []byte(password),
-		Name:         name,
+		Email:        userToCreate.Email,
+		PasswordHash: []byte(userToCreate.Password),
+		Name:         userToCreate.Name,
+		Surname:      userToCreate.Surname,
+		PhoneNumber:  userToCreate.PhoneNumber,
+		Gender:       userToCreate.Gender,
+		Role:         users.RoleUser,
+		DateOfBirth:  userToCreate.DateOfBirth,
 		CreatedAt:    time.Now().UTC(),
 	}
 
@@ -184,7 +189,7 @@ func (service *Service) Register(ctx context.Context, email, password, name stri
 		return "", Error.Wrap(err)
 	}
 
-	err = service.usersService.Create(ctx, user)
+	err = service.usersService.Create(ctx, user, userToCreate.Avatar)
 	if err != nil {
 		return "", Error.Wrap(err)
 	}
