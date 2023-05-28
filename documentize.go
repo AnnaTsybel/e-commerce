@@ -70,7 +70,7 @@ func New(config *Config, db DB) (*Documentize, error) {
 	}
 
 	{
-		app.products = products.New(db.Products(), app.store)
+		app.products = products.New(db.Products(), app.store, app.users)
 	}
 
 	{

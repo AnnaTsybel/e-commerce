@@ -6,38 +6,45 @@ import (
 	"encoding/base64"
 	"github.com/google/uuid"
 	"graduate_work/pkg/store"
+	"graduate_work/users"
 	"io"
 	"path/filepath"
+	"strconv"
 )
 
 type Service struct {
 	db DB
 
 	store *store.Store
+	users *users.Service
 }
 
-func New(db DB, store *store.Store) *Service {
+func New(db DB, store *store.Store, users *users.Service) *Service {
 	return &Service{
 		db:    db,
 		store: store,
+		users: users,
 	}
 }
 
 func (service *Service) Create(ctx context.Context, product Product) error {
 	product.ID = uuid.New()
+	product.IsAvailable = true
 
 	err := service.db.Create(ctx, product)
 	if err != nil {
 		return err
 	}
 
-	for _, imageWithName := range product.ImagesWithName {
-		img, err := base64.StdEncoding.DecodeString(imageWithName.Image)
+	for i, image := range product.Images {
+		img, err := base64.StdEncoding.DecodeString(image)
 		if err != nil {
 			return err
 		}
 
-		err = service.CreateProductImage(ctx, product.ID, imageWithName.Name, bytes.NewBuffer(img))
+		name := strconv.Itoa(i) + ".png"
+
+		err = service.CreateProductImage(ctx, product.ID, name, bytes.NewBuffer(img))
 		if err != nil {
 			return err
 		}
@@ -72,6 +79,54 @@ func (service *Service) List(ctx context.Context, userID uuid.UUID) ([]Product, 
 	return allProducts, nil
 }
 
+func (service *Service) ListLikedProducts(ctx context.Context, userID uuid.UUID) ([]Product, error) {
+	productIDs, err := service.db.ListLikedProducts(ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+
+	products := make([]Product, 0, len(productIDs))
+
+	for _, productID := range productIDs {
+		product, err := service.db.Get(ctx, productID)
+		if err != nil {
+			return nil, err
+		}
+
+		products = append(products, product)
+	}
+
+	return products, nil
+}
+
+func (service *Service) ListRecommendation(ctx context.Context, userID, productID uuid.UUID) ([]Product, error) {
+	similarUsers, err := service.users.SearchSimilarUsers(ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+
+	likedProducts := make([]Product, 0, 100)
+	for _, user := range similarUsers {
+		liked, err := service.ListLikedProducts(ctx, user.ID)
+		if err != nil {
+			return nil, err
+		}
+
+		likedProducts = append(likedProducts, liked...)
+	}
+
+	product, err := service.db.Get(ctx, productID)
+	if err != nil {
+		return nil, err
+	}
+
+	return service.SearchSimilarProducts(ctx, likedProducts, product)
+}
+
+func (service *Service) SearchSimilarProducts(ctx context.Context, productsToAnalyze []Product, product Product) ([]Product, error) {
+	return nil, nil
+}
+
 func (service *Service) Update(ctx context.Context, product Product) error {
 	relatedPath := filepath.Join("products", product.ID.String())
 	err := service.store.DeleteFolder(ctx, relatedPath)
@@ -79,13 +134,15 @@ func (service *Service) Update(ctx context.Context, product Product) error {
 		return err
 	}
 
-	for _, imageWithName := range product.ImagesWithName {
-		img, err := base64.StdEncoding.DecodeString(imageWithName.Image)
+	for i, image := range product.Images {
+		img, err := base64.StdEncoding.DecodeString(image)
 		if err != nil {
 			return err
 		}
 
-		err = service.CreateProductImage(ctx, product.ID, imageWithName.Name, bytes.NewBuffer(img))
+		name := strconv.Itoa(i) + ".png"
+
+		err = service.CreateProductImage(ctx, product.ID, name, bytes.NewBuffer(img))
 		if err != nil {
 			return err
 		}

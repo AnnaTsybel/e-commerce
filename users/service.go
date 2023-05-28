@@ -25,17 +25,7 @@ func New(db DB, store *store.Store) *Service {
 }
 
 func (service *Service) Create(ctx context.Context, user User, avatar string) error {
-	err := service.db.Create(ctx, user)
-	if err != nil {
-		return err
-	}
-
-	img, err := base64.StdEncoding.DecodeString(avatar)
-	if err != nil {
-		return err
-	}
-
-	return service.CreateAvatar(ctx, user.ID, bytes.NewBuffer(img))
+	return service.db.Create(ctx, user)
 }
 
 func (service *Service) Get(ctx context.Context, id uuid.UUID) (User, error) {
@@ -48,14 +38,26 @@ func (service *Service) CreateAvatar(ctx context.Context, userID uuid.UUID, read
 	return service.store.Create(ctx, pathFromRoot, reader)
 }
 
-func (service *Service) DeleteAvatar(ctx context.Context, userID uuid.UUID, reader io.Reader) error {
+func (service *Service) DeleteAvatar(ctx context.Context, userID uuid.UUID) error {
 	pathFromRoot := filepath.Join("users", userID.String()+".png")
 
-	return service.store.Delete(ctx, pathFromRoot, reader)
+	return service.store.Delete(ctx, pathFromRoot)
 }
 
 func (service *Service) UpdateUser(ctx context.Context, id uuid.UUID, updatedUser CreateUserFields) error {
-	return service.db.UpdateUser(ctx, id, updatedUser)
+	err := service.db.UpdateUser(ctx, id, updatedUser)
+	if err != nil {
+		return err
+	}
+
+	_ = service.DeleteAvatar(ctx, id)
+
+	img, err := base64.StdEncoding.DecodeString(updatedUser.Avatar)
+	if err != nil {
+		return err
+	}
+
+	return service.CreateAvatar(ctx, id, bytes.NewBuffer(img))
 }
 
 func (service *Service) SearchSimilarUsers(ctx context.Context, id uuid.UUID) ([]User, error) {
