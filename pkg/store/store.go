@@ -59,7 +59,7 @@ func (store *Store) Create(ctx context.Context, filename string, reader io.Reade
 	return errs.Combine(err, file.Close())
 }
 
-func (store *Store) Delete(ctx context.Context, filename string, reader io.Reader) error {
+func (store *Store) Delete(ctx context.Context, filename string) error {
 	outputPath := filepath.Join(store.config.OutputPath, filename)
 
 	return ErrFileStore.Wrap(os.Remove(outputPath))
