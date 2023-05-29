@@ -29,7 +29,14 @@ func (service *Service) Create(ctx context.Context, user User, avatar string) er
 }
 
 func (service *Service) Get(ctx context.Context, id uuid.UUID) (User, error) {
-	return service.db.Get(ctx, id)
+	user, err := service.db.Get(ctx, id)
+	if err != nil {
+		return User{}, err
+	}
+
+	relatedPath := filepath.Join("users", user.ID.String())
+	user.IsAvatarExists = service.store.Stat(ctx, relatedPath)
+	return user, err
 }
 
 func (service *Service) CreateAvatar(ctx context.Context, userID uuid.UUID, reader io.Reader) error {

@@ -1,9 +1,9 @@
 [
     {
-        "id":"cc04ac1e-fd04-11ed-be56-0242ac120002",
+        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
         "title":"Ноутбук Apple MacBook Air 13 M1 256GB 2020 (MGN63UA/A) Space Gray",
         "description":"Екран 13.3 Retina (2560x1600) WQXGA, глянсовий / Apple M1 / RAM 8 ГБ / SSD 256 ГБ / Apple M1 Graphics / Wi-Fi / Bluetooth / macOS Big Sur / 1.29 кг / сірий",
-        "price":"39999",
+        "price":39999,
         "color":"gray",
         "brand":"Apple",
         "IsLiked": true,
@@ -12,10 +12,10 @@
         "numOfImages":3
     },
     {
-        "id":"63ffd93e-fd06-11ed-be56-0242ac120002",
+        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
         "title":"Миша Apple Magic Mouse Bluetooth White (MK2E3ZM/A)",
         "description":"Бездротова миша Magic Mouse працює від вбудованого акумулятора та легко ковзає робочою поверхнею завдяки суцільній основі. Її поверхня Multi-Touch підтримує прості жести, наприклад, даючи змогу переходити між вебсторінками та прокручувати документи за допомогою змахування. Миша Magic Mouse може працювати без підзаряджання акумулятора приблизно упродовж місяця — і навіть довше. Вона не вимагає налаштування й автоматично під'єднується до вашого Mac. У комплект входить кабель USB-C/Lightning в оболонці — з його допомогою мишу можна під'єднувати до Mac для заряджання від порту USB-C.",
-        "price":"2999",
+        "price":2999,
         "color":"white",
         "brand":"Apple",
         "IsLiked": true,
@@ -24,10 +24,10 @@
         "numOfImages":2
     },
     {
-        "id":"6e9a1480-fd07-11ed-be56-0242ac120002",
+        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
         "title":"Ноутбук Lenovo Legion 5 Pro 16IAH7H (82RF00K5PB)",
         "description":"Lenovo Legion 5 Pro 16IAH7H / 16 IPS (2560x1600) WQXGA 165 Гц / Intel Core i7-12700H (2.3 - 4.7 Ггц) / RAM 16 ГБ / SSD 512 ТБ / NVIDIA GeForce RTX 3070 Ti, 8 ГБ GDDR6 / Windows 11 Home / White",
-        "price":"47000",
+        "price":47000,
         "color":"white",
         "brand":"Lenovo",
         "IsLiked": true,
@@ -36,10 +36,10 @@
         "numOfImages":2
     },
     {
-        "id":"a037981e-fd07-11ed-be56-0242ac1200022",
+        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
         "title":"Ноутбук Microsoft Surface Laptop 5 15 i7-1255U 8GB RAM 256GB SSD Windows 11 Home Білий (RBY-00009)",
         "description":"Екран 15 (2496x1664) Multitouch / Десятиядерний Intel Core i7-1255U (1.7 – 4.7 ГГц) / RAM 8 ГБ / 256 ГБ / Intel Iris Xe Graphics / LAN / Wi-Fi / Bluetooth / веб-камера / Windows 11 Home",
-        "price":"46000",
+        "price":46000,
         "color":"white",
         "brand":"Microsoft Surface",
         "IsLiked": true,
@@ -48,10 +48,10 @@
         "numOfImages":3
     },
     {
-        "id":"a42c0c86-fd0a-11ed-be56-0242ac120002",
+        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
         "title":"Ноутбук Asus ROG Strix G15 G513IE-HN065 (90NR0582-M002S0)",
         "description":"Екран 15.6 IPS (1920x1080) Full HD 144 Гц, матовий / AMD Ryzen 7 4800H (2.9 - 4.2 ГГц) / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce RTX 3050 Ti, 4 / Bluetooth / без ОС / 2.1 кг / сірий",
-        "price":"42000",
+        "price":42000,
         "color":"gray",
         "brand":"Asus",
         "IsLiked": false,
@@ -60,10 +60,10 @@
         "numOfImages":3
     },
      {
-        "id":"e85e8e74-fd0a-11ed-be56-0242ac120002",
+        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
         "title":"Ноутбук Lenovo ThinkBook 15 G4 IAP (21DJ00BRRA) Mineral Grey",
         "description":"Eкран 15.6 IPS (1920x1080) Full HD, матовbй / Intel Core i7-1255U (1.7 - 4.7 ГГц) / RAM 16 ГБ / SSD 1 ТБ / Intel Iris Xe Graphics / без ОД / LAN / Wi-Fi / Bluetooth / веб-камера / без ОС / 1.7 кг / сірий",
-        "price":"43259",
+        "price":43259,
         "color":"gray",
         "brand":"Lenovo",
         "IsLiked": false,
@@ -72,10 +72,10 @@
         "numOfImages":4
     },
     {
-        "id":"f6d1347a-fd0a-11ed-be56-0242ac120002",
+        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
         "title":"Acer Swift X SFX14-42G-R8XR (NX.K79EU.004) Steel Grey",
         "description":"Екран 14 IPS (1920x1080) Full HD, матовий / AMD Ryzen 7 5825U (2.0 - 4.5 ГГц) / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce RTX 3050 Ti, 4 ГБ / без ОД / Wi-Fi / Bluetooth / веб-камера / без ОС / 1.39 кг / сірий",
-        "price":"44099",
+        "price":44099,
         "color":"gray",
         "brand":"Acer",
         "IsLiked": false,
@@ -84,10 +84,10 @@
         "numOfImages":3
     },
     {
-        "id":"fbfd1054-fd0a-11ed-be56-0242ac120002",
+        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
         "title":"Ноутбук ASUS Vivobook S 15 OLED K3502ZA-L1202W (90NB0WK1-M00P50)",
         "description":"Екран 15.6 OLED (1920x1080) Full HD, матовий / Intel Core i5-12500H (3.3 - 4.5 ГГц) / RAM 8 ГБ / SSD 512 ГБ / Intel Iris Xe Graphics / без ОД / Wi-Fi / Bluetooth / веб-камера / Windows 11 Home / 1.8 кг / сірий",
-        "price":"42999",
+        "price":42999,
         "color":"gray",
         "brand":"Asus",
         "IsLiked": true,
@@ -96,10 +96,10 @@
         "numOfImages":3
     },
     {
-        "id":"00ca5060-fd0b-11ed-be56-0242ac120002",
+        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
         "title":"Ноутбук игровой Asus TUF Gaming F15 FX506HM-HN017 Grey",
         "description":"ASUS TUF Gaming F15 FX506HM - ноутбук для яскравих віртуальних розвагБагатофункціональний ігровий ноутбук нового покоління ASUS TUF Gaming F15 FX506HM - надійний ґаджет, за допомогою якого можна досягти вершин не лише в іграх, а й у розв'язанні різноманітних професійних і повсякденних завдань. Висока потужність і продуктивність пристрою дає змогу використовувати його для проведення ділових нарад, а також для роботи з графічними та відеоредакторами.Незважаючи на те, що лептопи серії ASUS TUF FX506HM відносяться до бюджетної цінової категорії, виробник оснастив їх надійними сучасними комплектуючими, використовуваними в більш дорогих моделях. Це дало змогу досягти оптимального балансу між ціною та якістю.Наявність абревіатури TUF у назві пристрою свідчить про його збільшений ресурс міцності та надійності. Ноутбуки цієї лінійки пройшли суворе тестування за військовим стандартом MIL-STD-810 H. Це підтверджує їхню стійкість до падінь, а також до впливу вологи, вібрацій і перепадів температур.",
-        "price":"41999",
+        "price":41999,
         "color":"gray",
         "brand":"Asus",
         "IsLiked": true,
@@ -108,10 +108,10 @@
         "numOfImages":3
     },
     {
-        "id":"07145df8-fd0b-11ed-be56-0242ac120002",
+        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
         "title":"Ноутбук Apple MacBook Air 13.6 M2 8-Core GPU 256Gb MLY33 Midnight",
         "description":"Екран  13.6 M2 8-Core GPU 256Gb MLY33 Midnight",
-        "price":"47499",
+        "price":47499,
         "color":"gray",
         "brand":"Apple",
         "IsLiked": false,
@@ -120,10 +120,10 @@
         "numOfImages":5
     },
     {
-        "id":"0bb8cc86-fd0b-11ed-be56-0242ac120002",
+        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
         "title":"Ноутбук ігровий Lenovo Gaming 3 15ACH6 (82K201U8RA) Shadow Black",
         "description":"Тип ноутбука: , Діагональ екрану: 15.6 (1920x1080) Full HD, Роздільна здатність: 1920x1080, Поверхня екрану: , Процесор: Шестиядерний AMD Ryzen 5 5600H (3.3 - 4.2 ГГц), Об'єм оперативної пам'яті Об'єм HDD: 1 ТБ, Відеокарта: NVIDIA GeForce RTX 3050 Ti, Бездротові технології: , Операційна система: Без ОС, Вага: 2.25 кг, Колір: Чорний",
-        "price":"40999",
+        "price":40999,
         "color":"black",
         "brand":"Lenovo",
         "IsLiked": true,
@@ -132,15 +132,15 @@
         "numOfImages":5
     },
     {
-        "id":"1061e34e-fd0b-11ed-be56-0242ac120002",
+        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
         "title":"Ноутбук Lenovo IdeaPad Gaming 3 15ACH Shadow Black (82K201U8RA)",
         "description":"Ноутбук Lenovo IdeaPad Gaming 3 15ACH6 (82K201U8RA), 15.6 FullHD (1920x1080) IPS LED матовый 120 Гц / AMD Ryzen 5 5600H (3.3 - 4.2 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 256 ГБ / nVidia GeForce RTX3050Ti, 4 ГБ / без ОП / LAN / Wi-Fi / Bluetooth / веб-камера / без ОС / 2.25 кг / чорний",
-        "price":"46000",
+        "price":46000,
         "color":"black",
         "brand":"Lenovo",
         "IsLiked": true,
         "isAvailable":false,
         "images":null,  
         "numOfImages":5
-    },
+    }
 ]

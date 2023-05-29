@@ -46,7 +46,7 @@ func (db *database) CreateSchema(ctx context.Context) error {
 	    role       INTEGER DEFAULT 0 NOT NULL,
 	    password_hash    BYTEA                     NOT NULL,
 	    date_of_birth TIMESTAMP WITH TIME ZONE        NOT NULL,
-	    created_at TIMESTAMP WITH TIME ZONE        NOT NULL
+	    created_at TIMESTAMP WITH TIME ZONE DEFAULT now()       NOT NULL
 	);
     CREATE TABLE IF NOT EXISTS products(
 	    id           BYTEA PRIMARY KEY               NOT NULL,

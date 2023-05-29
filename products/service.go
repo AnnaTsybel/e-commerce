@@ -120,11 +120,29 @@ func (service *Service) ListRecommendation(ctx context.Context, userID, productI
 		return nil, err
 	}
 
-	return service.SearchSimilarProducts(ctx, likedProducts, product)
+	products := service.SearchSimilarProducts(likedProducts, product)
+	return products, nil
 }
 
-func (service *Service) SearchSimilarProducts(ctx context.Context, productsToAnalyze []Product, product Product) ([]Product, error) {
-	return nil, nil
+func (service *Service) SearchSimilarProducts(productsToAnalyze []Product, product Product) []Product {
+	priceFrom := product.Price - 3000
+	priceTo := product.Price + 3000
+	expectedBrand := product.Brand
+
+	recommendedProducts := make([]Product, 0, 8)
+
+	for _, productToAnalyze := range productsToAnalyze {
+		price := productToAnalyze.Price
+		if price > priceFrom && price < priceTo && productToAnalyze.Brand == expectedBrand {
+			recommendedProducts = append(recommendedProducts, productToAnalyze)
+		}
+	}
+
+	if len(recommendedProducts) > 8 {
+		recommendedProducts = recommendedProducts[:8]
+	}
+
+	return recommendedProducts
 }
 
 func (service *Service) Update(ctx context.Context, product Product) error {

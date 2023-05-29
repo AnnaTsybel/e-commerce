@@ -25,16 +25,18 @@ const (
 )
 
 type User struct {
-	ID           uuid.UUID `json:"id"`
-	Name         string    `json:"name"`
-	Surname      string    `json:"surname"`
-	PhoneNumber  string    `json:"phoneNumber"`
-	Gender       string    `json:"gender"`
-	Email        string    `json:"email"`
-	PasswordHash []byte    `json:"passwordHash"`
-	Role         Role      `json:"role"`
-	DateOfBirth  time.Time `json:"dateOfBirth"`
-	CreatedAt    time.Time `json:"createdAt"`
+	ID             uuid.UUID `json:"id"`
+	Name           string    `json:"name"`
+	Surname        string    `json:"surname"`
+	PhoneNumber    string    `json:"phoneNumber"`
+	Gender         string    `json:"gender"`
+	Email          string    `json:"email"`
+	Password       string    `json:"password,omitempty"`
+	PasswordHash   []byte    `json:"passwordHash"`
+	Role           Role      `json:"role"`
+	DateOfBirth    time.Time `json:"dateOfBirth"`
+	CreatedAt      time.Time `json:"createdAt"`
+	IsAvatarExists bool      `json:"isAvatarExists"`
 }
 
 // EncodePass encode the password and generate "hash" to store from users password.
