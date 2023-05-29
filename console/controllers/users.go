@@ -78,11 +78,6 @@ func (controller *Users) UpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if request.Email == "" || request.Password == "" {
-		controller.serveError(w, http.StatusBadRequest, AuthError.New("did not enter email address or password"))
-		return
-	}
-
 	claimsMap, err := goauth.GetClaims(ctx)
 	if err != nil {
 		controller.serveError(w, http.StatusUnauthorized, AuthError.New("StatusUnauthorized"))

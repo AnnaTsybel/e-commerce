@@ -12,11 +12,11 @@ import { RootState } from '@/app/store';
 import { Product } from '@/product';
 import { deleteProductData, likeProduct, unlikeProduct } from '@/app/store/actions/products';
 
-
 import './index.scss';
 
 const NO_PRODUCT_IMAGES = 0;
 const ONE_PRODUCT_IMAGE = 1;
+const USER_ADMINISTRATOR = 0;
 
 export const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
     const dispatch = useAppDispatch();
@@ -45,8 +45,8 @@ export const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
     return (
         <div className="product-item">
             <div className={`products-item 
-            ${!!user.role && ' products-item__admin'}`}>
-                {!!user.role &&
+            ${user.role === USER_ADMINISTRATOR && ' products-item__admin'}`}>
+                {user.role === USER_ADMINISTRATOR &&
                     <div className="products-item__buttons">
                         <button className="products-item__button"
                             onClick={() => editProduct(product.id)}>

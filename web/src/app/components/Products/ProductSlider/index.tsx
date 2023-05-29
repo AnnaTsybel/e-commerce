@@ -49,7 +49,7 @@ export const ProductSlider = () => {
         const slides = getPhotosArray();
 
         dispatch(setProductPhotos(slides));
-    }, []);
+    }, [product]);
 
     return (
         <div className="product-slider">
@@ -59,9 +59,10 @@ export const ProductSlider = () => {
             </div>
 
             <div className="product-slider__container">
-                {productPhotos && productPhotos.map((sliderImage, index) =>
-                    <div key={`product-slider-image--${index}`}
-                        className={` product-slider__item ${index === current ? 'active' : ''}`}
+                {productPhotos.map((sliderImage, index) =>
+                    <div
+                        key={sliderImage}
+                        className={`product-slider__item ${index === current ? 'active' : ''}`}
                     >
                         {index === current &&
                             <img

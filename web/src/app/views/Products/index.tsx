@@ -13,6 +13,8 @@ import { User } from '@/users';
 
 import './index.scss';
 
+const USER_ADMINISTRATOR = 1;
+
 const Products = () => {
     const dispatch = useAppDispatch();
 
@@ -29,7 +31,7 @@ const Products = () => {
             <div className="products__content">
                 <ProductsFilter />
                 <div className="products__cards">
-                    {!!user.role &&
+                    {user.role === USER_ADMINISTRATOR &&
                         <Link to="/product/create" className="products__cards__button">
                             Add Product
                         </Link>

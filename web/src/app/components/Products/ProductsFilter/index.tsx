@@ -15,7 +15,12 @@ export const ProductsFilter = () => {
                     <h4 className="products-filter__color__title">Колір</h4>
                     <div className="products-filter__color__content">
                         {colors.map((color) =>
-                            <div className="products-filter__color__item" onClick={() => setCurrentColor(color)}>
+                            <div
+                                key={color}
+                                className="products-filter__color__item"
+                                onClick={() => setCurrentColor(color)}
+                            >
+
                                 <div
                                     className={`product__color__icon
                                     product__${color}__icon 

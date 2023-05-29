@@ -14,9 +14,11 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { getProduct, updateProduct } from '@/app/store/actions/products';
 import { addProductPhotos, deleteProductPhoto, setProductPhotos } from '@/app/store/reducers/products';
 
+
 import '../index.scss';
 
 const LAST_ITEM_PATH_INCREMENT = 1;
+const SECOND_INDEX = 1;
 
 const ProductEditPage = () => {
     const navigate = useNavigate();
@@ -27,17 +29,15 @@ const ProductEditPage = () => {
 
     const getLastItem = (thePath: string) => thePath.substring(thePath.lastIndexOf('/') + LAST_ITEM_PATH_INCREMENT);
 
-    const [files, setFiles] = useState<string[]>();
-
-    const [currentColor, setCurrentColor] = useState<Color>(product.color);
     const [title, setTitle] = useState<string>(product.title);
     const [description, setDescription] = useState<string>(product.description);
     const [price, setPrice] = useState<number>(product.price);
+    const [currentColor, setCurrentColor] = useState<Color>(product.color);
     const [brand, setBrand] = useState<string>(product.brand);
+    const [files, setFiles] = useState<string[]>();
 
     const getPhotosArray = () => {
         const sliderPhotos: string[] = [];
-        console.log(product);
 
         for (let index = 0; index < product.numOfImages; index++) {
             sliderPhotos.push(`${window.location.origin}/images/products/${product.id}/${index}.png`);
@@ -57,7 +57,7 @@ const ProductEditPage = () => {
                 photosData.push(URL.createObjectURL(uploadedFile));
 
                 const convertedFile: string = await convertToBase64(uploadedFile);
-                filesData.push(convertedFile);
+                filesData.push(convertedFile.split(',')[SECOND_INDEX]);
             }
             dispatch(addProductPhotos(photosData));
 
@@ -150,7 +150,10 @@ const ProductEditPage = () => {
                 />
                 <div className="product-edit__color__content">
                     {colors.map((color) =>
-                        <div className="product-edit__color__item" key={color}>
+                        <div
+                            key={color}
+                            className="product-edit__color__item"
+                        >
                             <div
                                 className={`product__color__icon product__${color}__icon 
                                 ${currentColor === color ? 'product-edit__color__checked' : ''}`}
@@ -163,7 +166,7 @@ const ProductEditPage = () => {
                         {productPhotos.map((photo, index) =>
                             <div
                                 className="product-edit__photos__item"
-                                key={`${photo}-${index}`}
+                                key={photo}
                                 onClick={() => deletePhoto(index)}
                                 style={{ backgroundImage: `url(${photo})` }}
                             >

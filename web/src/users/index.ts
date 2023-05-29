@@ -15,7 +15,8 @@ export class User {
         public passwordHash: string = '',
         public gender: Gender = '',
         public createdAt: string = '',
-        public dateOfBirth: string = ''
+        public dateOfBirth: string = '',
+        public isAvatarExists: boolean = false,
     ) { };
 }
 

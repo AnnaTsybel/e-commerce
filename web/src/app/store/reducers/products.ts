@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { deleteProductData, getProduct, productsList } from '../actions/products';
+import { deleteProductData, getProduct } from '../actions/products';
 import { Product } from '@/product';
 
 /** Exposes channels state */
@@ -43,6 +43,9 @@ export const productsSlice = createSlice({
             state.productPhotos =
                 state.productPhotos.concat(action.payload);
         },
+        deleteProductPhotos: (state) => {
+            state.productPhotos = [];
+        },
     },
 
     extraReducers: (builder) => {
@@ -57,6 +60,6 @@ export const productsSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { list, setProductPhotos, deleteProductPhoto, addProductPhotos } = productsSlice.actions;
+export const { list, setProductPhotos, deleteProductPhoto, addProductPhotos, deleteProductPhotos } = productsSlice.actions;
 
 export default productsSlice.reducer;

@@ -12,6 +12,7 @@ import { RootState } from '@/app/store';
 import { User } from '@/users';
 
 import './index.scss';
+import { deleteProductPhotos } from '@/app/store/reducers/products';
 
 const LAST_ITEM_PATH_INCREMENT = 1;
 const ONE_PRODUCT_IMAGE = 1;
@@ -45,6 +46,7 @@ const ProductPage = () => {
     };
 
     useEffect(() => {
+        dispatch(deleteProductPhotos());
         const productId = getLastItem(window.location.pathname);
         dispatch(getProduct(productId));
     }, []);

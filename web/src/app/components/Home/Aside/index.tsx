@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-import noUserPhoto from '@img/no-photo-profile.webp';
+import userNoPhoto from '@img/no-photo-profile.webp';
 import { useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { RootState } from '@/app/store';
 import { catalog } from '@/mockedData/catalog';
@@ -10,6 +11,18 @@ import './index.scss';
 
 export const Aside = () => {
     const user: User | null = useAppSelector((state: RootState) => state.usersReducer.user);
+
+    const [photo, setPhoto] = useState<string>();
+    const [isAvatarExists, setIsAvatarExists] = useState<boolean>();
+
+    const setUserAvatar = () => {
+        isAvatarExists ? setPhoto(`${window.location.origin}/images/users/${user.id}.png`) : setPhoto(userNoPhoto);
+    };
+
+    useEffect(() => {
+        setIsAvatarExists(user.isAvatarExists);
+        setUserAvatar;
+    }, [user]);
 
     return (
         <aside className="aside">
@@ -32,7 +45,7 @@ export const Aside = () => {
             {user
                 && <div className="aside__user">
                     <Link className="aside__user__info" to={`user/${user.id}`}>
-                        <img src={user.avatar ? user.avatar : noUserPhoto}
+                        <img src={photo}
                             alt="user"
                             className="aside__user__info__photo" />
                         <div>

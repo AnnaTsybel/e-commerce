@@ -52,7 +52,7 @@ export const Slider = () => {
 
             <div className="slider__container">
                 {sliderImages.map((sliderImage, index) =>
-                    <div key={`slider-image--${index}`}
+                    <div key={sliderImage.photo}
                         className={` slider__item ${index === current ? 'active' : ''}`}
                     >
                         {index === current &&

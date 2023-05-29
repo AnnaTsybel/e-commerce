@@ -12,8 +12,8 @@ export const ProductBlock: React.FC<{ products: Product[]; title: string }>
                 </div>
             </div>
             <div className="products-block__content">
-                {products.map((product: Product, index: number) =>
-                    <ProductItem product={product} key={`${product.id}-${index}`} />
+                {products.map((product: Product) =>
+                    <ProductItem product={product} key={product.id} />
                 )}
             </div>
             <span className="products-block__line"></span>

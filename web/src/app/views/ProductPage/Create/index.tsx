@@ -12,7 +12,6 @@ import { RootState } from '@/app/store';
 import { addProductPhotos, deleteProductPhoto, setProductPhotos } from '@/app/store/reducers/products';
 import { Color, colors } from '@/colors';
 
-
 import '../index.scss';
 
 const DEFAULT_COLOR_INDEX = 0;
@@ -113,7 +112,9 @@ const ProductCreate = () => {
                 />
                 <div className="product-create__color__content">
                     {colors.map((color) =>
-                        <div className="product-create__color__item" key={color}>
+                        <div
+                            key={color}
+                            className="product-create__color__item">
                             <div
                                 className={`product__color__icon product__${color}__icon 
                                 ${currentColor === color ? 'product-create__color__checked' : ''}`}
