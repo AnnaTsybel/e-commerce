@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { RouteConfig } from '@/routes';
-import { UserRegisterData } from '@/users';
+import { Gender, UserRegisterData } from '@/users';
 import { useAppDispatch } from '@/app/hooks/useReduxToolkit';
 import { getUser, register } from '@/app/store/actions/users';
 
@@ -17,22 +17,30 @@ export const Registration = () => {
     const [email, setEmail] = useState<string>('');
     const [phoneNumber, setPhoneNumber] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [gender, setGender] = useState<Gender>('man');
+    const [age, setAge] = useState<string>('');
 
-    const registerUser = () => {
-        dispatch(register(new UserRegisterData(
-            name,
-            surname,
-            phoneNumber,
-            email,
-            'man',
-            password
-        )));
+    const registerUser = async() => {
+        try {
+            await dispatch(register(new UserRegisterData(
+                name,
+                surname,
+                phoneNumber,
+                email,
+                'man',
+                password,
+                age
+            )));
 
-        window.localStorage.setItem('IS_LOGGEDIN', JSON.stringify(true));
+            await window.localStorage.setItem('IS_LOGGEDIN', JSON.stringify(true));
 
-        dispatch(getUser());
+            await dispatch(getUser());
 
-        navigate(RouteConfig.Home.path);
+            await navigate(RouteConfig.Home.path);
+        }
+        catch (e) {
+            /** TODO: add catching error */
+        }
     };
 
     return (
@@ -53,6 +61,7 @@ export const Registration = () => {
                         className="auth__input"
                         onChange={e => setName(e.target.value)}
                         required
+                        autoComplete="off"
                     />
                     <span></span>
                 </div>
@@ -62,6 +71,7 @@ export const Registration = () => {
                         className="auth__input"
                         onChange={e => setSurname(e.target.value)}
                         required
+                        autoComplete="off"
                     />
                     <span></span>
                 </div>
@@ -71,6 +81,8 @@ export const Registration = () => {
                         className="auth__input"
                         onChange={e => setEmail(e.target.value)}
                         required
+                        autoComplete="off"
+                        type="email"
                     />
                     <span></span>
                 </div>
@@ -84,12 +96,39 @@ export const Registration = () => {
                     <span></span>
                 </div>
                 <div className="auth__input__wrapper" >
+                    <label className="auth__label">День народження</label>
+                    <input
+                        className="auth__input"
+                        onChange={e => setAge(e.target.value)}
+                        type="date"
+                        required
+                    />
+                    <span></span>
+                </div>
+                <div className="auth__gender__wrapper" >
+                    <label className="auth__gender__title">Ваша стать</label>
+                    <div className="auth__gender">
+                        <div
+                            className={`auth__gender__item ${gender === 'woman' && 'auth__gender__item--active'}`}
+                            onClick={() => setGender('woman')}
+                        >
+                            Жінка
+                        </div>
+                        <div
+                            className={`auth__gender__item ${gender === 'man' && 'auth__gender__item--active'}`}
+                            onClick={() => setGender('man')}>
+                            Чоловік
+                        </div>
+                    </div>
+                </div>
+                <div className="auth__input__wrapper" >
                     <label className="auth__label">Пароль</label>
                     <input
                         className="auth__input"
                         onChange={e => setPassword(e.target.value)}
                         type="password"
                         required
+                        autoComplete="off"
                     />
                     <span></span>
                 </div>

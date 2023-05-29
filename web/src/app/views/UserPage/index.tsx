@@ -27,6 +27,7 @@ const UserPage = () => {
     const [gender, setGender] = useState<Gender>();
     const [photo, setPhoto] = useState<string>(userNoPhoto);
     const [file, setFile] = useState<string>(userNoPhoto);
+    const [email, setEmail] = useState<string>(userNoPhoto);
 
     const handleFileChange = async(e: any) => {
         if (e.target.files?.length) {
@@ -44,7 +45,12 @@ const UserPage = () => {
             name,
             surname,
             phonenumber,
-            gender
+            email,
+            file,
+            gender,
+            user.createdAt,
+            user.dateOfBirth,
+            user.passwordHash
         )));
     };
 
@@ -114,13 +120,22 @@ const UserPage = () => {
                             <span></span>
                         </div>
                         <div className="user__input__wrapper" >
-                            <label
-                                className="user__label">Стать</label>
-                            <input
-                                className="user__input"
-                                defaultValue={user.gender === 'man' ? 'чоловік' : 'жінка'}
-                                onChange={e => setName(e.target.value)}
-                            />
+                            <div className="user__gender__wrapper" >
+                                <label className="user__gender__title">Ваша стать</label>
+                                <div className="user__gender">
+                                    <div
+                                        className={`user__gender__item ${user.gender === 'woman' && 'auth__gender__item--active'}`}
+                                        onClick={() => setGender('woman')}
+                                    >
+                                        Жінка
+                                    </div>
+                                    <div
+                                        className={`user__gender__item ${user.gender === 'man' && 'auth__gender__item--active'}`}
+                                        onClick={() => setGender('man')}>
+                                        Чоловік
+                                    </div>
+                                </div>
+                            </div>
                             <span></span>
                         </div>
                     </div>
@@ -149,11 +164,16 @@ const UserPage = () => {
                             <p className="user__content__field__info">{user.phoneNumber}</p>
                         </div>
                         <div className="user__content__field">
+                            <h3 className="user__content__field__name">Дата народження</h3>
+                            <p className="user__content__field__info">11.06.2001</p>
+                        </div>
+                        <div className="user__content__field">
                             <h3 className="user__content__field__name">Стать</h3>
                             <p
                                 className="user__content__field__info"
                             >
-                                {user.gender === 'man' ? 'чоловік' : 'жінка'}
+                                {/* {user.gender === 'man' ? 'чоловік' : 'жінка'} */}
+                                жінка
                             </p>
                         </div>
                     </div>

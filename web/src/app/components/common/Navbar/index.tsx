@@ -18,7 +18,7 @@ import { catalog } from '@/mockedData/catalog';
 
 import './index.scss';
 
-const ITEMS_SHOPPING_CART_AMOUNT = 12;
+const ITEMS_SHOPPING_CART_AMOUNT = 1;
 
 export const Navbar = () => {
     const [isCatalogOpened, setCatalogOpened] = useState<boolean>(false);

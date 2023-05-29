@@ -1,23 +1,27 @@
-import productPhoto from '@img/mocked/phone-photo.jpeg';
 import { useEffect, useState } from 'react';
-
+import { ProductSlider } from '@components/Products/ProductSlider';
 import notLikedProduct from '@img/Product/not-favorite-icon.png';
 import likedProduct from '@img/Product/favorite-icon.png';
 import deleteIcon from '@img/Product/delete-icon.png';
 import editIcon from '@img/Product/edit-icon.png';
-import { Product } from '@/product';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
-import { deleteProductData, getProduct, likeProduct, unlikeProduct } from '@/app/store/actions/products';
-import { RootState } from '@/app/store';
 
+import { deleteProductData, getProduct, likeProduct, unlikeProduct } from '@/app/store/actions/products';
+import { Product } from '@/product';
+import { RootState } from '@/app/store';
+import { User } from '@/users';
 
 import './index.scss';
 
 const LAST_ITEM_PATH_INCREMENT = 1;
+const ONE_PRODUCT_IMAGE = 1;
+const NO_PRODUCT_IMAGE = 0;
+const ADMIN_ROLE = 1;
 
 const ProductPage = () => {
     const dispatch = useAppDispatch();
     const product: Product | null = useAppSelector((state: RootState) => state.productsReducer.currentProduct);
+    const user: User | null = useAppSelector((state: RootState) => state.usersReducer.user);
 
     const [isFavorite, setIsFavorite] = useState(product.IsLiked);
 
@@ -32,7 +36,7 @@ const ProductPage = () => {
         setIsFavorite(!isFavorite);
     };
 
-    const deleteProduct = async() => {
+    const deleteProduct = () => {
         dispatch(deleteProductData(product.id));
     };
 
@@ -50,7 +54,12 @@ const ProductPage = () => {
             <h1 className="product__title">{product.title}</h1>
             <div className="product__content">
                 <div className="product__photo">
-                    <img src={productPhoto} alt={product.title} className="product__photo__image" />
+                    {product.numOfImages > ONE_PRODUCT_IMAGE ?
+                        <ProductSlider />
+                        :
+                        <div style={{ backgroundImage: `url(${window.location.origin}/images/products/${product.id}/0.png)` }}
+                            className="product__photo__image" />
+                    }
                 </div>
                 <div className="product__info">
                     <div className="product__top-side">
@@ -59,13 +68,16 @@ const ProductPage = () => {
                             <span className={`product__color__icon product__${product.color}__icon`} />
                         </div>
                         <div className="product__actions">
-                            <button className="product__button"
-                                onClick={() => editProduct(product.id)}>
-                                <img src={editIcon} alt="edit-icon" />
-                            </button>
-                            <button className="product__button" onClick={() => deleteProduct()}>
-                                <img src={deleteIcon} alt="delete-icon" />
-                            </button>
+                            {user.role === ADMIN_ROLE &&
+                                <>
+                                    <button className="product__button"
+                                        onClick={() => editProduct(product.id)}>
+                                        <img src={editIcon} alt="edit-icon" />
+                                    </button>
+                                    <button className="product__button" onClick={() => deleteProduct()}>
+                                        <img src={deleteIcon} alt="delete-icon" />
+                                    </button>
+                                </>}
                             <div className="product__like" onClick={() => handleLikes()}>
                                 {isFavorite
                                     ? <img src={likedProduct}
@@ -82,6 +94,10 @@ const ProductPage = () => {
                     <div className="product__price">
                         <p className="product__subtitle">Ціна:</p>
                         <span className="product__price__value"> {product.price} &#8372;</span>
+                    </div>
+                    <div className="product__price">
+                        <p className="product__subtitle">Бренд:</p>
+                        <span className="product__price__value"> {product.brand}</span>
                     </div>
 
                     {product.isAvailable

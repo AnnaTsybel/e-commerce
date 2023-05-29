@@ -29,10 +29,11 @@ export class ProductsClient extends APIClient {
             product.title,
             product.description,
             product.price,
-            [],
             product.isAvailable,
-            product.colors,
-            product.IsLiked
+            product.color,
+            product.IsLiked,
+            product.brand,
+            product.numOfImages
         );
     }
 
@@ -52,10 +53,11 @@ export class ProductsClient extends APIClient {
                 product.title,
                 product.description,
                 product.price,
-                [],
                 product.isAvailable,
-                product.colors,
-                product.IsLiked
+                product.color,
+                product.IsLiked,
+                product.brand,
+                product.numOfImages
             )
         );
     }

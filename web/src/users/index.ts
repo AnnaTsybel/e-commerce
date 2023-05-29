@@ -1,7 +1,7 @@
 export type Gender = 'man' | 'woman' | '';
 export type UserStatus = 'admin' | 'user';
 
-const DEFAULT_ROLE = 0;
+const DEFAULT_ROLE = 1;
 
 export class User {
     public constructor(
@@ -14,7 +14,8 @@ export class User {
         public avatar: string = '',
         public passwordHash: string = '',
         public gender: Gender = '',
-        public createdAt: string = ''
+        public createdAt: string = '',
+        public dateOfBirth: string = ''
     ) { };
 }
 
@@ -26,6 +27,7 @@ export class UserRegisterData {
         public email: string = '',
         public gender: Gender = '',
         public password: string = '',
+        public age: string = ''
     ) { };
 }
 
@@ -35,6 +37,12 @@ export class UserUpdateData {
         public name: string = '',
         public surname: string = '',
         public phoneNumber: string = '',
+        public email: string = '',
+        public avatar: string = '',
         public gender: Gender = '',
+        public createdAt: string = '',
+        public dateOfBirth: string = '',
+        public passwordHash: string = '',
+
     ) { };
 }

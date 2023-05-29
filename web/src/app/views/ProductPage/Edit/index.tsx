@@ -14,14 +14,11 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { getProduct, updateProduct } from '@/app/store/actions/products';
 import { addProductPhotos, deleteProductPhoto, setProductPhotos } from '@/app/store/reducers/products';
 
-
 import '../index.scss';
 
-const DEFAULT_COLOR_INDEX = 0;
-const DEFAULT_PRICE = 0;
 const LAST_ITEM_PATH_INCREMENT = 1;
 
-const ProductCreate = () => {
+const ProductEditPage = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
@@ -32,10 +29,22 @@ const ProductCreate = () => {
 
     const [files, setFiles] = useState<string[]>();
 
-    const [currentColor, setCurrentColor] = useState<Color>(colors[DEFAULT_COLOR_INDEX]);
-    const [title, setTitle] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
-    const [price, setPrice] = useState<number>(DEFAULT_PRICE);
+    const [currentColor, setCurrentColor] = useState<Color>(product.color);
+    const [title, setTitle] = useState<string>(product.title);
+    const [description, setDescription] = useState<string>(product.description);
+    const [price, setPrice] = useState<number>(product.price);
+    const [brand, setBrand] = useState<string>(product.brand);
+
+    const getPhotosArray = () => {
+        const sliderPhotos: string[] = [];
+        console.log(product);
+
+        for (let index = 0; index < product.numOfImages; index++) {
+            sliderPhotos.push(`${window.location.origin}/images/products/${product.id}/${index}.png`);
+        }
+
+        return sliderPhotos;
+    };
 
     const handleFileChange = async(e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.length) {
@@ -74,9 +83,10 @@ const ProductCreate = () => {
                 description,
                 price,
                 product.isAvailable,
-                [currentColor],
+                currentColor,
                 product.IsLiked,
-                []
+                brand,
+                files
             )));
 
         navigate(`/product/${product.id}`);
@@ -85,8 +95,18 @@ const ProductCreate = () => {
     useEffect(() => {
         const productId = getLastItem(window.location.pathname);
         dispatch(getProduct(productId));
-        dispatch(setProductPhotos(product.photos));
     }, []);
+
+    useEffect(() => {
+        const slides = getPhotosArray();
+        dispatch(setProductPhotos(slides));
+
+        setCurrentColor(product.color);
+        setDescription(product.description);
+        setTitle(product.title);
+        setPrice(product.price);
+        setBrand(product.brand);
+    }, [product]);
 
     return (
         <>
@@ -109,8 +129,18 @@ const ProductCreate = () => {
                     <label className="product-edit__label">Ціна</label>
                     <input
                         className="product-edit__input"
-                        defaultValue={`${product.price}`}
+                        defaultValue={price}
+                        type="number"
                         onChange={onChangePrice} />
+                    <span></span>
+                </div>
+                <div className="product-edit__input__wrapper" >
+                    <label className="product-edit__label">Бренд</label>
+                    <input
+                        className="product-edit__input"
+                        defaultValue={product.brand}
+                        onChange={e => setBrand(e.target.value)}
+                    />
                     <span></span>
                 </div>
                 <textarea
@@ -181,4 +211,4 @@ const ProductCreate = () => {
     );
 };
 
-export default ProductCreate;
+export default ProductEditPage;

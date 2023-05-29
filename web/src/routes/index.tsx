@@ -84,7 +84,7 @@ export class RouteConfig {
         );
     public static Categories: ComponentRoutes
         = new ComponentRoutes(
-            '/categories',
+            '/categories/:id',
             <Categories />,
             false
         );

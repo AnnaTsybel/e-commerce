@@ -30,7 +30,7 @@ const Home = () => {
             <Aside />
             <div className="home__content">
                 <Slider />
-                {user.role &&
+                {!!user.role &&
                     <Link to="/product/create" className="home__add-product">
                         Add Product
                     </Link>

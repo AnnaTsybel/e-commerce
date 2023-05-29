@@ -6,7 +6,6 @@ import { RootState } from '@/app/store';
 import { catalog } from '@/mockedData/catalog';
 import { User } from '@/users';
 
-
 import './index.scss';
 
 export const Aside = () => {
@@ -21,21 +20,14 @@ export const Aside = () => {
                         key={`${subcategory.category}-${index}`}
                         to={`categories/${subcategory.id}`}
                     >
-                        <img src={noUserPhoto}
+                        {/* <img src={noUserPhoto}
                             alt="category icon"
                             className="aside__category__icon"
-                        />
+                        /> */}
                         <p className="aside__category__text">{subcategory.category}</p>
                     </Link>
                 )
                 }
-                <Link
-                    className="aside__category"
-                    to="/categories"
-                >
-                    <img src={noUserPhoto} alt="category icon" className="aside__category__icon" />
-                    <p className="aside__category__text">Всі категорії</p>
-                </Link>
             </div>
             {user
                 && <div className="aside__user">

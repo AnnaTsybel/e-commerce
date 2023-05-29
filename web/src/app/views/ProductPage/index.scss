@@ -74,6 +74,15 @@
         }
     }
 
+    &__photo__image {
+        height: 600px;
+        width: 500px;
+        margin: 0 auto 8px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+
     &__no-available,
     &__available {
         margin-bottom: 20px;

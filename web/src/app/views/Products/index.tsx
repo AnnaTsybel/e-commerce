@@ -29,15 +29,15 @@ const Products = () => {
             <div className="products__content">
                 <ProductsFilter />
                 <div className="products__cards">
-                    {user.role &&
+                    {!!user.role &&
                         <Link to="/product/create" className="products__cards__button">
                             Add Product
                         </Link>
                     }
                     {products?.length ?
                         <div className="products__cards__content">
-                            {products?.map((product: Product, index: number) =>
-                                <ProductItem product={product} key={`${product.id}-${index}`} />
+                            {products?.map((product: Product) =>
+                                <ProductItem product={product} key={product.title} />
                             )}
                         </div>
                         :

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { create, deleteProductData, getProduct, productsList } from '../actions/products';
+import { deleteProductData, getProduct, productsList } from '../actions/products';
 import { Product } from '@/product';
 
 /** Exposes channels state */

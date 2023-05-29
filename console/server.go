@@ -3,10 +3,6 @@ package console
 import (
 	"context"
 	"errors"
-	"github.com/BoostyLabs/goauth"
-	"github.com/gorilla/mux"
-	"github.com/zeebo/errs"
-	"golang.org/x/sync/errgroup"
 	"graduate_work/console/controllers"
 	"graduate_work/products"
 	"graduate_work/users"
@@ -16,6 +12,11 @@ import (
 	"net"
 	"net/http"
 	"path/filepath"
+
+	"github.com/BoostyLabs/goauth"
+	"github.com/gorilla/mux"
+	"github.com/zeebo/errs"
+	"golang.org/x/sync/errgroup"
 )
 
 var (
@@ -97,12 +98,12 @@ func NewServer(config Config, listener net.Listener, userAuth *userauth.Service,
 	productsRouter.HandleFunc("/{id}/like", productsController.LikeProduct).Methods(http.MethodPost)
 	productsRouter.HandleFunc("/{id}/like", productsController.UnlikeProduct).Methods(http.MethodDelete)
 
+	imagesServer := http.FileServer(http.Dir(server.config.PhotosDir))
+	router.PathPrefix("/images/").Handler(http.StripPrefix("/images/", imagesServer))
+
 	fs := http.FileServer(http.Dir(server.config.StaticDir))
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static", fs))
 	router.PathPrefix("/").HandlerFunc(server.appHandler)
-
-	imagesServer := http.FileServer(http.Dir(server.config.PhotosDir))
-	router.PathPrefix("/images/").Handler(http.StripPrefix("/images/", imagesServer))
 
 	server.server = http.Server{
 		Handler: router,

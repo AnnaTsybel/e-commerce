@@ -1,19 +1,22 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-
-import productPhoto from '@img/mocked/phone-photo.jpeg';
 import notLikedProduct from '@img/Product/not-favorite-icon.png';
 import likedProduct from '@img/Product/favorite-icon.png';
 import deleteIcon from '@img/Product/delete-icon.png';
 import editIcon from '@img/Product/edit-icon.png';
-import { User } from '@/users';
+import noImage from '@img/Product/no-image.png';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
+
+import { User } from '@/users';
 import { RootState } from '@/app/store';
 import { Product } from '@/product';
 import { deleteProductData, likeProduct, unlikeProduct } from '@/app/store/actions/products';
 
 
 import './index.scss';
+
+const NO_PRODUCT_IMAGES = 0;
+const ONE_PRODUCT_IMAGE = 1;
 
 export const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
     const dispatch = useAppDispatch();
@@ -42,8 +45,8 @@ export const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
     return (
         <div className="product-item">
             <div className={`products-item 
-            ${user.role && ' products-item__admin'}`}>
-                {user.role &&
+            ${!!user.role && ' products-item__admin'}`}>
+                {!!user.role &&
                     <div className="products-item__buttons">
                         <button className="products-item__button"
                             onClick={() => editProduct(product.id)}>
@@ -55,8 +58,13 @@ export const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
                     </div>
                 }
                 <Link to={`/product/${product.id}`} >
-                    <div style={{ backgroundImage: `url(${productPhoto})` }}
-                        className="products-item__image" />
+                    {product.numOfImages === NO_PRODUCT_IMAGES ?
+                        <div style={{ backgroundImage: `url(${noImage})` }}
+                            className="products-item__image" />
+                        :
+                        <div style={{ backgroundImage: `url(${window.location.origin}/images/products/${product.id}/0.png)` }}
+                            className="products-item__image" />
+                    }
                 </Link>
                 <Link className="products-item__title" to={`/product/${product.id}`}>
                     {product.title}

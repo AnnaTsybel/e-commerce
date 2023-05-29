@@ -52,9 +52,12 @@ export class UsersClient extends APIClient {
             user.surname,
             user.phoneNumber,
             user.email,
-            user.status,
+            user.role,
             user.avatar,
-            user.gender
+            user.passwordHash,
+            user.gender,
+            user.createdAt,
+            user.dateOfBirth
         );
     }
 

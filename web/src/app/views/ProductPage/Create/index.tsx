@@ -1,21 +1,23 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import closeIcon from '@img/Product/remove-icon.png';
 import photoAddIcon from '@img/Product/photo-add-icon.png';
 import backButtonIcon from '@img/back-button.png';
+import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
+
 import { ProductCreation } from '@/product';
 import { convertToBase64 } from '@/app/internal/convertImage';
-import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { create } from '@/app/store/actions/products';
 import { RootState } from '@/app/store';
 import { addProductPhotos, deleteProductPhoto, setProductPhotos } from '@/app/store/reducers/products';
 import { Color, colors } from '@/colors';
 
+
 import '../index.scss';
 
 const DEFAULT_COLOR_INDEX = 0;
 const DEFAULT_PRICE = 0;
+const SECOND_INDEX = 1;
 
 const ProductCreate = () => {
     const navigate = useNavigate();
@@ -27,6 +29,7 @@ const ProductCreate = () => {
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [price, setPrice] = useState<number>(DEFAULT_PRICE);
+    const [brand, setBrand] = useState<string>();
     const [files, setFiles] = useState<string[]>();
 
     const handleFileChange = async(e: ChangeEvent<HTMLInputElement>) => {
@@ -40,7 +43,7 @@ const ProductCreate = () => {
                 photosData.push(URL.createObjectURL(uploadedFile));
 
                 const convertedFile: string = await convertToBase64(uploadedFile);
-                filesData.push(convertedFile);
+                filesData.push(convertedFile.split(',')[SECOND_INDEX]);
             }
 
             dispatch(addProductPhotos(photosData));
@@ -48,16 +51,17 @@ const ProductCreate = () => {
         }
     };
 
-    const createProduct = () => {
-        dispatch(create(new ProductCreation(
+    const createProduct = async() => {
+        await dispatch(create(new ProductCreation(
             title,
             description,
             price,
-            productPhotos,
-            [currentColor]
+            files,
+            currentColor,
+            brand
         )));
 
-        navigate('/products');
+        await navigate('/products');
     };
 
     const onChangePrice = (e: any) => {
@@ -86,6 +90,11 @@ const ProductCreate = () => {
                 <div className="product-create__input__wrapper" >
                     <label className="product-create__label">Назва</label>
                     <input className="product-create__input" onChange={e => setTitle(e.target.value)} />
+                    <span></span>
+                </div>
+                <div className="product-create__input__wrapper" >
+                    <label className="product-create__label">Бренд</label>
+                    <input className="product-create__input" onChange={e => setBrand(e.target.value)} />
                     <span></span>
                 </div>
                 <div className="product-create__input__wrapper" >
