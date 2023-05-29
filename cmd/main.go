@@ -2,9 +2,12 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"github.com/caarlos0/env/v6"
 	documentize "graduate_work"
 	"graduate_work/database"
+	"graduate_work/products"
+	"graduate_work/users"
 	//"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/zeebo/errs"
@@ -50,6 +53,8 @@ func main() {
 		return
 	}
 
+	seed(ctx, db)
+
 	err = errs.Combine(app.Run(ctx), app.Close())
 	log.Println(err)
 }
@@ -63,4 +68,60 @@ func onSigInt(onSigInt func()) {
 		<-done
 		onSigInt()
 	}()
+}
+
+func seed(ctx context.Context, db documentize.DB) error {
+	usersFile, err := os.ReadFile("./cmd/testData/users.json")
+	if err != nil {
+		log.Println("AAAA", err)
+		return err
+	}
+
+	testUsers := make([]users.User, 0, 10)
+
+	err = json.Unmarshal(usersFile, &testUsers)
+	if err != nil {
+		log.Println("BBB", err)
+		return err
+	}
+
+	dir, err := os.Getwd()
+	if err != nil {
+		log.Println("CCC", err)
+		return err
+	}
+
+	log.Println(dir)
+
+	productsFile, err := os.ReadFile("./cmd/testData/products.json")
+	if err != nil {
+		log.Println("AAAA111", err)
+		return err
+	}
+
+	testProducts := make([]products.Product, 0, 10)
+
+	err = json.Unmarshal(productsFile, &testProducts)
+	if err != nil {
+		log.Println("BBB111", err)
+		return err
+	}
+
+	for _, user := range testUsers {
+		user.PasswordHash = []byte(user.Password)
+		err = user.EncodePass()
+		if err != nil {
+			log.Println("encode err", user)
+		}
+
+		err = db.Users().Create(ctx, user)
+		log.Println("err users creation", err)
+	}
+
+	for _, product := range testProducts {
+		err = db.Products().Create(ctx, product)
+		log.Println("err products creation", err)
+	}
+
+	return nil
 }

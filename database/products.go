@@ -183,33 +183,3 @@ func (productsDB *productsDB) ListLikedProducts(ctx context.Context, userID uuid
 	}
 	return data, nil
 }
-
-func (productsDB *productsDB) ListLikedProductsByUsers(ctx context.Context, userID uuid.UUID) ([]uuid.UUID, error) {
-	query := `SELECT product_id
-	          FROM product_likes
-	          WHERE user_id = $1`
-
-	rows, err := productsDB.conn.QueryContext(ctx, query, userID)
-	if err != nil {
-		return nil, err
-	}
-
-	defer func() {
-		err = errs.Combine(err, rows.Close())
-	}()
-
-	var data []uuid.UUID
-	for rows.Next() {
-		var productID uuid.UUID
-		err = rows.Scan(&productID)
-		if err != nil {
-			return nil, err
-		}
-
-		data = append(data, productID)
-	}
-	if err = rows.Err(); err != nil {
-		return nil, err
-	}
-	return data, nil
-}

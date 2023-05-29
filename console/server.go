@@ -99,7 +99,7 @@ func NewServer(config Config, listener net.Listener, userAuth *userauth.Service,
 	productsRouter.HandleFunc("/{id}/like", productsController.UnlikeProduct).Methods(http.MethodDelete)
 
 	imagesServer := http.FileServer(http.Dir(server.config.PhotosDir))
-	router.PathPrefix("/images/").Handler(http.StripPrefix("/images/", imagesServer))
+	router.PathPrefix("/images/").Handler(http.StripPrefix("/images", imagesServer))
 
 	fs := http.FileServer(http.Dir(server.config.StaticDir))
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static", fs))

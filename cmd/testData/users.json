@@ -8,7 +8,9 @@
         "status":"admin",
         "photo": "",
         "gender": "woman",
-        "password": "YVm2pE4B"
+        "password": "YVm2pE4B",
+        "role": 1,
+        "dateOfBirth" : "2002-04-23T18:25:43.511Z"
     },
     {
         "id":"325e89d4-f9e6-11ed-be56-0242ac120002",
@@ -16,10 +18,11 @@
         "surname": "Бондур",
         "phoneNumber": "+380924663336",
         "email": "mykyta@gmail.com",
-        "role":"admin",
+        "role":1,
         "photo": "",
         "gender": "man",
-        "password": "g6uPFwcXAXvm7E5D"
+        "password": "g6uPFwcXAXvm7E5D",
+        "dateOfBirth" : "2002-04-23T18:25:43.511Z"
     },
     {
         "id":"396b5b6c-f9e6-11ed-be56-0242ac120002",
@@ -27,10 +30,11 @@
         "surname": "Кожедуб",
         "phoneNumber": "+380966403336",
         "email": "ann@gmail.com",
-        "role":"user",
+        "role":0,
         "photo": "",
         "gender": "man",
-        "password": "PvqJwAxJ"
+        "password": "PvqJwAxJ",
+        "dateOfBirth" : "2002-04-23T18:25:43.511Z"
     },
     {
         "id":"3f26b682-f9e6-11ed-be56-0242ac120002",
@@ -38,10 +42,11 @@
         "surname": "Тельнова",
         "phoneNumber": "+380987663336",
         "email": "olena@gmail.com",
-        "role":"user",
+        "role":0,
         "photo": "",
         "gender": "woman",
-        "password": "2qTHSr4TUaZ5&Lty"
+        "password": "2qTHSr4TUaZ5&Lty",
+        "dateOfBirth" : "2002-04-23T18:25:43.511Z"
     },
     {
         "id":"464d5236-f9e6-11ed-be56-0242ac120002",
@@ -49,10 +54,11 @@
         "surname": "Кулінов",
         "phoneNumber": "+380966663336",
         "email": "vasya@gmail.com",
-        "role":"user",
+        "role":0,
         "photo": "",
         "gender": "man",
-        "password": "GUvIydtZpd3B5NYR"
+        "password": "GUvIydtZpd3B5NYR",
+        "dateOfBirth" : "2002-04-23T18:25:43.511Z"
     },
     {
         "id":"4e7a2830-f9e6-11ed-be56-0242ac120002",
@@ -60,9 +66,10 @@
         "surname": "Панасюк",
         "phoneNumber": "+380925663336",
         "email": "bohdan@gmail.com",
-        "role":"admin",
+        "role":1,
         "photo": "",
         "gender": "man",
-        "password": "XgxMFVfmDNmr7edC"
+        "password": "XgxMFVfmDNmr7edC",
+        "dateOfBirth" : "2002-04-23T18:25:43.511Z"
     }
 ]

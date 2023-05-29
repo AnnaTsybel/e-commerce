@@ -79,6 +79,14 @@ func (store *Store) Count(ctx context.Context, relatedPath string) (int, error) 
 	return len(files), nil
 }
 
+func (store *Store) Stat(ctx context.Context, relatedPath string) bool {
+	_, err := os.Stat(relatedPath)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return true
+}
+
 // DeleteFolder deletes folder from local file system store.
 func (store *Store) DeleteFolder(ctx context.Context, relatedPath string) error {
 	path := filepath.Join(store.config.OutputPath, relatedPath)
