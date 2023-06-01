@@ -14,7 +14,7 @@ type DB interface {
 	UpdatePassword(ctx context.Context, id uuid.UUID, password []byte) error
 	UpdateEmail(ctx context.Context, id uuid.UUID, newEmail string) error
 	UpdateUser(ctx context.Context, id uuid.UUID, user CreateUserFields) error
-	SearchSimilarUsers(ctx context.Context, dataOfBirthFrom time.Time, dataOfBirthTo time.Time, gender string) ([]User, error)
+	SearchSimilarUsers(ctx context.Context, id uuid.UUID, dataOfBirthFrom time.Time, dataOfBirthTo time.Time, gender string) ([]User, error)
 }
 
 type Role int

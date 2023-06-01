@@ -80,7 +80,8 @@ func (store *Store) Count(ctx context.Context, relatedPath string) (int, error) 
 }
 
 func (store *Store) Stat(ctx context.Context, relatedPath string) bool {
-	_, err := os.Stat(relatedPath)
+	path := filepath.Join(store.config.OutputPath, relatedPath)
+	_, err := os.Stat(path)
 	if os.IsNotExist(err) {
 		return false
 	}

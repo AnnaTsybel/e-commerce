@@ -92,6 +92,7 @@ func NewServer(config Config, listener net.Listener, userAuth *userauth.Service,
 	productsRouter.HandleFunc("", productsController.Create).Methods(http.MethodPost)
 	productsRouter.HandleFunc("/{id}", productsController.Get).Methods(http.MethodGet)
 	productsRouter.HandleFunc("/{id}/recommendation", productsController.ListRecommendations).Methods(http.MethodGet)
+	productsRouter.HandleFunc("/recommendation/for/home", productsController.ListHomeRecommendations).Methods(http.MethodGet)
 	productsRouter.HandleFunc("", productsController.List).Methods(http.MethodGet)
 	productsRouter.HandleFunc("/{id}", productsController.Update).Methods(http.MethodPut)
 	productsRouter.HandleFunc("/{id}", productsController.Delete).Methods(http.MethodDelete)
