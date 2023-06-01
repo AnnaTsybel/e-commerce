@@ -99,6 +99,42 @@ func (controller *Products) Get(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func (controller *Products) ListRecommendations(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	ctx := r.Context()
+
+	vars := mux.Vars(r)
+	id, err := uuid.Parse(vars["id"])
+	if err != nil {
+		controller.serveError(w, http.StatusBadRequest, ErrUsers.New("invalid id"))
+		return
+	}
+
+	claimsMap, err := goauth.GetClaims(ctx)
+	if err != nil {
+		controller.serveError(w, http.StatusUnauthorized, ErrProducts.Wrap(err))
+		return
+	}
+
+	claims, err := userauth.GetStructClaims(claimsMap)
+	if err != nil {
+		controller.serveError(w, http.StatusUnauthorized, ErrProducts.Wrap(err))
+		return
+	}
+
+	product, err := controller.products.ListRecommendation(ctx, claims.UserID, id)
+	if err != nil {
+		log.Println("Unable to list recommendation product", ErrProducts.Wrap(err))
+		controller.serveError(w, http.StatusInternalServerError, ErrProducts.Wrap(err))
+		return
+	}
+
+	if err = json.NewEncoder(w).Encode(product); err != nil {
+		log.Println("failed to write json response", ErrUsers.Wrap(err))
+		return
+	}
+}
+
 func (controller *Products) List(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	ctx := r.Context()
