@@ -113,11 +113,11 @@ func (usersDB *usersDB) UpdateUser(ctx context.Context, id uuid.UUID, user users
 	return err
 }
 
-func (usersDB *usersDB) SearchSimilarUsers(ctx context.Context, dataOfBirthFrom time.Time, dataOfBirthTo time.Time, gender string) ([]users.User, error) {
+func (usersDB *usersDB) SearchSimilarUsers(ctx context.Context, id uuid.UUID, dataOfBirthFrom time.Time, dataOfBirthTo time.Time, gender string) ([]users.User, error) {
 	query := `SELECT id, name, surname, phone_number, gender, email, date_of_birth, password_hash, role, created_at 
 	          FROM users
-	          WHERE date_of_birth > $1 AND date_of_birth < $2 AND gender = $3`
-	rows, err := usersDB.conn.QueryContext(ctx, query, dataOfBirthFrom, dataOfBirthTo, gender)
+	          WHERE date_of_birth > $1 AND date_of_birth < $2 AND gender = $3 AND id != $4`
+	rows, err := usersDB.conn.QueryContext(ctx, query, dataOfBirthFrom, dataOfBirthTo, gender, id)
 	if err != nil {
 		return nil, err
 	}

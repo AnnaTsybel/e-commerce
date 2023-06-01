@@ -93,6 +93,7 @@ func (service *Service) ListLikedProducts(ctx context.Context, userID uuid.UUID)
 			return nil, err
 		}
 
+		product.IsLiked = true
 		products = append(products, product)
 	}
 
@@ -124,6 +125,29 @@ func (service *Service) ListRecommendation(ctx context.Context, userID, productI
 	return products, nil
 }
 
+func (service *Service) ListHomeRecommendation(ctx context.Context, userID uuid.UUID) ([]Product, error) {
+	similarUsers, err := service.users.SearchSimilarUsers(ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+
+	likedProducts := make([]Product, 0, 100)
+	for _, user := range similarUsers {
+		liked, err := service.ListLikedProducts(ctx, user.ID)
+		if err != nil {
+			return nil, err
+		}
+
+		likedProducts = append(likedProducts, liked...)
+	}
+
+	if len(likedProducts) > 8 {
+		likedProducts = likedProducts[:8]
+	}
+
+	return likedProducts, nil
+}
+
 func (service *Service) SearchSimilarProducts(productsToAnalyze []Product, product Product) []Product {
 	priceFrom := product.Price - 3000
 	priceTo := product.Price + 3000
@@ -133,7 +157,8 @@ func (service *Service) SearchSimilarProducts(productsToAnalyze []Product, produ
 
 	for _, productToAnalyze := range productsToAnalyze {
 		price := productToAnalyze.Price
-		if price > priceFrom && price < priceTo && productToAnalyze.Brand == expectedBrand {
+		if price > priceFrom && price < priceTo &&
+			productToAnalyze.Brand == expectedBrand && product.ID != productToAnalyze.ID {
 			recommendedProducts = append(recommendedProducts, productToAnalyze)
 		}
 	}

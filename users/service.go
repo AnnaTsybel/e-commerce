@@ -34,7 +34,7 @@ func (service *Service) Get(ctx context.Context, id uuid.UUID) (User, error) {
 		return User{}, err
 	}
 
-	relatedPath := filepath.Join("users", user.ID.String())
+	relatedPath := filepath.Join("users", user.ID.String()+".png")
 	user.IsAvatarExists = service.store.Stat(ctx, relatedPath)
 	return user, err
 }
@@ -77,5 +77,5 @@ func (service *Service) SearchSimilarUsers(ctx context.Context, id uuid.UUID) ([
 	from := time.Date(year-5, month, day, 0, 0, 0, 0, time.UTC)
 	to := time.Date(year+5, month, day, 0, 0, 0, 0, time.UTC)
 
-	return service.db.SearchSimilarUsers(ctx, from, to, user.Gender)
+	return service.db.SearchSimilarUsers(ctx, user.ID, from, to, user.Gender)
 }

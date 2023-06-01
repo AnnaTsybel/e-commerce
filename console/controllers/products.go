@@ -135,6 +135,35 @@ func (controller *Products) ListRecommendations(w http.ResponseWriter, r *http.R
 	}
 }
 
+func (controller *Products) ListHomeRecommendations(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	ctx := r.Context()
+
+	claimsMap, err := goauth.GetClaims(ctx)
+	if err != nil {
+		controller.serveError(w, http.StatusUnauthorized, ErrProducts.Wrap(err))
+		return
+	}
+
+	claims, err := userauth.GetStructClaims(claimsMap)
+	if err != nil {
+		controller.serveError(w, http.StatusUnauthorized, ErrProducts.Wrap(err))
+		return
+	}
+
+	product, err := controller.products.ListHomeRecommendation(ctx, claims.UserID)
+	if err != nil {
+		log.Println("Unable to list home recommendation product", ErrProducts.Wrap(err))
+		controller.serveError(w, http.StatusInternalServerError, ErrProducts.Wrap(err))
+		return
+	}
+
+	if err = json.NewEncoder(w).Encode(product); err != nil {
+		log.Println("failed to write json response", ErrUsers.Wrap(err))
+		return
+	}
+}
+
 func (controller *Products) List(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	ctx := r.Context()
