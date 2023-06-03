@@ -131,7 +131,7 @@ func (service *Service) ListRecommendation(ctx context.Context, userID, productI
 			return nil, err
 		}
 
-		products = service.SearchSimilarProductsExceptGiven(products, all, product)
+		products = service.SearchSimilarProductsExceptGiven(all, products, product)
 	case len(products) > 8:
 		products = products[:8]
 	}
@@ -214,14 +214,12 @@ func contains(s []Product, str Product) bool {
 func (service *Service) SearchSimilarProducts(productsToAnalyze []Product, product Product) []Product {
 	priceFrom := product.Price - 3000
 	priceTo := product.Price + 3000
-	expectedBrand := product.Brand
 
 	recommendedProducts := make([]Product, 0, 8)
 
 	for _, productToAnalyze := range productsToAnalyze {
 		price := productToAnalyze.Price
-		if price > priceFrom && price < priceTo &&
-			productToAnalyze.Brand == expectedBrand && product.ID != productToAnalyze.ID {
+		if price > priceFrom && price < priceTo && product.ID != productToAnalyze.ID {
 			recommendedProducts = append(recommendedProducts, productToAnalyze)
 		}
 	}
