@@ -2,9 +2,7 @@
 // See LICENSE for copying information.
 
 import { APIClient } from '.';
-import { Color } from '@/colors';
 import { Product, ProductCreation, ProductEdit } from '@/product';
-import { User, UserRegisterData } from '@/users';
 
 /**
  * ProductsClient is a http implementation of users API.
@@ -31,7 +29,7 @@ export class ProductsClient extends APIClient {
             product.price,
             product.isAvailable,
             product.color,
-            product.IsLiked,
+            product.isLiked,
             product.brand,
             product.numOfImages
         );
@@ -55,12 +53,38 @@ export class ProductsClient extends APIClient {
                 product.price,
                 product.isAvailable,
                 product.color,
-                product.IsLiked,
+                product.isLiked,
                 product.brand,
                 product.numOfImages
             )
         );
     }
+
+    /** gets list of products */
+    public async productRecommendations(productId: string): Promise<Product[]> {
+        const path = `${this.ROOT_PATH}/${productId}/recommendation`;
+        const response = await this.http.get(path);
+
+        if (!response.ok) {
+            await this.handleError(response);
+        }
+        const products = await response.json();
+
+        return products.map((product: any) =>
+            new Product(
+                product.id,
+                product.title,
+                product.description,
+                product.price,
+                product.isAvailable,
+                product.color,
+                product.isLiked,
+                product.brand,
+                product.numOfImages
+            )
+        );
+    }
+
     /** creates product */
     public async create(productCreation: ProductCreation): Promise<void> {
         const path = `${this.ROOT_PATH}`;
@@ -109,5 +133,31 @@ export class ProductsClient extends APIClient {
         if (!response.ok) {
             await this.handleError(response);
         }
+    }
+
+    /** updates product */
+    public async recommendationForHomePage(): Promise<Product[]> {
+        const path = `${this.ROOT_PATH}/recommendation/for/home`;
+        const response = await this.http.get(path);
+
+        if (!response.ok) {
+            await this.handleError(response);
+        }
+
+        const products = await response.json();
+
+        return products.map((product: any) =>
+            new Product(
+                product.id,
+                product.title,
+                product.description,
+                product.price,
+                product.isAvailable,
+                product.color,
+                product.isLiked,
+                product.brand,
+                product.numOfImages
+            )
+        );
     }
 }

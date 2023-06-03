@@ -71,3 +71,22 @@ export const getProduct = createAsyncThunk(
     }
 );
 
+export const productRecommendation = createAsyncThunk(
+    'products/recommedation-item',
+    async(productId: string) => {
+        const products = await productsService.productRecommendations(productId);
+
+        return products;
+    }
+);
+
+export const getRecommendationForHomePage = createAsyncThunk(
+    'products/recommedation/for/home',
+    async() => {
+        const products = await productsService.getRecommendationForHome();
+
+        return products;
+    }
+);
+
+

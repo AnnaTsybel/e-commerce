@@ -60,7 +60,7 @@ export const Navbar = () => {
                     <p className="header__user__text">{user.name} {user.surname}</p>
                 </Link>
                 <div className="header__shopping-cart">
-                    <Link to="/products/favorite" className="header__shopping-cart__icon">
+                    <Link to="/liked-products" className="header__shopping-cart__icon">
                         <img src={favoriteIcon}
                             alt="shopping cart"
                             className="header__shopping-cart__image" />

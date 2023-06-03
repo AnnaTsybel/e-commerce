@@ -18,10 +18,17 @@ export const Registration = () => {
     const [phoneNumber, setPhoneNumber] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [gender, setGender] = useState<Gender>('man');
-    const [age, setAge] = useState<string>('');
+    const [dateOfBirth, setDateOfBirth] = useState<string>('');
+
+    const setDateOfBirthConverted = (date: string) => {
+        const convertedDate = new Date(date).toISOString();
+        setDateOfBirth(convertedDate);
+    };
 
     const registerUser = async() => {
         try {
+            setDateOfBirthConverted(dateOfBirth);
+
             await dispatch(register(new UserRegisterData(
                 name,
                 surname,
@@ -29,7 +36,7 @@ export const Registration = () => {
                 email,
                 'man',
                 password,
-                age
+                dateOfBirth
             )));
 
             await window.localStorage.setItem('IS_LOGGEDIN', JSON.stringify(true));

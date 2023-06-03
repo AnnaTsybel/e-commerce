@@ -1,11 +1,11 @@
 import { User } from '@/users';
 
 
-export const getUserAge = (user: User) => {
+export const getUserAge = (dateOfBirth: string) => {
     const CHECK_IS_VALUE_TWO_DIGIT = 10;
     const CONVERT_MONTH_VALUE = 1;
 
-    const date = new Date(user.dateOfBirth);
+    const date = new Date(dateOfBirth);
 
     const month = date.getMonth() + CONVERT_MONTH_VALUE;
     const year = date.getFullYear();

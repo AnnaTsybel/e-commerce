@@ -35,12 +35,23 @@ const UserPage = () => {
     const [convertedDateOfBirth, setConvertedDateOfBirth] = useState<string>();
     const [isAvatarExists, setIsAvatarExists] = useState<boolean>();
 
-    const handleFileChange = async(e: any) => {
+    const handleFileChange = async (e: any) => {
         if (e.target.files?.length) {
             setPhoto(URL.createObjectURL(e.target.files[PHOTO_INDEX]));
             const convertedFile: string = await convertToBase64(e.target.files[PHOTO_INDEX]);
             setFile(convertedFile.split(',')[SECOND_INDEX]);
         }
+    };
+
+    const setDateOfBirthConverted = (date: string) => {
+        const convertedDate = new Date(date).toISOString();
+        setDateOfBirth(convertedDate);
+    };
+
+    const setUserAge = (dateOfBirthUser: string) => {
+        const age = getUserAge(dateOfBirthUser);
+
+        setConvertedDateOfBirth(age);
     };
 
     const sendChanges = () => {
@@ -55,9 +66,13 @@ const UserPage = () => {
             file,
             gender,
             user.createdAt,
-            user.dateOfBirth,
+            dateOfBirth,
             user.passwordHash
         )));
+
+        if (dateOfBirth) {
+            setUserAge(dateOfBirth);
+        }
     };
 
     const logoutUser = () => {
@@ -70,12 +85,6 @@ const UserPage = () => {
         isAvatarExists ? setPhoto(`${window.location.origin}/images/users/${user.id}.png`) : setPhoto(userNoPhoto);
     };
 
-    const setUserAge = () => {
-        const age = getUserAge(user);
-
-        setConvertedDateOfBirth(age);
-    };
-
     useEffect(() => {
         setEmail(user.email);
         setName(user.name);
@@ -84,7 +93,7 @@ const UserPage = () => {
         setPhonenumber(user.phoneNumber);
         setGender(user.gender);
         setDateOfBirth(user.dateOfBirth);
-        setUserAge();
+        setUserAge(user.dateOfBirth);
         setUserAvatar();
     }, [user]);
 
@@ -161,7 +170,7 @@ const UserPage = () => {
                             <input
                                 className="user__input"
                                 defaultValue={dateOfBirth}
-                                onChange={e => setDateOfBirth(e.target.value)}
+                                onChange={e => setDateOfBirthConverted(e.target.value)}
                                 type="date"
                             />
                             <span></span>

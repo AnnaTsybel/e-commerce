@@ -14,6 +14,7 @@ const Products = lazy(() => import('../app/views/Products'));
 const ProductCreate = lazy(() => import('../app/views/ProductPage/Create'));
 const ProductEdit = lazy(() => import('../app/views/ProductPage/Edit'));
 const Categories = lazy(() => import('../app/views/Categories'));
+const LikedProducts = lazy(() => import('../app/views/ProductPage/Liked'));
 
 /** Route base config implementation */
 export class ComponentRoutes {
@@ -84,8 +85,14 @@ export class RouteConfig {
         );
     public static Categories: ComponentRoutes
         = new ComponentRoutes(
-            '/categories/:id',
+            '/category/:id',
             <Categories />,
+            false
+        );
+    public static LikedProducts: ComponentRoutes
+        = new ComponentRoutes(
+            '/liked-products',
+            <LikedProducts />,
             false
         );
     public static routes: ComponentRoutes[] = [
@@ -97,6 +104,7 @@ export class RouteConfig {
         RouteConfig.ProductCreate,
         RouteConfig.ProductEdit,
         RouteConfig.Categories,
+        RouteConfig.LikedProducts,
     ];
 }
 

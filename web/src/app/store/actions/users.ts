@@ -2,12 +2,12 @@
 // See LICENSE for copying information.
 
 import { Dispatch } from 'redux';
-
 import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import { UsersClient } from '@/api/users';
+import { BadRequestError } from '@/api';
 import { UsersService } from '@/users/service';
 import { userSlice } from '@/app/store/reducers/users';
-import { BadRequestError } from '@/api';
 import { setErrorMessage } from '@/app/store/reducers/error';
 import { UserRegisterData, UserUpdateData } from '@/users';
 
@@ -32,6 +32,17 @@ export const getUser = () => async function(dispatch: Dispatch) {
     try {
         const user = await usersService.getUser();
         dispatch(userSlice.actions.setUser(user));
+    } catch (error: any) {
+        if (error instanceof BadRequestError) {
+            dispatch(setErrorMessage('No valid user info'));
+        }
+    }
+};
+
+export const getLikedProducts = () => async function(dispatch: Dispatch) {
+    try {
+        const products = await usersService.likedProducts();
+        dispatch(userSlice.actions.setLikedProducts(products));
     } catch (error: any) {
         if (error instanceof BadRequestError) {
             dispatch(setErrorMessage('No valid user info'));

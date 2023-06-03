@@ -9,7 +9,7 @@ export const ProductsFilter = () => {
 
     return (
         <div className="products-filter">
-            <h3 className="products-filter__title">Фильтр</h3>
+            <h3 className="products-filter__title">Фільтр</h3>
             <div className="products-filter__content">
                 <div className="products-filter__color">
                     <h4 className="products-filter__color__title">Колір</h4>

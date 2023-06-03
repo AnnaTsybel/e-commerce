@@ -21,23 +21,19 @@ export const Aside = () => {
 
     useEffect(() => {
         setIsAvatarExists(user.isAvatarExists);
-        setUserAvatar;
+        setUserAvatar();
     }, [user]);
 
     return (
         <aside className="aside">
             <div className="aside__categories">
-                {catalog.map((subcategory, index) =>
+                {catalog.map((category, index) =>
                     <Link
                         className="aside__category"
-                        key={`${subcategory.category}-${index}`}
-                        to={`categories/${subcategory.id}`}
+                        key={`${category.category}-${index}`}
+                        to={`category/${category.id}`}
                     >
-                        {/* <img src={noUserPhoto}
-                            alt="category icon"
-                            className="aside__category__icon"
-                        /> */}
-                        <p className="aside__category__text">{subcategory.category}</p>
+                        <p className="aside__category__text">{category.category}</p>
                     </Link>
                 )
                 }

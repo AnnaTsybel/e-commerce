@@ -4,6 +4,11 @@
     &__item {
         width: 33%;
 
+        &__photo {
+            height: 300px;
+            width: 150px;
+        }
+
         &__title {
             display: block;
             color: white;

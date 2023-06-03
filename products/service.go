@@ -4,12 +4,13 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
-	"github.com/google/uuid"
 	"graduate_work/pkg/store"
 	"graduate_work/users"
 	"io"
 	"path/filepath"
 	"strconv"
+
+	"github.com/google/uuid"
 )
 
 type Service struct {

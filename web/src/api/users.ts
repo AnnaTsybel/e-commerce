@@ -3,6 +3,7 @@
 
 import { APIClient } from '.';
 import { User, UserRegisterData, UserUpdateData } from '@/users';
+import { Product } from '@/product';
 
 /**
  * UsersClient is a http implementation of users API.
@@ -59,6 +60,32 @@ export class UsersClient extends APIClient {
             user.createdAt,
             user.dateOfBirth,
             user.isAvatarExists
+        );
+    }
+
+    /** liked products */
+    public async likedProducts(): Promise<Product[]> {
+        const path = '/api/v0/users/liked';
+        const response = await this.http.get(path);
+
+        if (!response.ok) {
+            await this.handleError(response);
+        }
+
+        const products = await response.json();
+
+        return products.map((product: any) =>
+            new Product(
+                product.id,
+                product.title,
+                product.description,
+                product.price,
+                product.isAvailable,
+                product.color,
+                product.isLiked,
+                product.brand,
+                product.numOfImages
+            )
         );
     }
 

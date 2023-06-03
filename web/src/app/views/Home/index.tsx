@@ -9,7 +9,7 @@ import { Product } from '@/product';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { RootState } from '@/app/store';
 import { getUser } from '@/app/store/actions/users';
-import { productsList } from '@/app/store/actions/products';
+import { getRecommendationForHomePage } from '@/app/store/actions/products';
 import { User } from '@/users';
 
 import './index.scss';
@@ -19,12 +19,12 @@ const USER_ADMINISTRATOR = 1;
 const Home = () => {
     const dispatch = useAppDispatch();
 
-    const products: Product[] | null = useAppSelector((state: RootState) => state.productsReducer.products);
+    const productRecommendationForHome: Product[] | null = useAppSelector((state: RootState) => state.productsReducer.productRecommendationForHome);
     const user: User | null = useAppSelector((state: RootState) => state.usersReducer.user);
 
     useEffect(() => {
         dispatch(getUser());
-        dispatch(productsList());
+        dispatch(getRecommendationForHomePage());
     }, []);
 
     return (
@@ -38,7 +38,7 @@ const Home = () => {
                     </Link>
                 }
                 <ProductBlock
-                    products={products}
+                    products={productRecommendationForHome}
                     title="Рекомендовані товари" />
             </div>
         </div>

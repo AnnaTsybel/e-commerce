@@ -17,7 +17,8 @@ export const Login = () => {
 
     const login = async() => {
         if (password && email) {
-            await usersService.login(password, email);
+            await usersService.login(email, password);
+            await window.localStorage.setItem('IS_LOGGEDIN', JSON.stringify(true));
             navigate(RouteConfig.Home.path);
         }
     };

@@ -1,6 +1,6 @@
 [
     {
-        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
+        "id":"4d0351fe-001f-11ee-be56-0242ac120002",
         "title":"Ноутбук Apple MacBook Air 13 M1 256GB 2020 (MGN63UA/A) Space Gray",
         "description":"Екран 13.3 Retina (2560x1600) WQXGA, глянсовий / Apple M1 / RAM 8 ГБ / SSD 256 ГБ / Apple M1 Graphics / Wi-Fi / Bluetooth / macOS Big Sur / 1.29 кг / сірий",
         "price":39999,
@@ -12,7 +12,7 @@
         "numOfImages":3
     },
     {
-        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
+        "id":"a522d648-001f-11ee-be56-0242ac120002",
         "title":"Миша Apple Magic Mouse Bluetooth White (MK2E3ZM/A)",
         "description":"Бездротова миша Magic Mouse працює від вбудованого акумулятора та легко ковзає робочою поверхнею завдяки суцільній основі. Її поверхня Multi-Touch підтримує прості жести, наприклад, даючи змогу переходити між вебсторінками та прокручувати документи за допомогою змахування. Миша Magic Mouse може працювати без підзаряджання акумулятора приблизно упродовж місяця — і навіть довше. Вона не вимагає налаштування й автоматично під'єднується до вашого Mac. У комплект входить кабель USB-C/Lightning в оболонці — з його допомогою мишу можна під'єднувати до Mac для заряджання від порту USB-C.",
         "price":2999,
@@ -24,7 +24,7 @@
         "numOfImages":2
     },
     {
-        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
+        "id":"6e9a1480-fd07-11ed-be56-0242ac120002",
         "title":"Ноутбук Lenovo Legion 5 Pro 16IAH7H (82RF00K5PB)",
         "description":"Lenovo Legion 5 Pro 16IAH7H / 16 IPS (2560x1600) WQXGA 165 Гц / Intel Core i7-12700H (2.3 - 4.7 Ггц) / RAM 16 ГБ / SSD 512 ТБ / NVIDIA GeForce RTX 3070 Ti, 8 ГБ GDDR6 / Windows 11 Home / White",
         "price":47000,
@@ -36,7 +36,7 @@
         "numOfImages":2
     },
     {
-        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
+        "id":"0a094d70-0021-11ee-be56-0242ac120002",
         "title":"Ноутбук Microsoft Surface Laptop 5 15 i7-1255U 8GB RAM 256GB SSD Windows 11 Home Білий (RBY-00009)",
         "description":"Екран 15 (2496x1664) Multitouch / Десятиядерний Intel Core i7-1255U (1.7 – 4.7 ГГц) / RAM 8 ГБ / 256 ГБ / Intel Iris Xe Graphics / LAN / Wi-Fi / Bluetooth / веб-камера / Windows 11 Home",
         "price":46000,
@@ -48,7 +48,7 @@
         "numOfImages":3
     },
     {
-        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
+        "id":"9a9107da-0020-11ee-be56-0242ac120002",
         "title":"Ноутбук Asus ROG Strix G15 G513IE-HN065 (90NR0582-M002S0)",
         "description":"Екран 15.6 IPS (1920x1080) Full HD 144 Гц, матовий / AMD Ryzen 7 4800H (2.9 - 4.2 ГГц) / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce RTX 3050 Ti, 4 / Bluetooth / без ОС / 2.1 кг / сірий",
         "price":42000,
@@ -72,7 +72,7 @@
         "numOfImages":4
     },
     {
-        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
+        "id":"520b6b9a-0020-11ee-be56-0242ac120002",
         "title":"Acer Swift X SFX14-42G-R8XR (NX.K79EU.004) Steel Grey",
         "description":"Екран 14 IPS (1920x1080) Full HD, матовий / AMD Ryzen 7 5825U (2.0 - 4.5 ГГц) / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce RTX 3050 Ti, 4 ГБ / без ОД / Wi-Fi / Bluetooth / веб-камера / без ОС / 1.39 кг / сірий",
         "price":44099,
@@ -84,7 +84,7 @@
         "numOfImages":3
     },
     {
-        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
+        "id":"dfe990ae-0020-11ee-be56-0242ac120002",
         "title":"Ноутбук ASUS Vivobook S 15 OLED K3502ZA-L1202W (90NB0WK1-M00P50)",
         "description":"Екран 15.6 OLED (1920x1080) Full HD, матовий / Intel Core i5-12500H (3.3 - 4.5 ГГц) / RAM 8 ГБ / SSD 512 ГБ / Intel Iris Xe Graphics / без ОД / Wi-Fi / Bluetooth / веб-камера / Windows 11 Home / 1.8 кг / сірий",
         "price":42999,
@@ -96,7 +96,7 @@
         "numOfImages":3
     },
     {
-        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
+        "id":"1c843fba-0020-11ee-be56-0242ac120002",
         "title":"Ноутбук игровой Asus TUF Gaming F15 FX506HM-HN017 Grey",
         "description":"ASUS TUF Gaming F15 FX506HM - ноутбук для яскравих віртуальних розвагБагатофункціональний ігровий ноутбук нового покоління ASUS TUF Gaming F15 FX506HM - надійний ґаджет, за допомогою якого можна досягти вершин не лише в іграх, а й у розв'язанні різноманітних професійних і повсякденних завдань. Висока потужність і продуктивність пристрою дає змогу використовувати його для проведення ділових нарад, а також для роботи з графічними та відеоредакторами.Незважаючи на те, що лептопи серії ASUS TUF FX506HM відносяться до бюджетної цінової категорії, виробник оснастив їх надійними сучасними комплектуючими, використовуваними в більш дорогих моделях. Це дало змогу досягти оптимального балансу між ціною та якістю.Наявність абревіатури TUF у назві пристрою свідчить про його збільшений ресурс міцності та надійності. Ноутбуки цієї лінійки пройшли суворе тестування за військовим стандартом MIL-STD-810 H. Це підтверджує їхню стійкість до падінь, а також до впливу вологи, вібрацій і перепадів температур.",
         "price":41999,
@@ -108,7 +108,7 @@
         "numOfImages":3
     },
     {
-        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
+        "id":"7c78b16c-0020-11ee-be56-0242ac120002",
         "title":"Ноутбук Apple MacBook Air 13.6 M2 8-Core GPU 256Gb MLY33 Midnight",
         "description":"Екран  13.6 M2 8-Core GPU 256Gb MLY33 Midnight",
         "price":47499,
@@ -120,7 +120,7 @@
         "numOfImages":5
     },
     {
-        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
+        "id":"fa7be688-0020-11ee-be56-0242ac120002",
         "title":"Ноутбук ігровий Lenovo Gaming 3 15ACH6 (82K201U8RA) Shadow Black",
         "description":"Тип ноутбука: , Діагональ екрану: 15.6 (1920x1080) Full HD, Роздільна здатність: 1920x1080, Поверхня екрану: , Процесор: Шестиядерний AMD Ryzen 5 5600H (3.3 - 4.2 ГГц), Об'єм оперативної пам'яті Об'єм HDD: 1 ТБ, Відеокарта: NVIDIA GeForce RTX 3050 Ti, Бездротові технології: , Операційна система: Без ОС, Вага: 2.25 кг, Колір: Чорний",
         "price":40999,
@@ -132,7 +132,7 @@
         "numOfImages":5
     },
     {
-        "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
+        "id":"636c2514-0020-11ee-be56-0242ac120002",
         "title":"Ноутбук Lenovo IdeaPad Gaming 3 15ACH Shadow Black (82K201U8RA)",
         "description":"Ноутбук Lenovo IdeaPad Gaming 3 15ACH6 (82K201U8RA), 15.6 FullHD (1920x1080) IPS LED матовый 120 Гц / AMD Ryzen 5 5600H (3.3 - 4.2 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 256 ГБ / nVidia GeForce RTX3050Ti, 4 ГБ / без ОП / LAN / Wi-Fi / Bluetooth / веб-камера / без ОС / 2.25 кг / чорний",
         "price":46000,
@@ -142,5 +142,201 @@
         "isAvailable":false,
         "images":null,  
         "numOfImages":5
+    },
+    {
+        "id":"bc0f91c8-002b-11ee-be56-0242ac120002",
+        "title":"Холодильник BOSCH KGN36NL306",
+        "description":"Загальний об'єм холодильника : 329 л/ Тип холодильника: Двокамерний/ Клас енергоспоживання: A+/ Система розморожування холодильної камери:Статична (крапельна)/Габарити (ВхШхГ): 200 х 60 х 59.2 см",
+        "price":21199,
+        "color":"gray",
+        "brand":"BOSCH",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3
+    },
+    {
+        "id":"450ad62e-002a-11ee-be56-0242ac120002",
+        "title":"Холодильник GORENJE RK6201ES4",
+        "description":"Загальний об'єм холодильника : 329 л/ Тип холодильника: Двокамерний/ Клас енергоспоживання: A+/ Система розморожування холодильної камери:Статична (крапельна)/Габарити (ВхШхГ): 200 х 60 х 59.2 см",
+        "price":19099,
+        "color":"gray",
+        "brand":"GORENJE",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3
+    },
+    {
+        "id":"d1b94b96-002a-11ee-be56-0242ac120002",
+        "title":"Холодильник BOSCH KGN33NL206",
+        "description":"Загальний об'єм холодильника : 306 л/ Тип холодильника: Двокамерний/ Клас енергоспоживання: A+/ Система розморожування холодильної камери:No Frost/Габарити (ВхШхГ): 176x60x66 см",
+        "price":19999,
+        "color":"gray",
+        "brand":"BOSCH",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3
+    }
+    ,{
+        "id":"619e279a-002b-11ee-be56-0242ac120002",
+        "title":"Холодильник BOSCH KGN39XI326",
+        "description":"Загальний об'єм холодильника : 400 л/ Тип холодильника: Двокамерний/ Клас енергоспоживання: A++/ Система розморожування холодильної камери:Статична (крапельна)/Габарити (ВхШхГ): 203 х 60 х 66  см",
+        "price":18599,
+        "color":"gray",
+        "brand":"BOSCH",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3
+    },
+    {
+        "id":"01921158-002c-11ee-be56-0242ac120002",
+        "title":"Холодильник GORENJE NRKE62BXL",
+        "description":"Загальний об'єм холодильника : 320 л/ Тип холодильника: Двокамерний/ Клас енергоспоживання: A++/ Система розморожування холодильної камери:No Frost/Габарити (ВхШхГ): 185 х 60 х 59.2 см",
+        "price":20599,
+        "color":"gray",
+        "brand":"GORENJE",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3
+    },
+    {
+        "id":"ab9ee266-002c-11ee-be56-0242ac120002",
+        "title":"Пральна машина вузька SAMSUNG WW70T3020BW/UA",
+        "description":"Максимальне завантаження білизни: 7 кг / Тип двигуна: Інверторний / Кількість програм : 14 / Клас енергоспоживання : А++, Максимальна швидкість віджимання, об/хв 1200 / Габарити (ВхШхГ) : 85 х 59 х 44 см / Технічні особливості: З дисплеєм",
+        "price":15599,
+        "color":"white",
+        "brand":"SAMSUNG",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":2
+    },
+    {
+        "id":"683c032c-002d-11ee-be56-0242ac120002",
+        "title":"Пральна машина SAMSUNG WW80J62E0FA/UA",
+        "description":"Максимальне завантаження білизни: 8 кг / Тип двигуна: Інверторний / Кількість програм : 14 / Клас енергоспоживання : А++, Максимальна швидкість віджимання, об/хв 1200 / Габарити (ВхШхГ) : 85 х 59 х 44 см / Технічні особливості: З дисплеєм",
+        "price":17499,
+        "color":"white",
+        "brand":"SAMSUNG",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3
+    },{
+        "id":"a6ce9eec-002d-11ee-be56-0242ac120002",
+        "title":"Пральна машина повногабаритна SAMSUNG WW10T754CBH/UA",
+        "description":"Максимальне завантаження білизни: 10.5 кг / Тип двигуна: Інверторний / Кількість програм : 55 / Клас енергоспоживання : А+++, Максимальна швидкість віджимання, об/хв 1400 / Габарити (ВхШхГ) : 85 х 60 х 60 см / Технічні особливості: З дисплеєм, З парою",
+        "price":16599,
+        "color":"white",
+        "brand":" SAMSUNG",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3
+    },{
+        "id":"23ff4934-002e-11ee-be56-0242ac120002",
+        "title":"Пральна машина вузька SAMSUNG WW80A6S24AN/UA",
+        "description":"Максимальне завантаження білизни: 8 кг / Тип двигуна: Інверторний / Кількість програм : 20 / Клас енергоспоживання : А++, Максимальна швидкість віджимання, об/хв 1400 / Габарити (ВхШхГ) : 85 х 60 х 60 см / Технічні особливості: З дисплеєм, З парою",
+        "price":14999,
+        "color":"black",
+        "brand":"SAMSUNG",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3
+    },{
+        "id":"5a0372b2-002e-11ee-be56-0242ac120002",
+        "title":"Пральна машина вузька SAMSUNG WW80J62E0DX/UA",
+        "description":"Максимальне завантаження білизни: 8 кг / Тип двигуна: Інверторний / Кількість програм : 20 / Клас енергоспоживання : А+++, Максимальна швидкість віджимання, об/хв 1200 / Габарити (ВхШхГ) : 85 х 60 х 60 см / Технічні особливості: З парою",
+        "price":18599,
+        "color":"gray",
+        "brand":"SAMSUNG",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3
+    },{
+        "id":"e819349c-002e-11ee-be56-0242ac120002",
+        "title":"Пральна машина автоматична LG F2WV5S7S1E",
+        "description":"Максимальне завантаження білизни: 7 кг / Тип двигуна: Інверторний / Кількість програм : 14 / Клас енергоспоживання : А+++, Максимальна швидкість віджимання, об/хв 1200 / Технічні особливості: З парою",
+        "price":15299,
+        "color":"white",
+        "brand":"LG",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3
+    },{
+        "id":"102f31c0-002f-11ee-be56-0242ac120002",
+        "title":"Пральна машина LG F2J5HS9W (F00189568)",
+        "description":"Максимальне завантаження білизни: 7 кг / Тип двигуна: Інверторний / Кількість програм : 20 / Клас енергоспоживання : А+++, Максимальна швидкість віджимання, об/хв 1200 / Габарити (ВхШхГ) : 85 х 60 х 45 см / Технічні особливості: З парою",
+        "price":21599,
+        "color":"white",
+        "brand":"LG",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3
+    },{
+        "id":"7ddb42a4-002f-11ee-be56-0242ac120002",
+        "title":"Пральна машина вузька LG F2V3HS7WW",
+        "description":"Максимальне завантаження білизни: 7 кг / Тип двигуна: Інверторний / Кількість програм : 20 / Клас енергоспоживання : А+++, Максимальна швидкість віджимання, об/хв 1200 / Габарити (ВхШхГ) : 85 х 60 х 45 см / Технічні особливості: З парою",
+        "price":19599,
+        "color":"white",
+        "brand":"LG",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3
+    },
+    {
+        "id":"4d6ce982-0030-11ee-be56-0242ac120002",
+        "title":"Крісло геймерське NOBLECHAIRS Hero Black (NBL-HRO-PU-BLA)",
+        "description":"Розміри сидіння : 52 х 55 см",
+        "price":18599,
+        "color":"black",
+        "brand":"NOBLECHAIRS",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":4
+    }, {
+        "id":"920da2ca-0030-11ee-be56-0242ac120002",
+        "title":"Крісло для геймерів Razer Iskur (RZ38-02770100-R3G1)",
+        "description":"Розміри сидіння: 39 х 45 см",
+        "price":17298,
+        "color":"black",
+        "brand":"Razer",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":4
+    }, {
+        "id":"e3df7c4a-0030-11ee-be56-0242ac120002",
+        "title":"Крісло геймерське Lorgar Embrace 533 Black/Red (LRG-CHR533BR)",
+        "description":"Розміри сидіння : 52 х 47 см",
+        "price":15999,
+        "color":"black",
+        "brand":"Lorgar Embrace",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":4
+    },
+     {
+        "id":"62144afa-0031-11ee-be56-0242ac120002",
+        "title":"Крісло Nowy Styl YAPPI TILT ordf CHR68 SORO-23",
+        "description":"Розміри сидіння : 50.5 х 57 см",
+        "price":5844,
+        "color":"red",
+        "brand":"Nowy Styl",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3
     }
 ]

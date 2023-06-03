@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import notLikedProduct from '@img/Product/not-favorite-icon.png';
 import likedProduct from '@img/Product/favorite-icon.png';
 import deleteIcon from '@img/Product/delete-icon.png';
@@ -15,7 +15,6 @@ import { deleteProductData, likeProduct, unlikeProduct } from '@/app/store/actio
 import './index.scss';
 
 const NO_PRODUCT_IMAGES = 0;
-const ONE_PRODUCT_IMAGE = 1;
 const USER_ADMINISTRATOR = 0;
 
 export const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
@@ -34,9 +33,9 @@ export const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
     };
 
     const handleLikes = () => {
-        if (isFavorite && user) {
+        if (isFavorite) {
             dispatch(unlikeProduct(product.id));
-        } else if (user) {
+        } else {
             dispatch(likeProduct(product.id));
         }
         setIsFavorite(!isFavorite);

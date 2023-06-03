@@ -3,6 +3,7 @@
 
 import { User, UserRegisterData, UserUpdateData } from '.';
 import { UsersClient } from '@/api/users';
+import { Product } from '@/product';
 
 /**
  * Exposes all users related logic.
@@ -24,6 +25,11 @@ export class UsersService {
     /** gets user info */
     public async getUser(): Promise<User> {
         return await this.users.getUser();
+    }
+
+    /** logouts */
+    public async likedProducts(): Promise<Product[]> {
+        return await this.users.likedProducts();
     }
 
     /** updates user info */

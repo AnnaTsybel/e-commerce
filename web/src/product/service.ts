@@ -20,6 +20,16 @@ export class ProductsService {
         return await this.products.list();
     }
 
+    /** products list */
+    public async productRecommendations(productId: string): Promise<Product[]> {
+        return await this.products.productRecommendations(productId);
+    }
+
+    /** products list */
+    public async getRecommendationForHome(): Promise<Product[]> {
+        return await this.products.recommendationForHomePage();
+    }
+
     /** creates products */
     public async create(productCreation: ProductCreation): Promise<void> {
         await this.products.create(productCreation);
