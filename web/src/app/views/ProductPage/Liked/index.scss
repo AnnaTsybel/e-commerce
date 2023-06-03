@@ -1,0 +1,14 @@
+.liked-products {
+
+    &__title {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    &__content {
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 30px;
+    }
+}
