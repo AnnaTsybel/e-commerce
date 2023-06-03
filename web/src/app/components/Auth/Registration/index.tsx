@@ -25,10 +25,8 @@ export const Registration = () => {
         setDateOfBirth(convertedDate);
     };
 
-    const registerUser = async() => {
+    const registerUser = async () => {
         try {
-            setDateOfBirthConverted(dateOfBirth);
-
             await dispatch(register(new UserRegisterData(
                 name,
                 surname,
@@ -106,7 +104,7 @@ export const Registration = () => {
                     <label className="auth__label">День народження</label>
                     <input
                         className="auth__input"
-                        onChange={e => setAge(e.target.value)}
+                        onChange={e => setDateOfBirthConverted(e.target.value)}
                         type="date"
                         required
                     />
