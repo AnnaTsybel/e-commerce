@@ -94,6 +94,7 @@ func (service *Service) ListLikedProducts(ctx context.Context, userID uuid.UUID)
 		}
 
 		product.IsLiked = true
+		product.NumOfImages, _ = service.CountImages(ctx, product.ID)
 		products = append(products, product)
 	}
 
@@ -122,6 +123,19 @@ func (service *Service) ListRecommendation(ctx context.Context, userID, productI
 	}
 
 	products := service.SearchSimilarProducts(likedProducts, product)
+
+	switch {
+	case len(products) < 8:
+		all, err := service.List(ctx, userID)
+		if err != nil {
+			return nil, err
+		}
+
+		products = service.SearchSimilarProductsExceptGiven(products, all, product)
+	case len(products) > 8:
+		products = products[:8]
+	}
+
 	return products, nil
 }
 
@@ -138,7 +152,20 @@ func (service *Service) ListHomeRecommendation(ctx context.Context, userID uuid.
 			return nil, err
 		}
 
+		for i := 0; i < len(liked); i++ {
+			liked[i].IsLiked, _ = service.db.GetLikedUserProduct(ctx, liked[i].ID, userID)
+		}
+
 		likedProducts = append(likedProducts, liked...)
+	}
+
+	if len(likedProducts) < 8 {
+		products, err := service.List(ctx, userID)
+		if err != nil {
+			return nil, err
+		}
+
+		likedProducts = ExceptGivenFromSlice(products, likedProducts)
 	}
 
 	if len(likedProducts) > 8 {
@@ -146,6 +173,42 @@ func (service *Service) ListHomeRecommendation(ctx context.Context, userID uuid.
 	}
 
 	return likedProducts, nil
+}
+
+func (service *Service) SearchSimilarProductsExceptGiven(productsToAnalyze, given []Product, product Product) []Product {
+	sortedProducts := service.SearchSimilarProducts(productsToAnalyze, product)
+
+	result := make([]Product, 0, len(sortedProducts))
+
+	for _, sortedProduct := range sortedProducts {
+		if !contains(given, sortedProduct) {
+			result = append(result, sortedProduct)
+		}
+	}
+
+	return sortedProducts
+}
+
+func ExceptGivenFromSlice(all, given []Product) []Product {
+	result := make([]Product, 0, len(all))
+
+	for _, sortedProduct := range all {
+		if !contains(given, sortedProduct) {
+			result = append(result, sortedProduct)
+		}
+	}
+
+	return result
+}
+
+func contains(s []Product, str Product) bool {
+	for _, v := range s {
+		if v.ID == str.ID {
+			return true
+		}
+	}
+
+	return false
 }
 
 func (service *Service) SearchSimilarProducts(productsToAnalyze []Product, product Product) []Product {
