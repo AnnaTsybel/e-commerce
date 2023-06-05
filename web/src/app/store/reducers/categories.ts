@@ -8,7 +8,7 @@ class UsersState {
     /** class implementation */
     constructor(
         public listCategories: Category[] = [],
-        public currentCategory: Category = new Category();
+        public currentCategory: Category = new Category()
     ) { }
 }
 

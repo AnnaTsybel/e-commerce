@@ -9,6 +9,8 @@ import { Product } from '@/product';
  * UsersClient is a http implementation of users API.
  * Exposes all users-related functionality.
  */
+const MOCK_ADMIN = 1;
+
 export class UsersClient extends APIClient {
     private readonly ROOT_PATH: string = '/api/v0/auth';
 
@@ -53,7 +55,7 @@ export class UsersClient extends APIClient {
             user.surname,
             user.phoneNumber,
             user.email,
-            1,
+            MOCK_ADMIN,
             user.avatar,
             user.passwordHash,
             user.gender,

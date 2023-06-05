@@ -35,7 +35,7 @@ const UserPage = () => {
     const [convertedDateOfBirth, setConvertedDateOfBirth] = useState<string>();
     const [isAvatarExists, setIsAvatarExists] = useState<boolean>();
 
-    const handleFileChange = async (e: any) => {
+    const handleFileChange = async(e: any) => {
         if (e.target.files?.length) {
             setPhoto(URL.createObjectURL(e.target.files[PHOTO_INDEX]));
             const convertedFile: string = await convertToBase64(e.target.files[PHOTO_INDEX]);

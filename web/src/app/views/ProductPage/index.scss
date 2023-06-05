@@ -5,6 +5,18 @@
         display: flex;
     }
 
+    &__recommendations {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        width: 100%;
+        padding: 10px;
+
+        & .product-item {
+            margin-right: 20px;
+        }
+    }
+
     &__top-side {
         display: flex;
         justify-content: space-between;

@@ -126,7 +126,7 @@ const ProductPage = () => {
 
                 </div>
             </div>
-            <div className="products__recomendations">
+            <div className="product__recommendations">
                 {productRecommendations.map((product: Product) =>
                     <ProductItem key={product.title} product={product} />
                 )}

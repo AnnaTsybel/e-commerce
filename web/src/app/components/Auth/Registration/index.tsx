@@ -25,7 +25,7 @@ export const Registration = () => {
         setDateOfBirth(convertedDate);
     };
 
-    const registerUser = async () => {
+    const registerUser = async() => {
         try {
             await dispatch(register(new UserRegisterData(
                 name,
