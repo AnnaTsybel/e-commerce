@@ -23,7 +23,8 @@ func (productsDB *productsDB) Create(ctx context.Context, product products.Produ
                   price,
                   color,
                   brand,
-                  is_available
+                  is_available,
+                  subsubcategory_id
                ) VALUES (
                    $1,
                    $2,
@@ -31,11 +32,12 @@ func (productsDB *productsDB) Create(ctx context.Context, product products.Produ
                    $4,
                    $5,
                    $6,
-                   $7
+                   $7,
+                   $8
                )`
 
 	_, err := productsDB.conn.ExecContext(ctx, query,
-		product.ID, product.Title, product.Description, product.Price, product.Color, product.Brand, product.IsAvailable)
+		product.ID, product.Title, product.Description, product.Price, product.Color, product.Brand, product.IsAvailable, product.SubsubcategoryID)
 	return err
 }
 
@@ -48,6 +50,32 @@ func (productsDB *productsDB) Get(ctx context.Context, id uuid.UUID) (products.P
 	err := productsDB.conn.QueryRowContext(ctx, query, id).Scan(
 		&product.ID, &product.Title, &product.Description, &product.Price, &product.Color, &product.Brand, &product.IsAvailable)
 	return product, err
+}
+
+func (productsDB *productsDB) ListBySubSubCategoryID(ctx context.Context, id uuid.UUID) ([]products.Product, error) {
+	rows, err := productsDB.conn.QueryContext(ctx, "SELECT id, title, description, price, color, brand, is_available FROM products WHERE subsubcategory_id = $1", id)
+	if err != nil {
+		return nil, err
+	}
+
+	defer func() {
+		err = errs.Combine(err, rows.Close())
+	}()
+
+	var data []products.Product
+	for rows.Next() {
+		var product products.Product
+		err = rows.Scan(&product.ID, &product.Title, &product.Description, &product.Price, &product.Color, &product.Brand, &product.IsAvailable)
+		if err != nil {
+			return nil, err
+		}
+
+		data = append(data, product)
+	}
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+	return data, nil
 }
 
 func (productsDB *productsDB) List(ctx context.Context) ([]products.Product, error) {

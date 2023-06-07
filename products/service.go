@@ -140,6 +140,20 @@ func (service *Service) ListRecommendation(ctx context.Context, userID, productI
 	return products, nil
 }
 
+func (service *Service) ListBySubSubCategoryID(ctx context.Context, userID uuid.UUID, id uuid.UUID) ([]Product, error) {
+	allProducts, err := service.db.ListBySubSubCategoryID(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	for i := 0; i < len(allProducts); i++ {
+		allProducts[i].IsLiked, _ = service.db.GetLikedUserProduct(ctx, allProducts[i].ID, userID)
+		allProducts[i].NumOfImages, _ = service.CountImages(ctx, allProducts[i].ID)
+	}
+
+	return allProducts, nil
+}
+
 func (service *Service) ListHomeRecommendation(ctx context.Context, userID uuid.UUID) ([]Product, error) {
 	similarUsers, err := service.users.SearchSimilarUsers(ctx, userID)
 	if err != nil {
@@ -220,7 +234,8 @@ func (service *Service) SearchSimilarProducts(productsToAnalyze []Product, produ
 
 	for _, productToAnalyze := range productsToAnalyze {
 		price := productToAnalyze.Price
-		if price > priceFrom && price < priceTo && product.ID != productToAnalyze.ID {
+		if price > priceFrom && price < priceTo && product.ID != productToAnalyze.ID &&
+			product.SubsubcategoryID == productToAnalyze.SubsubcategoryID {
 			recommendedProducts = append(recommendedProducts, productToAnalyze)
 		}
 	}

@@ -193,6 +193,42 @@ func (controller *Products) List(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func (controller *Products) ListBySubSubCategoryID(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	ctx := r.Context()
+
+	claimsMap, err := goauth.GetClaims(ctx)
+	if err != nil {
+		controller.serveError(w, http.StatusUnauthorized, ErrProducts.Wrap(err))
+		return
+	}
+
+	claims, err := userauth.GetStructClaims(claimsMap)
+	if err != nil {
+		controller.serveError(w, http.StatusUnauthorized, ErrProducts.Wrap(err))
+		return
+	}
+
+	vars := mux.Vars(r)
+	id, err := uuid.Parse(vars["categoryId"])
+	if err != nil {
+		controller.serveError(w, http.StatusBadRequest, ErrUsers.New("invalid id"))
+		return
+	}
+
+	allProducts, err := controller.products.ListBySubSubCategoryID(ctx, claims.UserID, id)
+	if err != nil {
+		log.Println("Unable to create product", ErrProducts.Wrap(err))
+		controller.serveError(w, http.StatusInternalServerError, ErrProducts.Wrap(err))
+		return
+	}
+
+	if err = json.NewEncoder(w).Encode(allProducts); err != nil {
+		log.Println("failed to write json response", ErrUsers.Wrap(err))
+		return
+	}
+}
+
 func (controller *Products) Update(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	ctx := r.Context()
