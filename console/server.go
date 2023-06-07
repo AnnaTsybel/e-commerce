@@ -3,6 +3,7 @@ package console
 import (
 	"context"
 	"errors"
+	"graduate_work/categories"
 	"graduate_work/console/controllers"
 	"graduate_work/products"
 	"graduate_work/users"
@@ -51,7 +52,7 @@ type Server struct {
 }
 
 // NewServer is a constructor for console web server.
-func NewServer(config Config, listener net.Listener, userAuth *userauth.Service, users *users.Service, products *products.Service) *Server {
+func NewServer(config Config, listener net.Listener, userAuth *userauth.Service, users *users.Service, products *products.Service, categories *categories.Service) *Server {
 	server := &Server{
 		config:      config,
 		listener:    listener,
@@ -70,6 +71,7 @@ func NewServer(config Config, listener net.Listener, userAuth *userauth.Service,
 	usersController := controllers.NewUsers(users)
 	authController := controllers.NewAuth(userAuth, server.cookieAuth)
 	productsController := controllers.NewProducts(products)
+	categoriesController := controllers.NewCategories(categories)
 
 	router := mux.NewRouter()
 	apiRouter := router.PathPrefix("/api/v0").Subrouter()
@@ -92,12 +94,22 @@ func NewServer(config Config, listener net.Listener, userAuth *userauth.Service,
 	productsRouter.HandleFunc("", productsController.Create).Methods(http.MethodPost)
 	productsRouter.HandleFunc("/{id}", productsController.Get).Methods(http.MethodGet)
 	productsRouter.HandleFunc("/{id}/recommendation", productsController.ListRecommendations).Methods(http.MethodGet)
+	productsRouter.HandleFunc("/by/subsubcategory/{categoryId}", productsController.ListBySubSubCategoryID).Methods(http.MethodGet)
 	productsRouter.HandleFunc("/recommendation/for/home", productsController.ListHomeRecommendations).Methods(http.MethodGet)
 	productsRouter.HandleFunc("", productsController.List).Methods(http.MethodGet)
 	productsRouter.HandleFunc("/{id}", productsController.Update).Methods(http.MethodPut)
 	productsRouter.HandleFunc("/{id}", productsController.Delete).Methods(http.MethodDelete)
 	productsRouter.HandleFunc("/{id}/like", productsController.LikeProduct).Methods(http.MethodPost)
 	productsRouter.HandleFunc("/{id}/like", productsController.UnlikeProduct).Methods(http.MethodDelete)
+
+	categoriesRouter := apiRouter.PathPrefix("/categories").Subrouter()
+	categoriesRouter.HandleFunc("", categoriesController.CreateCategory).Methods(http.MethodPost)
+	categoriesRouter.HandleFunc("", categoriesController.ListCategories).Methods(http.MethodGet)
+	categoriesRouter.HandleFunc("/subcategories", categoriesController.CreateSubCategory).Methods(http.MethodPost)
+	categoriesRouter.HandleFunc("/{id}/subcategories", categoriesController.ListSubCategories).Methods(http.MethodGet)
+	categoriesRouter.HandleFunc("/subsubcategories", categoriesController.CreateSubSubCategory).Methods(http.MethodPost)
+	categoriesRouter.HandleFunc("/subcategories/{id}/subsubcategories", categoriesController.ListSubSubCategories).Methods(http.MethodGet)
+	categoriesRouter.HandleFunc("/all", categoriesController.ListSubSubCategories).Methods(http.MethodGet)
 
 	imagesServer := http.FileServer(http.Dir(server.config.PhotosDir))
 	router.PathPrefix("/images/").Handler(http.StripPrefix("/images", imagesServer))

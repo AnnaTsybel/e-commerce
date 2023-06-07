@@ -6,6 +6,7 @@ import (
 	_ "github.com/lib/pq" // using postgres driver.
 	"github.com/zeebo/errs"
 	documentize "graduate_work"
+	"graduate_work/categories"
 	"graduate_work/products"
 	"graduate_work/users"
 )
@@ -48,6 +49,20 @@ func (db *database) CreateSchema(ctx context.Context) error {
 	    date_of_birth TIMESTAMP WITH TIME ZONE        NOT NULL,
 	    created_at TIMESTAMP WITH TIME ZONE DEFAULT now()       NOT NULL
 	);
+	CREATE TABLE IF NOT EXISTS categories(
+	    id         BYTEA PRIMARY KEY,
+	    name    VARCHAR DEFAULT '' NOT NULL
+	);
+	CREATE TABLE IF NOT EXISTS subcategories(
+	    id         BYTEA PRIMARY KEY,
+	    category_id BYTEA REFERENCES categories(id) ON DELETE CASCADE NOT NULL,
+	    name    VARCHAR DEFAULT '' NOT NULL
+	);
+	CREATE TABLE IF NOT EXISTS subsubcategories(
+	    id         BYTEA PRIMARY KEY,
+	    subcategory_id BYTEA REFERENCES subcategories(id) ON DELETE CASCADE NOT NULL,
+	    name    VARCHAR DEFAULT '' NOT NULL
+	);
     CREATE TABLE IF NOT EXISTS products(
 	    id           BYTEA PRIMARY KEY               NOT NULL,
 	    title        VARCHAR                         NOT NULL,
@@ -55,6 +70,7 @@ func (db *database) CreateSchema(ctx context.Context) error {
 	    price        numeric                         NOT NULL,
 	    color        VARCHAR DEFAULT '' NOT NULL,
 	    brand        VARCHAR DEFAULT '' NOT NULL,
+	    subsubcategory_id BYTEA REFERENCES subsubcategories(id) ON DELETE CASCADE NOT NULL,
 	    is_available BOOLEAN DEFAULT FALSE NOT NULL
 	);
     CREATE TABLE IF NOT EXISTS product_likes(
@@ -78,4 +94,8 @@ func (db *database) Users() users.DB {
 
 func (db *database) Products() products.DB {
 	return &productsDB{conn: db.conn}
+}
+
+func (db *database) Categories() categories.DB {
+	return &categoriesDB{conn: db.conn}
 }

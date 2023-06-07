@@ -6,6 +6,7 @@ import (
 	"github.com/BoostyLabs/goauth"
 	"github.com/zeebo/errs"
 	"golang.org/x/sync/errgroup"
+	"graduate_work/categories"
 	"graduate_work/console"
 	"graduate_work/pkg/store"
 	"graduate_work/products"
@@ -19,6 +20,7 @@ type DB interface {
 
 	Users() users.DB
 	Products() products.DB
+	Categories() categories.DB
 
 	Close() error
 }
@@ -34,10 +36,11 @@ type Config struct {
 type Documentize struct {
 	config *Config
 
-	users    *users.Service
-	store    *store.Store
-	auth     *userauth.Service
-	products *products.Service
+	users      *users.Service
+	store      *store.Store
+	auth       *userauth.Service
+	products   *products.Service
+	categories *categories.Service
 
 	server *console.Server
 }
@@ -74,6 +77,10 @@ func New(config *Config, db DB) (*Documentize, error) {
 	}
 
 	{
+		app.categories = categories.New(db.Categories(), app.store)
+	}
+
+	{
 		listener, err := net.Listen("tcp", config.ServerAddress)
 		if err != nil {
 			return nil, err
@@ -93,6 +100,7 @@ func New(config *Config, db DB) (*Documentize, error) {
 			app.auth,
 			app.users,
 			app.products,
+			app.categories,
 		)
 	}
 
