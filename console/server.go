@@ -93,6 +93,7 @@ func NewServer(config Config, listener net.Listener, userAuth *userauth.Service,
 	productsRouter.Use(server.withAuth)
 	productsRouter.HandleFunc("", productsController.Create).Methods(http.MethodPost)
 	productsRouter.HandleFunc("/{id}", productsController.Get).Methods(http.MethodGet)
+	productsRouter.HandleFunc("/search/by/title", productsController.SearchByTitle).Methods(http.MethodGet)
 	productsRouter.HandleFunc("/{id}/recommendation", productsController.ListRecommendations).Methods(http.MethodGet)
 	productsRouter.HandleFunc("/by/subsubcategory/{categoryId}", productsController.ListBySubSubCategoryID).Methods(http.MethodGet)
 	productsRouter.HandleFunc("/recommendation/for/home", productsController.ListHomeRecommendations).Methods(http.MethodGet)
