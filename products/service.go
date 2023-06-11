@@ -80,6 +80,20 @@ func (service *Service) List(ctx context.Context, userID uuid.UUID) ([]Product, 
 	return allProducts, nil
 }
 
+func (service *Service) SearchByTitle(ctx context.Context, userID uuid.UUID, title string) ([]Product, error) {
+	allProducts, err := service.db.SearchByTitle(ctx, title)
+	if err != nil {
+		return nil, err
+	}
+
+	for i := 0; i < len(allProducts); i++ {
+		allProducts[i].IsLiked, _ = service.db.GetLikedUserProduct(ctx, allProducts[i].ID, userID)
+		allProducts[i].NumOfImages, _ = service.CountImages(ctx, allProducts[i].ID)
+	}
+
+	return allProducts, nil
+}
+
 func (service *Service) ListLikedProducts(ctx context.Context, userID uuid.UUID) ([]Product, error) {
 	productIDs, err := service.db.ListLikedProducts(ctx, userID)
 	if err != nil {
