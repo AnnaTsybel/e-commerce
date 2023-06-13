@@ -87,7 +87,7 @@ func NewServer(config Config, listener net.Listener, userAuth *userauth.Service,
 	userRouter.Use(server.withAuth)
 	userRouter.HandleFunc("", usersController.GetProfile).Methods(http.MethodGet)
 	userRouter.HandleFunc("/liked", productsController.ListLikedProducts).Methods(http.MethodGet)
-	userRouter.HandleFunc("/liked/count", productsController.ListLikedProducts).Methods(http.MethodGet)
+	userRouter.HandleFunc("/liked/count", productsController.CountLikedProducts).Methods(http.MethodGet)
 	userRouter.HandleFunc("", usersController.UpdateUser).Methods(http.MethodPut)
 
 	productsRouter := apiRouter.PathPrefix("/products").Subrouter()
