@@ -161,5 +161,17 @@ func (categoriesDB *categoriesDB) ListSubsubcategoriesByID(ctx context.Context, 
 		return nil, err
 	}
 	return data, nil
+}
 
+func (categoriesDB *categoriesDB) GetSubsubcategoryByName(ctx context.Context, name string) (categories.Subsubcategory, error) {
+	var category categories.Subsubcategory
+
+	err := categoriesDB.conn.QueryRowContext(ctx,
+		"SELECT id, name, subcategory_id FROM subsubcategories WHERE name = $1",
+		name).Scan(&category.ID, &category.Name, &category.SubcategoryID)
+	if err != nil {
+		return category, err
+	}
+
+	return category, nil
 }

@@ -4,9 +4,11 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"fmt"
 	"github.com/google/uuid"
 	"github.com/zeebo/errs"
 	"graduate_work/products"
+	"log"
 )
 
 var _ products.DB = (*productsDB)(nil)
@@ -52,8 +54,27 @@ func (productsDB *productsDB) Get(ctx context.Context, id uuid.UUID) (products.P
 	return product, err
 }
 
-func (productsDB *productsDB) ListBySubSubCategoryID(ctx context.Context, id uuid.UUID) ([]products.Product, error) {
-	rows, err := productsDB.conn.QueryContext(ctx, "SELECT id, title, description, price, color, brand, is_available FROM products WHERE subsubcategory_id = $1", id)
+func (productsDB *productsDB) ListBySubSubCategoryID(ctx context.Context, id uuid.UUID, color string, priceFrom, priceTo float32) ([]products.Product, error) {
+	query := "SELECT id, title, description, price, color, brand, is_available, subsubcategory_id FROM products WHERE subsubcategory_id = $1"
+	args := []interface{}{id}
+
+	if color != "" {
+		args = append(args, color)
+		query += fmt.Sprintf(" AND color = $%v", len(args))
+	}
+
+	if priceFrom != 0 {
+		args = append(args, priceFrom)
+		query += fmt.Sprintf(" AND price >= $%v", len(args))
+	}
+
+	if priceTo != 0 {
+		args = append(args, priceTo)
+		query += fmt.Sprintf(" AND price <= $%v", len(args))
+	}
+
+	log.Println("query", query)
+	rows, err := productsDB.conn.QueryContext(ctx, query, args...)
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +86,7 @@ func (productsDB *productsDB) ListBySubSubCategoryID(ctx context.Context, id uui
 	var data []products.Product
 	for rows.Next() {
 		var product products.Product
-		err = rows.Scan(&product.ID, &product.Title, &product.Description, &product.Price, &product.Color, &product.Brand, &product.IsAvailable)
+		err = rows.Scan(&product.ID, &product.Title, &product.Description, &product.Price, &product.Color, &product.Brand, &product.IsAvailable, &product.SubsubcategoryID)
 		if err != nil {
 			return nil, err
 		}
@@ -107,7 +128,7 @@ func (productsDB *productsDB) SearchByTitle(ctx context.Context, title string) (
 }
 
 func (productsDB *productsDB) List(ctx context.Context) ([]products.Product, error) {
-	rows, err := productsDB.conn.QueryContext(ctx, "SELECT id, title, description, price, color, brand, is_available FROM products")
+	rows, err := productsDB.conn.QueryContext(ctx, "SELECT id, title, description, price, color, brand, is_available, subsubcategory_id FROM products")
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +140,7 @@ func (productsDB *productsDB) List(ctx context.Context) ([]products.Product, err
 	var data []products.Product
 	for rows.Next() {
 		var product products.Product
-		err = rows.Scan(&product.ID, &product.Title, &product.Description, &product.Price, &product.Color, &product.Brand, &product.IsAvailable)
+		err = rows.Scan(&product.ID, &product.Title, &product.Description, &product.Price, &product.Color, &product.Brand, &product.IsAvailable, &product.SubsubcategoryID)
 		if err != nil {
 			return nil, err
 		}

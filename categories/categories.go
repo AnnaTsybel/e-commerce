@@ -13,6 +13,7 @@ type DB interface {
 	CreateSubsubcategory(ctx context.Context, category Subsubcategory) error
 	ListSubsubcategoriesByID(ctx context.Context, id uuid.UUID) ([]Subsubcategory, error)
 	ListSubSubcategories(ctx context.Context) ([]Subsubcategory, error)
+	GetSubsubcategoryByName(ctx context.Context, name string) (Subsubcategory, error)
 }
 
 type Category struct {

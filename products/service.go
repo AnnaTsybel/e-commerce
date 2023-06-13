@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
+	"graduate_work/categories"
 	"graduate_work/pkg/store"
 	"graduate_work/users"
 	"io"
@@ -16,23 +17,39 @@ import (
 type Service struct {
 	db DB
 
-	store *store.Store
-	users *users.Service
+	store      *store.Store
+	users      *users.Service
+	categories *categories.Service
 }
 
-func New(db DB, store *store.Store, users *users.Service) *Service {
+func New(db DB, store *store.Store, users *users.Service, categories *categories.Service) *Service {
 	return &Service{
-		db:    db,
-		store: store,
-		users: users,
+		db:         db,
+		store:      store,
+		users:      users,
+		categories: categories,
 	}
 }
 
-func (service *Service) Create(ctx context.Context, product Product) error {
-	product.ID = uuid.New()
-	product.IsAvailable = true
+func (service *Service) Create(ctx context.Context, productWithCategoryName ProductWithCategoryName) error {
+	category, err := service.categories.GetSubsubcategoryByName(ctx, productWithCategoryName.SubsubcategoryName)
+	if err != nil {
+		return err
+	}
 
-	err := service.db.Create(ctx, product)
+	product := Product{
+		ID:               uuid.New(),
+		IsAvailable:      true,
+		Title:            productWithCategoryName.Title,
+		Description:      productWithCategoryName.Description,
+		Price:            productWithCategoryName.Price,
+		Color:            productWithCategoryName.Color,
+		Brand:            productWithCategoryName.Brand,
+		Images:           productWithCategoryName.Images,
+		SubsubcategoryID: category.ID,
+	}
+
+	err = service.db.Create(ctx, product)
 	if err != nil {
 		return err
 	}
@@ -154,8 +171,8 @@ func (service *Service) ListRecommendation(ctx context.Context, userID, productI
 	return products, nil
 }
 
-func (service *Service) ListBySubSubCategoryID(ctx context.Context, userID uuid.UUID, id uuid.UUID) ([]Product, error) {
-	allProducts, err := service.db.ListBySubSubCategoryID(ctx, id)
+func (service *Service) ListBySubSubCategoryID(ctx context.Context, userID uuid.UUID, id uuid.UUID, color string, priceFrom, priceTo float32) ([]Product, error) {
+	allProducts, err := service.db.ListBySubSubCategoryID(ctx, id, color, priceFrom, priceTo)
 	if err != nil {
 		return nil, err
 	}

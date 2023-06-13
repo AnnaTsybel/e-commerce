@@ -10,6 +10,7 @@ import (
 	"graduate_work/users/userauth"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 var (
@@ -48,7 +49,7 @@ func (controller *Products) Create(w http.ResponseWriter, r *http.Request) {
 	//}
 
 	var err error
-	var request products.Product
+	var request products.ProductWithCategoryName
 
 	if err = json.NewDecoder(r.Body).Decode(&request); err != nil {
 		controller.serveError(w, http.StatusBadRequest, ErrProducts.Wrap(err))
@@ -216,7 +217,32 @@ func (controller *Products) ListBySubSubCategoryID(w http.ResponseWriter, r *htt
 		return
 	}
 
-	allProducts, err := controller.products.ListBySubSubCategoryID(ctx, claims.UserID, id)
+	urlQuery := r.URL.Query()
+	color := urlQuery.Get("color")
+	priceFromStr := urlQuery.Get("priceFrom")
+	priceToStr := urlQuery.Get("priceTo")
+
+	var (
+		priceFrom float64
+		priceTo   float64
+	)
+	if priceFromStr != "" {
+		priceFrom, err = strconv.ParseFloat(priceFromStr, 64)
+		if err != nil {
+			controller.serveError(w, http.StatusBadRequest, err)
+			return
+		}
+	}
+
+	if priceToStr != "" {
+		priceTo, err = strconv.ParseFloat(priceToStr, 64)
+		if err != nil {
+			controller.serveError(w, http.StatusBadRequest, err)
+			return
+		}
+	}
+
+	allProducts, err := controller.products.ListBySubSubCategoryID(ctx, claims.UserID, id, color, float32(priceFrom), float32(priceTo))
 	if err != nil {
 		log.Println("Unable to create product", ErrProducts.Wrap(err))
 		controller.serveError(w, http.StatusInternalServerError, ErrProducts.Wrap(err))

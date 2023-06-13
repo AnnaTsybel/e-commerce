@@ -111,6 +111,10 @@ func (service *Service) ListSubsubcategoriesByID(ctx context.Context, id uuid.UU
 	return service.db.ListSubsubcategoriesByID(ctx, id)
 }
 
+func (service *Service) GetSubsubcategoryByName(ctx context.Context, name string) (Subsubcategory, error) {
+	return service.db.GetSubsubcategoryByName(ctx, name)
+}
+
 func (service *Service) CreateImage(ctx context.Context, categoryID uuid.UUID, reader io.Reader) error {
 	pathFromRoot := filepath.Join("categories", categoryID.String()+".png")
 
