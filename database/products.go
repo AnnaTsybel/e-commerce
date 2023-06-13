@@ -78,6 +78,34 @@ func (productsDB *productsDB) ListBySubSubCategoryID(ctx context.Context, id uui
 	return data, nil
 }
 
+func (productsDB *productsDB) SearchByTitle(ctx context.Context, title string) ([]products.Product, error) {
+	rows, err := productsDB.conn.QueryContext(ctx,
+		"SELECT id, title, description, price, color, brand, is_available FROM products WHERE title ILIKE '%' || $1 || '%';",
+		title)
+	if err != nil {
+		return nil, err
+	}
+
+	defer func() {
+		err = errs.Combine(err, rows.Close())
+	}()
+
+	var data []products.Product
+	for rows.Next() {
+		var product products.Product
+		err = rows.Scan(&product.ID, &product.Title, &product.Description, &product.Price, &product.Color, &product.Brand, &product.IsAvailable)
+		if err != nil {
+			return nil, err
+		}
+
+		data = append(data, product)
+	}
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+	return data, nil
+}
+
 func (productsDB *productsDB) List(ctx context.Context) ([]products.Product, error) {
 	rows, err := productsDB.conn.QueryContext(ctx, "SELECT id, title, description, price, color, brand, is_available FROM products")
 	if err != nil {

@@ -16,6 +16,7 @@ type DB interface {
 	GetLikedUserProduct(ctx context.Context, productID, userID uuid.UUID) (bool, error)
 	ListLikedProducts(ctx context.Context, userID uuid.UUID) ([]uuid.UUID, error)
 	ListBySubSubCategoryID(ctx context.Context, id uuid.UUID) ([]Product, error)
+	SearchByTitle(ctx context.Context, title string) ([]Product, error)
 }
 
 type Product struct {
