@@ -87,3 +87,42 @@ func (service *Service) CreateImage(ctx context.Context, categoryID uuid.UUID, r
 
 	return service.store.Create(ctx, pathFromRoot, reader)
 }
+
+func (service *Service) ListCategoryWithChildren(ctx context.Context) ([]CategoryWithChild, error) {
+	categories, err := service.ListCategories(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	resp := make([]CategoryWithChild, 0, len(categories))
+
+	for _, category := range categories {
+		subcategories, err := service.ListSubcategoriesByID(ctx, category.ID)
+		if err != nil {
+			return nil, err
+		}
+
+		categoryWithChild := CategoryWithChild{
+			Category:    category,
+			Subcategory: make([]SubcategoryWithChild, 0, 100),
+		}
+
+		for _, subcategory := range subcategories {
+			subsubcategories, err := service.ListSubsubcategoriesByID(ctx, subcategory.ID)
+			if err != nil {
+				return nil, err
+			}
+
+			subCategoryWithChild := SubcategoryWithChild{
+				Subcategory:    subcategory,
+				Subsubcategory: subsubcategories,
+			}
+
+			categoryWithChild.Subcategory = append(categoryWithChild.Subcategory, subCategoryWithChild)
+		}
+
+		resp = append(resp, categoryWithChild)
+	}
+
+	return resp, nil
+}

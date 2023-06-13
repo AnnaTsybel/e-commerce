@@ -33,3 +33,13 @@ type Subsubcategory struct {
 	SubcategoryID uuid.UUID `json:"categoryId"`
 	Image         string    `json:"image"`
 }
+
+type CategoryWithChild struct {
+	Category    Category               `json:"category"`
+	Subcategory []SubcategoryWithChild `json:"subcategory"`
+}
+
+type SubcategoryWithChild struct {
+	Subcategory    Subcategory      `json:"subcategory"`
+	Subsubcategory []Subsubcategory `json:"subsubcategory"`
+}
