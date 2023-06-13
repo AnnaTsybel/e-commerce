@@ -94,7 +94,32 @@ func (categoriesDB *categoriesDB) ListSubcategoriesByID(ctx context.Context, id 
 		return nil, err
 	}
 	return data, nil
+}
 
+func (categoriesDB *categoriesDB) ListSubSubcategories(ctx context.Context) ([]categories.Subsubcategory, error) {
+	rows, err := categoriesDB.conn.QueryContext(ctx, "SELECT id, name, subcategory_id FROM subsubcategories")
+	if err != nil {
+		return nil, err
+	}
+
+	defer func() {
+		err = errs.Combine(err, rows.Close())
+	}()
+
+	var data []categories.Subsubcategory
+	for rows.Next() {
+		var category categories.Subsubcategory
+		err = rows.Scan(&category.ID, &category.Name, &category.SubcategoryID)
+		if err != nil {
+			return nil, err
+		}
+
+		data = append(data, category)
+	}
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+	return data, nil
 }
 
 func (categoriesDB *categoriesDB) CreateSubsubcategory(ctx context.Context, category categories.Subsubcategory) error {

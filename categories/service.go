@@ -62,6 +62,10 @@ func (service *Service) ListSubcategoriesByID(ctx context.Context, id uuid.UUID)
 	return service.db.ListSubcategoriesByID(ctx, id)
 }
 
+func (service *Service) ListSubSubcategories(ctx context.Context) ([]Subsubcategory, error) {
+	return service.db.ListSubSubcategories(ctx)
+}
+
 func (service *Service) ListSubcategoriesByIDWithChild(ctx context.Context, id uuid.UUID) ([]SubcategoryWithChild, error) {
 	subcategories, err := service.db.ListSubcategoriesByID(ctx, id)
 	if err != nil {

@@ -109,6 +109,7 @@ func NewServer(config Config, listener net.Listener, userAuth *userauth.Service,
 	categoriesRouter.HandleFunc("", categoriesController.ListCategories).Methods(http.MethodGet)
 	categoriesRouter.HandleFunc("/with-children", categoriesController.ListCategoriesWithChildren).Methods(http.MethodGet)
 	categoriesRouter.HandleFunc("/subcategories", categoriesController.CreateSubCategory).Methods(http.MethodPost)
+	categoriesRouter.HandleFunc("/all/subsubcategories", categoriesController.ListAllSubSubCategories).Methods(http.MethodGet)
 	categoriesRouter.HandleFunc("/{id}/subcategories", categoriesController.ListSubCategories).Methods(http.MethodGet)
 	categoriesRouter.HandleFunc("/subsubcategories", categoriesController.CreateSubSubCategory).Methods(http.MethodPost)
 	categoriesRouter.HandleFunc("/subcategories/{id}/subsubcategories", categoriesController.ListSubSubCategories).Methods(http.MethodGet)

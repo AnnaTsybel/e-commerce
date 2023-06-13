@@ -108,6 +108,23 @@ func (controller *Categories) ListSubCategories(w http.ResponseWriter, r *http.R
 	}
 }
 
+func (controller *Categories) ListAllSubSubCategories(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	ctx := r.Context()
+
+	subcategories, err := controller.categories.ListSubSubcategories(ctx)
+	if err != nil {
+		log.Println("could not list all subsubcategories", ErrCategories.Wrap(err))
+		controller.serveError(w, http.StatusInternalServerError, ErrCategories.Wrap(err))
+		return
+	}
+
+	if err = json.NewEncoder(w).Encode(subcategories); err != nil {
+		log.Println("failed to write json response", ErrCategories.Wrap(err))
+		return
+	}
+}
+
 func (controller *Categories) CreateSubSubCategory(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	ctx := r.Context()
