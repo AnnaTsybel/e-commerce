@@ -32,7 +32,7 @@ export const Registration = () => {
                 surname,
                 phoneNumber,
                 email,
-                'man',
+                gender,
                 password,
                 dateOfBirth
             )));

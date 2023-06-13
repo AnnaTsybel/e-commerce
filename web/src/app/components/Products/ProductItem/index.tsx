@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import notLikedProduct from '@img/Product/not-favorite-icon.png';
 import likedProduct from '@img/Product/favorite-icon.png';
 import deleteIcon from '@img/Product/delete-icon.png';
@@ -7,10 +7,12 @@ import editIcon from '@img/Product/edit-icon.png';
 import noImage from '@img/Product/no-image.png';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 
+import { amountOfLikedProducts } from '@/app/store/actions/users';
 import { User } from '@/users';
 import { RootState } from '@/app/store';
 import { Product } from '@/product';
 import { deleteProductData, likeProduct, unlikeProduct } from '@/app/store/actions/products';
+
 
 import './index.scss';
 
@@ -32,12 +34,13 @@ export const ProductItem: React.FC<{ product: Product }> = ({ product }) => {
         window.location.replace(`/product-edit/${id}`);
     };
 
-    const handleLikes = () => {
+    const handleLikes = async() => {
         if (isFavorite) {
-            dispatch(unlikeProduct(product.id));
+            await dispatch(unlikeProduct(product.id));
         } else {
-            dispatch(likeProduct(product.id));
+            await dispatch(likeProduct(product.id));
         }
+        await dispatch(amountOfLikedProducts());
         setIsFavorite(!isFavorite);
     };
 

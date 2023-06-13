@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-
 import arrow from '@img/Home/Slider/arrow-icon.png';
-
-import './index.scss';
-import { Product } from '@/product';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
+
+import { Product } from '@/product';
 import { RootState } from '@/app/store';
 import { setProductPhotos } from '@/app/store/reducers/products';
+
+
+import './index.scss';
 
 const DEFAULT_SLIDE = 0;
 const FIRST_SLIDE = 0;

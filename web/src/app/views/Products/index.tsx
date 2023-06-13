@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import { ProductsFilter } from '@components/Products/ProductsFilter';
@@ -6,8 +6,7 @@ import { ProductItem } from '@components/Products/ProductItem';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { RootState } from '@/app/store';
 import { getUser } from '@/app/store/actions/users';
-import { productsList } from '@/app/store/actions/products';
-
+import { getListByCategory } from '@/app/store/actions/products';
 import { Product } from '@/product';
 import { User } from '@/users';
 
@@ -17,13 +16,20 @@ const USER_ADMINISTRATOR = 1;
 
 const Products = () => {
     const dispatch = useAppDispatch();
+    const { id } = useParams<string>();
 
     const user: User | null = useAppSelector((state: RootState) => state.usersReducer.user);
     const products: Product[] | null = useAppSelector((state: RootState) => state.productsReducer.products);
 
+    const onPageLoad = () => {
+        if (id) {
+            dispatch(getUser());
+            dispatch(getListByCategory(id));
+        }
+    };
+
     useEffect(() => {
-        dispatch(getUser());
-        dispatch(productsList());
+        onPageLoad();
     }, []);
 
     return (

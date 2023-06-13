@@ -8,11 +8,12 @@ import { Aside } from '@components/Home/Aside';
 import { Product } from '@/product';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { RootState } from '@/app/store';
-import { getUser } from '@/app/store/actions/users';
+import { amountOfLikedProducts, getUser } from '@/app/store/actions/users';
 import { getRecommendationForHomePage } from '@/app/store/actions/products';
 import { User } from '@/users';
 
 import './index.scss';
+import { setCategories } from '@/app/store/actions/categories';
 
 const USER_ADMINISTRATOR = 1;
 
@@ -25,6 +26,7 @@ const Home = () => {
     useEffect(() => {
         dispatch(getUser());
         dispatch(getRecommendationForHomePage());
+        dispatch(setCategories());
     }, []);
 
     return (

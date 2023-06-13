@@ -36,8 +36,8 @@ export class ProductsClient extends APIClient {
     }
 
     /** gets list of products */
-    public async list(): Promise<Product[]> {
-        const path = `${this.ROOT_PATH}`;
+    public async list(subsubcategoryId: string): Promise<Product[]> {
+        const path = `${this.ROOT_PATH}/by/subsubcategory/${subsubcategoryId}`;
         const response = await this.http.get(path);
 
         if (!response.ok) {
@@ -160,4 +160,17 @@ export class ProductsClient extends APIClient {
             )
         );
     }
+
+    /** Searches products */
+    public async searchProducts(text: string): Promise<Product[]> {
+        const path = `${this.ROOT_PATH}/search/by/title?title=${text}`;
+        const response = await this.http.get(path);
+
+        if (!response.ok) {
+            await this.handleError(response);
+        }
+        const products = await response.json();
+
+        return products;
+    };
 }

@@ -49,6 +49,16 @@ export const getLikedProducts = () => async function(dispatch: Dispatch) {
         }
     }
 };
+export const amountOfLikedProducts = () => async function(dispatch: Dispatch) {
+    try {
+        const amount = await usersService.amountOflikedProducts();
+        dispatch(userSlice.actions.setAmountOfLikedProducts(amount));
+    } catch (error: any) {
+        if (error instanceof BadRequestError) {
+            dispatch(setErrorMessage('No valid user info'));
+        }
+    }
+};
 
 export const logout = createAsyncThunk(
     '/auth/logout',

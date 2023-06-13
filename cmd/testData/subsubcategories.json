@@ -20,6 +20,11 @@
     "categoryId" : "1100cf90-55df-493f-9aed-ae05b2285f91"
   },
   {
+    "id": "3d1d0686-0993-11ee-be56-0242ac120002",
+    "name": "Microsoft",
+    "categoryId" : "1100cf90-55df-493f-9aed-ae05b2285f91"
+  },
+  {
     "id": "ab17ec3f-17c1-4f87-949b-a77f5af84de3",
     "name": "Монітори",
     "categoryId" : "ed8aae7f-93ca-4cec-9c87-453ba103f9d2"
@@ -120,24 +125,14 @@
     "categoryId" : "9e46cd04-0ff2-4c63-af95-0df0900818d8"
   },
   {
-    "id": "585e5109-5bd0-4777-b1f0-05616b509fd9",
-    "name": "Навушники",
-    "categoryId" : "4bcdfe8d-bdf4-45e5-8cb1-775de25cbdf0"
-  },
-  {
     "id": "a34b5c9c-c358-4e07-8b4c-dddf913f84d6",
     "name": "Кабелі",
-    "categoryId" : "4bcdfe8d-bdf4-45e5-8cb1-775de25cbdf0"
-  },
-  {
-    "id": "0da73381-58c4-4258-8bf5-02eb2bfb9e09",
-    "name": "Адаптори",
-    "categoryId" : "4bcdfe8d-bdf4-45e5-8cb1-775de25cbdf0"
+    "categoryId" : "112083c4-09e7-11ee-be56-0242ac120002"
   },
   {
     "id": "287a9b3d-72bf-4fa1-9782-26fa15210938",
     "name": "Чохли",
-    "categoryId" : "4bcdfe8d-bdf4-45e5-8cb1-775de25cbdf0"
+    "categoryId" : "112083c4-09e7-11ee-be56-0242ac120002"
   },
   {
     "id": "61e654b1-6a52-4d10-895e-fa6fbf53f6bb",

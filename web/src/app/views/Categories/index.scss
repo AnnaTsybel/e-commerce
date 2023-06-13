@@ -1,12 +1,27 @@
 .categories {
-    display: flex;
+
+    &__content {
+        display: flex;
+        justify-content: center;
+        padding-top: 30px;
+    }
+
+    &__back-button {
+        text-decoration: none;
+        width: 40px;
+        height: 40px;
+    }
 
     &__item {
-        width: 33%;
+        width: 30%;
+        margin-right: 20px;
 
         &__photo {
             height: 300px;
-            width: 150px;
+            width: 100%;
+            background-position: left;
+            background-repeat: no-repeat;
+            background-size: contain;
         }
 
         &__title {

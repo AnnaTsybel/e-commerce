@@ -1,29 +1,51 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Catalog from '@components/Catalog';
-
 import userProfileIcon from '@img/Navbar/user-icon.png';
 import catalogIcon from '@img/Navbar/catalog-icon.png';
 import favoriteIcon from '@img/Navbar/not-favorite-icon.png';
 import searchIcon from '@img/Navbar/search-icon.png';
 import сancelIcon from '@img/Navbar/cancel-icon.png';
 import logoIcon from '@img/Navbar/logo.png';
+import { SearchingModal } from './SearchingModal';
 import { User } from '@/users';
 import { RouteConfig } from '@/routes';
 import { RootState } from '@/app/store';
-import { useAppSelector } from '@/app/hooks/useReduxToolkit';
+import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
+import { searchProducts } from '@/app/store/actions/products';
+import { Product } from '@/product';
+import { setCategories } from '@/app/store/actions/categories';
+import { amountOfLikedProducts, getUser } from '@/app/store/actions/users';
 
-import { catalog } from '@/mockedData/catalog';
 
 import './index.scss';
 
-const ITEMS_SHOPPING_CART_AMOUNT = 1;
-
 export const Navbar = () => {
+    const dispatch = useAppDispatch();
+
+    const [isSearching, setIsSearching] = useState(false);
     const [isCatalogOpened, setCatalogOpened] = useState<boolean>(false);
 
     const user: User | null = useAppSelector((state: RootState) => state.usersReducer.user);
+    const foundedProducts: Product[] | [] = useAppSelector((state: RootState) => state.productsReducer.foundedProducts);
+    const amountLikedProducts: number = useAppSelector((state: RootState) => state.usersReducer.amountOfLikedProducts);
+
+    const handleSearching = (e: any) => {
+        if (e.target.value) {
+            setIsSearching(true);
+            dispatch(searchProducts(e.target.value));
+        }
+        else {
+            setIsSearching(false);
+        }
+    };
+
+    useEffect(() => {
+        dispatch(getUser());
+        dispatch(setCategories());
+        dispatch(amountOfLikedProducts());
+    }, []);
 
     return (
         <header className="header">
@@ -45,8 +67,14 @@ export const Navbar = () => {
                     <label htmlFor="search" className="header__search__label">
                         <img className="header__search__icon" src={searchIcon} alt="search icon" />
                     </label>
-                    <input className="header__search__input"
-                        id="search" type="text" placeholder="Я шукаю..." />
+                    <input
+                        className="header__search__input"
+                        id="search"
+                        type="text"
+                        placeholder="Я шукаю..."
+                        onChange={handleSearching}
+                        autoComplete="off"
+                    />
                     <button className="header__search__button" >
                         Знайти
                     </button>
@@ -66,13 +94,15 @@ export const Navbar = () => {
                             className="header__shopping-cart__image" />
                     </Link>
                     <span className="header__shopping-cart__active">
-                        {ITEMS_SHOPPING_CART_AMOUNT}
+                        {amountLikedProducts}
                     </span>
                 </div>
             </div>
             {isCatalogOpened
-                && <Catalog catalog={catalog} setCatalogOpened={setCatalogOpened} />
+                && <Catalog setCatalogOpened={setCatalogOpened} />
             }
+            {isSearching &&
+                <SearchingModal setIsSearching={setIsSearching} foundedProducts={foundedProducts} />}
         </header>
     );
 };

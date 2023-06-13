@@ -4,13 +4,15 @@ import { useEffect, useState } from 'react';
 import userNoPhoto from '@img/no-photo-profile.webp';
 import { useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { RootState } from '@/app/store';
-import { catalog } from '@/mockedData/catalog';
 import { User } from '@/users';
+import { Category } from '@/categories';
+
 
 import './index.scss';
 
 export const Aside = () => {
     const user: User | null = useAppSelector((state: RootState) => state.usersReducer.user);
+    const categories: Category[] | null = useAppSelector((state: RootState) => state.categoriesReducer.listCategories);
 
     const [photo, setPhoto] = useState<string>();
     const [isAvatarExists, setIsAvatarExists] = useState<boolean>();
@@ -27,13 +29,13 @@ export const Aside = () => {
     return (
         <aside className="aside">
             <div className="aside__categories">
-                {catalog.map((category, index) =>
+                {categories.map((category) =>
                     <Link
                         className="aside__category"
-                        key={`${category.category}-${index}`}
+                        key={`${category.id}`}
                         to={`category/${category.id}`}
                     >
-                        <p className="aside__category__text">{category.category}</p>
+                        <p className="aside__category__text">{category.name}</p>
                     </Link>
                 )
                 }

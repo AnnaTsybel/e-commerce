@@ -75,10 +75,10 @@ const UserPage = () => {
         }
     };
 
-    const logoutUser = () => {
-        dispatch(logout());
+    const logoutUser = async() => {
+        await dispatch(logout());
 
-        navigate(AuthRoutesConfig.Registration.path);
+        await navigate(AuthRoutesConfig.Registration.path);
     };
 
     const setUserAvatar = () => {

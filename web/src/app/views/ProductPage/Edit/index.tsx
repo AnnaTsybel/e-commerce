@@ -1,24 +1,24 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import photoAddIcon from '@img/Product/photo-add-icon.png';
 import closeIcon from '@img/Product/remove-icon.png';
 import backButtonIcon from '@img/back-button.png';
 import { Product, ProductEdit } from '@/product';
 import { Color, colors } from '@/colors';
-
 import { convertToBase64 } from '@/app/internal/convertImage';
-
 import { RootState } from '@/app/store';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { getProduct, updateProduct } from '@/app/store/actions/products';
 import { addProductPhotos, deleteProductPhoto, setProductPhotos } from '@/app/store/reducers/products';
+import { setSubSubCategory } from '@/app/store/actions/categories';
+import { SubSubCategory } from '@/categories';
 
 
 import '../index.scss';
 
-const LAST_ITEM_PATH_INCREMENT = 1;
 const SECOND_INDEX = 1;
+const FIRST_INDEX_SUBSUBCATEGORIES = 0;
 
 const ProductEditPage = () => {
     const navigate = useNavigate();
@@ -26,9 +26,11 @@ const ProductEditPage = () => {
 
     const product: Product | null = useAppSelector((state: RootState) => state.productsReducer.currentProduct);
     const productPhotos: string[] | [] = useAppSelector((state: RootState) => state.productsReducer.productPhotos);
+    const subsubcategories: SubSubCategory[] | [] = useAppSelector((state: RootState) => state.categoriesReducer.allSubSubcategories);
 
-    const getLastItem = (thePath: string) => thePath.substring(thePath.lastIndexOf('/') + LAST_ITEM_PATH_INCREMENT);
+    const { id } = useParams();
 
+    const [currentSubSubCategorie, setCurrentSubSubCategorie] = useState<string>();
     const [title, setTitle] = useState<string>(product.title);
     const [description, setDescription] = useState<string>(product.description);
     const [price, setPrice] = useState<number>(product.price);
@@ -92,10 +94,28 @@ const ProductEditPage = () => {
         navigate(`/product/${product.id}`);
     };
 
+    const onChangeSubSubCategorie = (e: any) => {
+        if (e.target.value) {
+            setCurrentSubSubCategorie(e.target.value);
+        }
+    };
+
+    const onPageLoad = () => {
+        if (id) {
+            dispatch(getProduct(id));
+            dispatch(setSubSubCategory());
+        }
+    };
+
     useEffect(() => {
-        const productId = getLastItem(window.location.pathname);
-        dispatch(getProduct(productId));
+        onPageLoad();
     }, []);
+
+    useEffect(() => {
+        if (subsubcategories.length) {
+            setCurrentSubSubCategorie(subsubcategories[FIRST_INDEX_SUBSUBCATEGORIES].name);
+        }
+    }, [subsubcategories]);
 
     useEffect(() => {
         const slides = getPhotosArray();
@@ -142,6 +162,23 @@ const ProductEditPage = () => {
                         onChange={e => setBrand(e.target.value)}
                     />
                     <span></span>
+                </div>
+                <div className="product-edit__select">
+                    <select
+                        onChange={onChangeSubSubCategorie}
+                    >
+                        {subsubcategories.length && subsubcategories.map((subsubcategory: SubSubCategory) =>
+                            <option
+                                key={subsubcategory.id}
+                                value={subsubcategory.name}
+                            >
+                                {subsubcategory.name}
+                            </option>
+                        )}
+                    </select>
+                    <span className="product-edit__select__arrow" >
+                        &#9660;
+                    </span>
                 </div>
                 <textarea
                     className="product-edit__textarea"

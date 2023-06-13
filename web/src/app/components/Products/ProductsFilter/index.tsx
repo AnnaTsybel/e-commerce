@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Color, colors } from '@/colors';
 
-
 import './index.scss';
 
 export const ProductsFilter = () => {

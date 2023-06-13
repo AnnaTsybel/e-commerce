@@ -3,19 +3,22 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"github.com/caarlos0/env/v6"
 	documentize "graduate_work"
 	"graduate_work/categories"
 	"graduate_work/database"
 	"graduate_work/products"
 	"graduate_work/users"
+
+	"github.com/caarlos0/env/v6"
+
 	//"github.com/joho/godotenv"
-	_ "github.com/joho/godotenv/autoload"
-	"github.com/zeebo/errs"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
+
+	_ "github.com/joho/godotenv/autoload"
+	"github.com/zeebo/errs"
 )
 
 func main() {

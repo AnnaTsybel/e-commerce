@@ -1,36 +1,48 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { Category } from '@/categories';
+import { setCategories, setCurrentCategory, setSubSubCategory } from '../actions/categories';
+import { Category, SubCategory, SubSubCategory } from '@/categories';
 
 /** Exposes channels state */
 class UsersState {
     /** class implementation */
     constructor(
         public listCategories: Category[] = [],
-        public currentCategory: Category = new Category()
+        public currentCategory: SubCategory[] = [],
+        public allSubSubcategories: SubSubCategory[] = []
     ) { }
 }
 
 const initialState: UsersState = {
     listCategories: [],
-    currentCategory: new Category(),
+    currentCategory: [],
+    allSubSubcategories: [],
 };
 
 export const categoriesSlice = createSlice({
     name: 'categoriesReducer',
     initialState,
     reducers: {
-        setCategories: (state, action: PayloadAction<Category[]>) => {
-            state.listCategories = action.payload;
-        },
-        setCurrentCategory: (state, action: PayloadAction<Category>) => {
-            state.currentCategory = action.payload;
-        },
+
     },
+    extraReducers: (builder) => {
+        builder.addCase(setCurrentCategory.fulfilled, (state, action) => {
+            state.currentCategory = action.payload;
+        });
+
+        builder.addCase(setCategories.fulfilled, (state, action) => ({
+            ...state,
+            listCategories: action.payload,
+        }));
+        builder.addCase(setSubSubCategory.fulfilled, (state, action) => ({
+            ...state,
+            allSubSubcategories: action.payload,
+        }));
+    },
+
 });
 
 // Action creators are generated for each case reducer function
-export const { setCategories, setCurrentCategory } = categoriesSlice.actions;
+export const { } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;

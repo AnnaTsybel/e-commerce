@@ -1,42 +1,65 @@
 
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { catalog } from '../../../mockedData/catalog';
+import { Link, useParams } from 'react-router-dom';
+import backButtonIcon from '@img/back-button.png';
+import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
+import { RootState } from '@/app/store';
+import { setCurrentCategory } from '@/app/store/actions/categories';
+import { SubCategory, SubSubCategory } from '@/categories';
 
 import './index.scss';
 
-const LAST_ITEM_PATH_INCREMENT = 1;
-
 const Categories = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
+    const { id } = useParams<string>();
 
-    const getLastItem = (thePath: string) => thePath.substring(thePath.lastIndexOf('/') + LAST_ITEM_PATH_INCREMENT);
+    const currentCategory: SubCategory[] | null = useAppSelector((state: RootState) => state.categoriesReducer.currentCategory);
+
+    const onLoadPage = () => {
+        if (id) {
+            dispatch(setCurrentCategory(id));
+        }
+    };
+
     useEffect(() => {
-        const categoryId = getLastItem(window.location.pathname);
-        // dispatch(getProduct(categoryId));
+        onLoadPage();
     }, []);
 
     return (
         <div className="categories">
-            {catalog.map(category =>
-                <div className="categories__item">
+            <Link to="/">
+                <img src={backButtonIcon}
+                    alt="back-button"
+                    className="categories__back-button" />
+            </Link>
+            <div className="categories__content">
 
-                    <p className="categories__item__title">
-                        {category.category}
-                    </p>
-                    <div className="categories__item__subcategories">
-                        {category.subcategories.map((subcategory) =>
-                            <Link
-                                to={`/category/${category.id}`}
-                                className="categories__item__subcategory"
-                            >
-                                {subcategory.subcategory}
-                            </Link>)
-                        }
+
+                {currentCategory.map((category: SubCategory) =>
+                    <div className="categories__item"
+                        key={category.id}
+                    >
+
+                        <div
+                            className="categories__item__photo"
+                            style={{ backgroundImage: `url(${window.location.origin}/images/categories/${category.id}.png` }} />
+                        <p className="categories__item__title">
+                            {category.name}
+                        </p>
+                        <div className="categories__item__subcategories">
+                            {category.subsubcategories.map((subsubcategory: SubSubCategory) =>
+                                <Link
+                                    to={`/category/${subsubcategory.id}/products`}
+                                    className="categories__item__subcategory"
+                                    key={subsubcategory.id}
+                                >
+                                    {subsubcategory.name}
+                                </Link>)
+                            }
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>);
 };
 export default Categories;

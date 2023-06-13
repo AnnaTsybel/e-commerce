@@ -67,7 +67,7 @@ export class RouteConfig {
         );
     public static Products: ComponentRoutes
         = new ComponentRoutes(
-            '/products',
+            '/category/:id/products',
             <Products />,
             false
         );

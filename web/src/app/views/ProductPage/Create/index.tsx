@@ -11,18 +11,23 @@ import { create } from '@/app/store/actions/products';
 import { RootState } from '@/app/store';
 import { addProductPhotos, deleteProductPhoto, setProductPhotos } from '@/app/store/reducers/products';
 import { Color, colors } from '@/colors';
+import { setSubSubCategory } from '@/app/store/actions/categories';
+import { SubSubCategory } from '@/categories';
+
 
 import '../index.scss';
 
 const DEFAULT_COLOR_INDEX = 0;
 const DEFAULT_PRICE = 0;
 const SECOND_INDEX = 1;
+const FIRST_INDEX_SUBSUBCATEGORIES = 0;
 
 const ProductCreate = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
     const productPhotos: string[] | [] = useAppSelector((state: RootState) => state.productsReducer.productPhotos);
+    const subsubcategories: SubSubCategory[] | [] = useAppSelector((state: RootState) => state.categoriesReducer.allSubSubcategories);
 
     const [currentColor, setCurrentColor] = useState<Color>(colors[DEFAULT_COLOR_INDEX]);
     const [title, setTitle] = useState<string>('');
@@ -30,6 +35,7 @@ const ProductCreate = () => {
     const [price, setPrice] = useState<number>(DEFAULT_PRICE);
     const [brand, setBrand] = useState<string>();
     const [files, setFiles] = useState<string[]>();
+    const [currentSubSubCategorie, setCurrentSubSubCategorie] = useState<string>();
 
     const handleFileChange = async(e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.length) {
@@ -57,7 +63,8 @@ const ProductCreate = () => {
             price,
             files,
             currentColor,
-            brand
+            brand,
+            currentSubSubCategorie
         )));
 
         await navigate('/products');
@@ -73,13 +80,27 @@ const ProductCreate = () => {
         dispatch(deleteProductPhoto(productPhotos[index]));
     };
 
+    const onChangeSubSubCategorie = (e: any) => {
+        if (e.target.value) {
+            setCurrentSubSubCategorie(e.target.value);
+        }
+    };
+
+    useEffect(() => {
+        if (subsubcategories.length) {
+            setCurrentSubSubCategorie(subsubcategories[FIRST_INDEX_SUBSUBCATEGORIES].name);
+        }
+    }, [subsubcategories]);
+
+
     useEffect(() => {
         dispatch(setProductPhotos([]));
+        dispatch(setSubSubCategory());
     }, []);
 
     return (
         <>
-            <Link to="/products">
+            <Link to="/home">
                 <img src={backButtonIcon}
                     alt="back-button"
                     className="product-create__back-button" />
@@ -104,6 +125,29 @@ const ProductCreate = () => {
                         onChange={onChangePrice}
                     />
                     <span></span>
+                </div>
+                <div className="product-create__select">
+
+
+                    <select
+                        onChange={onChangeSubSubCategorie}
+                        value={currentSubSubCategorie}
+                    >
+                        {subsubcategories.length && subsubcategories.map((subsubcategory: SubSubCategory) =>
+                            <option
+                                key={subsubcategory.id}
+                                value={subsubcategory.name}
+                            >
+                                {subsubcategory.name}
+                            </option>
+                        )
+
+                        }
+
+                    </select>
+                    <span className="product-create__select__arrow" >
+                        &#9660;
+                    </span>
                 </div>
                 <textarea
                     className="product-create__textarea"

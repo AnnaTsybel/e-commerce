@@ -4,18 +4,22 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { User } from '@/users';
 import { Product } from '@/product';
 
+const DEFAULT_AMOUNT_LIKED_PRODUCTS = 0;
+
 /** Exposes channels state */
 class UsersState {
     /** class implementation */
     constructor(
         public user: User = new User(),
-        public likedProducts: Product[] = []
+        public likedProducts: Product[] = [],
+        public amountOfLikedProducts: number = DEFAULT_AMOUNT_LIKED_PRODUCTS
     ) { }
 }
 
 const initialState: UsersState = {
     user: new User(),
     likedProducts: [],
+    amountOfLikedProducts: DEFAULT_AMOUNT_LIKED_PRODUCTS,
 };
 
 export const userSlice = createSlice({
@@ -27,6 +31,9 @@ export const userSlice = createSlice({
         },
         setLikedProducts: (state, action: PayloadAction<Product[]>) => {
             state.likedProducts = action.payload;
+        },
+        setAmountOfLikedProducts: (state, action: PayloadAction<number>) => {
+            state.amountOfLikedProducts = action.payload;
         },
     },
 });

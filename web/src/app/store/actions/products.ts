@@ -28,16 +28,15 @@ export const unlikeProduct = createAsyncThunk(
     }
 );
 
-export const productsList = () => async function(dispatch: Dispatch) {
-    try {
-        const products = await productsService.list();
-        dispatch(productsSlice.actions.list(products));
-    } catch (error: any) {
-        if (error instanceof BadRequestError) {
-            dispatch(setErrorMessage('No valid list'));
-        }
+export const getListByCategory = createAsyncThunk(
+    '/products/list/categories',
+    async function(subsubcategoryId: string) {
+        const products = await productsService.list(subsubcategoryId);
+
+        return products;
     }
-};
+);
+
 
 export const create = createAsyncThunk(
     '/products',
@@ -89,4 +88,11 @@ export const getRecommendationForHomePage = createAsyncThunk(
     }
 );
 
+export const searchProducts = createAsyncThunk(
+    '/search/products',
+    async function(text: string) {
+        const products = await productsService.searchProducts(text);
 
+        return products;
+    }
+);

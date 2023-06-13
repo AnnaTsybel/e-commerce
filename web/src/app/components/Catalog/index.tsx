@@ -1,34 +1,37 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 
 import { SubCategories } from '@components/Catalog/SubCategories';
-
 import arrowRight from '@img/arrow-right.png';
+import { Category, SubCategory } from '@/categories';
+import { useAppSelector } from '@/app/hooks/useReduxToolkit';
+import { RootState } from '@/app/store';
+
 
 import './index.scss';
 
 const INDEX_FIRST_ITEM = 0;
 
 const Catalog: React.FC<{
-    catalog: any;
     setCatalogOpened: Dispatch<SetStateAction<boolean>>;
 }>
-    = ({ catalog, setCatalogOpened }) => {
-        const [currentCategory, setCurrentCategory] = useState(catalog[INDEX_FIRST_ITEM]);
+    = ({ setCatalogOpened }) => {
+        const categories: Category[] | null = useAppSelector((state: RootState) => state.categoriesReducer.listCategories);
+        const [currentCategory, setCurrentCategory] = useState<Category>(categories[INDEX_FIRST_ITEM]);
 
         return (
             <div className="catalog" onClick={() => setCatalogOpened(false)}>
                 <div className="catalog__content" onClick={e => e.stopPropagation()}>
                     <div className="catalog__main-category">
-                        {catalog.map((catalogItem: any, index: number) =>
+                        {categories.map((category: Category, index: number) =>
                             <div
                                 className={`catalog__main-category__item 
-                            ${catalogItem.category === currentCategory.category
+                            ${category.name === currentCategory.name
                                     && 'catalog__main-category__item--active'}`}
-                                key={`${catalogItem.category}-${index}`}
-                                onMouseEnter={() => setCurrentCategory(catalogItem)}
+                                key={`${category.id}-${index}`}
+                                onMouseEnter={() => setCurrentCategory(category)}
                             >
                                 <p className="catalog__main-category__item__text">
-                                    {catalogItem.category}
+                                    {category.name}
                                 </p>
                                 <span className="catalog__main-category__item__icon">
                                     <img src={arrowRight}
@@ -39,10 +42,12 @@ const Catalog: React.FC<{
                         )}
                     </div>
                     <div className="catalog__sub-category">
-                        {currentCategory.subcategories.map((catalogItem: any, index: number) =>
+                        {currentCategory.subcategories.map((subcategory: SubCategory, index: number) =>
                             <SubCategories
-                                subcategory={catalogItem}
-                                key={`${catalogItem.subcategory}-${index}`} />
+                                subcategory={subcategory}
+                                key={`${subcategory.id}-${index}`}
+                                setCatalogOpened={setCatalogOpened}
+                            />
                         )}
                     </div>
                 </div>

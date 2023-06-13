@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
 
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { categoriesSlice } from '../reducers/categories';
 import { BadRequestError } from '@/api';
 import { setErrorMessage } from '@/app/store/reducers/error';
@@ -9,13 +10,30 @@ import { CategoriesService } from '@/categories/service';
 const categoriesClient = new CategoriesClient();
 export const categoriesService = new CategoriesService(categoriesClient);
 
-export const setCategories = () => async function(dispatch: Dispatch) {
-    try {
+export const setCategories = createAsyncThunk(
+    '/all-categories',
+    async function() {
         const categories = await categoriesService.listCategories();
-        dispatch(categoriesSlice.actions.setCategories(categories));
-    } catch (error: any) {
-        if (error instanceof BadRequestError) {
-            dispatch(setErrorMessage('No valid user info'));
-        }
+
+        return categories;
     }
-};
+);
+
+export const setCurrentCategory = createAsyncThunk(
+    '/id/subcategories',
+    async function(categoryId: string) {
+        const currentCategory = await categoriesService.currentCategory(categoryId);
+
+        return currentCategory;
+    }
+);
+
+
+export const setSubSubCategory = createAsyncThunk(
+    '/all-subsubcategories',
+    async function() {
+        const subsubCategories = await categoriesService.getSubSubCategories();
+
+        return subsubCategories;
+    }
+);

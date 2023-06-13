@@ -91,6 +91,20 @@ export class UsersClient extends APIClient {
         );
     }
 
+    /** logout */
+    public async countOfLikedProducts(): Promise<number> {
+        const path = '/api/v0/users/liked/count';
+        const response = await this.http.get(path);
+
+        if (!response.ok) {
+            await this.handleError(response);
+        }
+
+        const amountOfProducts = response.json();
+
+        return amountOfProducts;
+    }
+
     /** updates user */
     public async update(user: UserUpdateData): Promise<void> {
         const path = '/api/v0/users';

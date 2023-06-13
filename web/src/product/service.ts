@@ -16,8 +16,8 @@ export class ProductsService {
     }
 
     /** products list */
-    public async list(): Promise<Product[]> {
-        return await this.products.list();
+    public async list(subsubcategoryId: string): Promise<Product[]> {
+        return await this.products.list(subsubcategoryId);
     }
 
     /** products list */
@@ -53,5 +53,10 @@ export class ProductsService {
     /** unlikes product */
     public async unlikeProduct(productId: string): Promise<void> {
         await this.products.unlikeProduct(productId);
+    }
+
+    /** searchProducts */
+    public async searchProducts(text: string): Promise<Product[]> {
+        return await this.products.searchProducts(text);
     }
 }

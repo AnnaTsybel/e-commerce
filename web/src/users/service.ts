@@ -32,6 +32,11 @@ export class UsersService {
         return await this.users.likedProducts();
     }
 
+    /** logouts */
+    public async amountOflikedProducts(): Promise<number> {
+        return await this.users.countOfLikedProducts();
+    }
+
     /** updates user info */
     public async update(user: UserUpdateData): Promise<void> {
         await this.users.update(user);

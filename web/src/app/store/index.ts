@@ -5,10 +5,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { handleErrorMiddleware } from './middleaware';
 import productsSlice from './reducers/products';
 import userSlice from '@/app/store/reducers/users';
+import categoriesSlice from '@/app/store/reducers/categories';
 
 const reducer = {
     usersReducer: userSlice,
     productsReducer: productsSlice,
+    categoriesReducer: categoriesSlice,
 };
 
 export const store = configureStore({

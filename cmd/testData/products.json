@@ -10,7 +10,7 @@
         "isAvailable":true,
         "images":null,  
         "numOfImages":3,
-        "subsubcategoryId": "1100cf90-55df-493f-9aed-ae05b2285f91"
+        "subsubcategoryId": "2747cd34-d582-46e5-bf0d-3058317d7c6b"
     },
     {
         "id":"a522d648-001f-11ee-be56-0242ac120002",
@@ -22,7 +22,8 @@
         "IsLiked": true,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":2
+        "numOfImages":2,
+        "subsubcategoryId": "c2986713-943e-4627-947f-6bb08fa66588"
     },
     {
         "id":"6e9a1480-fd07-11ed-be56-0242ac120002",
@@ -34,7 +35,8 @@
         "IsLiked": true,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":2
+        "numOfImages":2,
+        "subsubcategoryId":"e5a5f3d1-a4c1-45f7-880d-301d7c06682f"
     },
     {
         "id":"0a094d70-0021-11ee-be56-0242ac120002",
@@ -46,7 +48,8 @@
         "IsLiked": true,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"3d1d0686-0993-11ee-be56-0242ac120002"
     },
     {
         "id":"9a9107da-0020-11ee-be56-0242ac120002",
@@ -58,7 +61,9 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"c4feaefd-5e93-4eba-a56d-708828c0acf5"
+        
     },
      {
         "id":"7359134a-f859-4393-906a-a1be3ed6ee01",
@@ -70,7 +75,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":4
+        "numOfImages":4,
+        "subsubcategoryId":"e5a5f3d1-a4c1-45f7-880d-301d7c06682f"
     },
     {
         "id":"520b6b9a-0020-11ee-be56-0242ac120002",
@@ -82,7 +88,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"6b3a4984-bc94-4be5-b66a-f649ca168cb6"
     },
     {
         "id":"dfe990ae-0020-11ee-be56-0242ac120002",
@@ -94,7 +101,8 @@
         "IsLiked": true,
         "isAvailable":false,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"c4feaefd-5e93-4eba-a56d-708828c0acf5"
     },
     {
         "id":"1c843fba-0020-11ee-be56-0242ac120002",
@@ -106,7 +114,8 @@
         "IsLiked": true,
         "isAvailable":false,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"c4feaefd-5e93-4eba-a56d-708828c0acf5"
     },
     {
         "id":"7c78b16c-0020-11ee-be56-0242ac120002",
@@ -118,7 +127,8 @@
         "IsLiked": false,
         "isAvailable":false,
         "images":null,  
-        "numOfImages":5
+        "numOfImages":5,
+        "subsubcategoryId": "2747cd34-d582-46e5-bf0d-3058317d7c6b"
     },
     {
         "id":"fa7be688-0020-11ee-be56-0242ac120002",
@@ -130,7 +140,8 @@
         "IsLiked": true,
         "isAvailable":false,
         "images":null,  
-        "numOfImages":5
+        "numOfImages":5,
+        "subsubcategoryId":"e5a5f3d1-a4c1-45f7-880d-301d7c06682f"
     },
     {
         "id":"636c2514-0020-11ee-be56-0242ac120002",
@@ -142,7 +153,8 @@
         "IsLiked": true,
         "isAvailable":false,
         "images":null,  
-        "numOfImages":5
+        "numOfImages":5,
+        "subsubcategoryId":"e5a5f3d1-a4c1-45f7-880d-301d7c06682f"
     },
     {
         "id":"bc0f91c8-002b-11ee-be56-0242ac120002",
@@ -154,7 +166,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+         "subsubcategoryId":"a6224a59-b9c7-467f-bb47-05f4065ee4da"
     },
     {
         "id":"450ad62e-002a-11ee-be56-0242ac120002",
@@ -166,7 +179,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+         "subsubcategoryId":"a6224a59-b9c7-467f-bb47-05f4065ee4da"
     },
     {
         "id":"d1b94b96-002a-11ee-be56-0242ac120002",
@@ -178,7 +192,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+         "subsubcategoryId":"a6224a59-b9c7-467f-bb47-05f4065ee4da"
     }
     ,{
         "id":"619e279a-002b-11ee-be56-0242ac120002",
@@ -190,7 +205,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+         "subsubcategoryId":"a6224a59-b9c7-467f-bb47-05f4065ee4da"
     },
     {
         "id":"01921158-002c-11ee-be56-0242ac120002",
@@ -202,7 +218,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"a6224a59-b9c7-467f-bb47-05f4065ee4da"
     },
     {
         "id":"ab9ee266-002c-11ee-be56-0242ac120002",
@@ -214,7 +231,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":2
+        "numOfImages":2,
+        "subsubcategoryId":"8c6c3fc2-d88c-4e6d-8885-fd5ce26b2298"
     },
     {
         "id":"683c032c-002d-11ee-be56-0242ac120002",
@@ -226,7 +244,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"8c6c3fc2-d88c-4e6d-8885-fd5ce26b2298"
     },{
         "id":"a6ce9eec-002d-11ee-be56-0242ac120002",
         "title":"Пральна машина повногабаритна SAMSUNG WW10T754CBH/UA",
@@ -237,7 +256,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"8c6c3fc2-d88c-4e6d-8885-fd5ce26b2298"
     },{
         "id":"23ff4934-002e-11ee-be56-0242ac120002",
         "title":"Пральна машина вузька SAMSUNG WW80A6S24AN/UA",
@@ -248,7 +268,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"8c6c3fc2-d88c-4e6d-8885-fd5ce26b2298"
     },{
         "id":"5a0372b2-002e-11ee-be56-0242ac120002",
         "title":"Пральна машина вузька SAMSUNG WW80J62E0DX/UA",
@@ -259,7 +280,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"8c6c3fc2-d88c-4e6d-8885-fd5ce26b2298"
     },{
         "id":"e819349c-002e-11ee-be56-0242ac120002",
         "title":"Пральна машина автоматична LG F2WV5S7S1E",
@@ -270,7 +292,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"8c6c3fc2-d88c-4e6d-8885-fd5ce26b2298"
     },{
         "id":"102f31c0-002f-11ee-be56-0242ac120002",
         "title":"Пральна машина LG F2J5HS9W (F00189568)",
@@ -281,7 +304,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"8c6c3fc2-d88c-4e6d-8885-fd5ce26b2298"
     },{
         "id":"7ddb42a4-002f-11ee-be56-0242ac120002",
         "title":"Пральна машина вузька LG F2V3HS7WW",
@@ -292,7 +316,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"8c6c3fc2-d88c-4e6d-8885-fd5ce26b2298"
     },
     {
         "id":"4d6ce982-0030-11ee-be56-0242ac120002",
@@ -304,7 +329,9 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":4
+        "numOfImages":4,
+        "subsubcategoryId":"380074c1-6797-4954-a4ed-435dbb76518b"
+
     }, {
         "id":"920da2ca-0030-11ee-be56-0242ac120002",
         "title":"Крісло для геймерів Razer Iskur (RZ38-02770100-R3G1)",
@@ -315,7 +342,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":4
+        "numOfImages":4,
+        "subsubcategoryId":"380074c1-6797-4954-a4ed-435dbb76518b"
     }, {
         "id":"e3df7c4a-0030-11ee-be56-0242ac120002",
         "title":"Крісло геймерське Lorgar Embrace 533 Black/Red (LRG-CHR533BR)",
@@ -326,7 +354,8 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":4
+        "numOfImages":4,
+        "subsubcategoryId":"380074c1-6797-4954-a4ed-435dbb76518b"
     },
      {
         "id":"62144afa-0031-11ee-be56-0242ac120002",
@@ -338,6 +367,216 @@
         "IsLiked": false,
         "isAvailable":true,
         "images":null,  
-        "numOfImages":3
+        "numOfImages":3,
+        "subsubcategoryId":"380074c1-6797-4954-a4ed-435dbb76518b"
+    },
+    {
+        "id":"5c471974-09d5-11ee-be56-0242ac120002",
+        "title":"Посудомийна машина окремостояча Vestfrost FDW4510W",
+        "description":"Місткість комплектів:9/ Витрата води за цикл/рік: 9.5/2090 л/Споживання електроенергії за цикл/рік: 0.787/173 кВт*год/ Спосіб встановлення: Вбудована/ Клас енергоспоживання: A+/ Габарити (ВхШхГ): 81.5 x 44.8 x 55 см/ Розміри ніші для вбудовування (ВxШxГ): 81.5-87.5 х 45 х 55 см/ Клас мийки:A/ Клас сушіння: A",
+        "price":16200,
+        "color":"white",
+        "brand":"Vestfrost",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":2,
+        "subsubcategoryId":"d936ed53-722f-40d2-8c41-9e4d63273061"
+    },
+    {
+        "id":"5c471cb2-09d5-11ee-be56-0242ac120002",
+        "title":"Посудомийна машина вбудована Bosch SMV2IVX00K",
+        "description":"Місткість комплектів:10/ Витрата води за цикл/рік: 9.5/2090 л/Споживання електроенергії за цикл/рік: 0.787/173 кВт*год/ Спосіб встановлення: Вбудована/ Клас енергоспоживання: A+/ Габарити (ВхШхГ): 81.5 x 44.8 x 55 см/ Розміри ніші для вбудовування (ВxШxГ): 81.5-87.5 х 45 х 55 см/ Клас мийки:A/ Клас сушіння: A",
+        "price":19999 ,
+        "color":"white",
+        "brand":"Bosch",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3,
+        "subsubcategoryId":"d936ed53-722f-40d2-8c41-9e4d63273061"
+    },
+     {
+        "id":"5c471e56-09d5-11ee-be56-0242ac120002",
+        "title":"Планшет Apple iPad Mini 6 WiFi 64GB (MK7M3) Space Gray",
+        "description":"Екран 8.3 Retina (2266х1488) ємнісний MultiTouch / Apple A15 Bionic / 64 ГБ вбудованої пам'яті / Wi-Fi / Bluetooth 5.0 / основна камера 12 Мп, фронтальна 12 Мп / iPadOS 15 / 293 г / сірий",
+        "price":24999 ,
+        "color":"gray",
+        "brand":"Apple iPad",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3,
+        "subsubcategoryId":"2c48b84f-5331-458d-8ea4-7c6fd6e7739a"
+    },
+    {
+        "id":"5c472590-09d5-11ee-be56-0242ac120002",
+        "title":"Планшет Apple iPad Pro 12.9 M2 Wi-Fi 128GB Silver (MNXQ3RK/A)",
+        "description":"Екран 12.9 Liquid Retina XDR (2732x2048) MultiTouch / Apple M2 / 128 ГБ вбудованої пам'яті / Wi-Fi / Bluetooth 5.3 / основна подвійна камера 12 Мп + 10 Мп, фронтальна - 12 Мп / iPadOS 16 / 682 г / сріблястий",
+        "price":55999 ,
+        "color":"gray",
+        "brand":"Apple iPad",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3,
+        "subsubcategoryId":"2c48b84f-5331-458d-8ea4-7c6fd6e7739a"
+    },
+    {
+        "id":"5c47273e-09d5-11ee-be56-0242ac120002",
+        "title":"Акустична система Redragon Anvil GS520 Black (77878)",
+        "description":"Стильна акустична система з бездоганним звуком та переливчастою світлодіодною підсвіткою. На верхній панелі сателіта є сенсорна поверхня для вмикання/вимикання підсвітки. На фронтальній панелі кнопки для регулювання гучності та вмикання/вимикання живлення.",
+        "price":959 ,
+        "color":"black",
+        "brand":"Redragon Anvil",
+        "IsLiked": false,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3,
+        "subsubcategoryId":"309c20ad-9119-4140-81dd-97d1d5891096"
+    },
+    {
+        "id":"5c4728ec-09d5-11ee-be56-0242ac120002",
+        "title":"Комп'ютерна акустика компактна 2.0 2E PCS231 USB Black (2E-PCS231BK)",
+        "description":"Вдоскональте якість та гучність звучання вашого ноутбука або настільного ПК, відкривши для себе акустичні системи для ПК від 2E серії PCS. 2Е колонки для ПК - це не тільки якісний стереозвук, а й стильний додаток до робочого столу вдома або в офісі. Пориньте повністю у прослуховування музики, дії улюбленого фільму або серіалу, улюблену відеогру, слухайте аудіокниги та багато іншого.",
+        "price":1099 ,
+        "color":"black",
+        "brand":"PCS231",
+        "IsLiked": true,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":1,
+        "subsubcategoryId":"309c20ad-9119-4140-81dd-97d1d5891096"
+    },
+    {
+        "id":"5c472aae-09d5-11ee-be56-0242ac120002",
+        "title":"Клавіатура бездротова Logitech K380 (920-011166)",
+        "description":"Клавіатури/ Бездротове/ Тип клавіатури: Мембранні/ Форма:Без цифрового блоку/ Ультракомпактна Розкладка / Eng / Ukr/ Особливості: З плоскими клавішами/ Сумісність з ОС: Android, Chrome OS ,Mac OS, Microsoft Windows, iOS/ Призначення: Для настільного ПК",
+        "price":1999 ,
+        "color":"purple",
+        "brand":"Logitech",
+        "IsLiked": true,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3,
+        "subsubcategoryId":"c2986713-943e-4627-947f-6bb08fa66588"
+    },
+    {
+        "id":"5c472c66-09d5-11ee-be56-0242ac120002",
+        "title":"Клавіатура дротова ігрова Hator Starfall RGB Premium Pink switch (HTK-599)",
+        "description":"Клавіатури/ Бездротове/ Тип клавіатури: Мембранні/ Форма:Без цифрового блоку/ Ультракомпактна Розкладка / Eng / Ukr/ Особливості: З плоскими клавішами/ Сумісність з ОС: Android, Chrome OS ,Mac OS, Microsoft Windows, iOS/ Призначення: Для настільного ПК",
+        "price":1699 ,
+        "color":"black",
+        "brand":"Hator Starfall",
+        "IsLiked": true,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3,
+        "subsubcategoryId":"c2986713-943e-4627-947f-6bb08fa66588"
+    },
+    {
+        "id":"80f4157e-09e4-11ee-be56-0242ac120002",
+        "title":"Стіл комп'ютерний Cougar Mars 120",
+        "description":"Особливості: LED підсвітка",
+        "price":11999,
+        "color":"black",
+        "brand":"Cougar Mars",
+        "IsLiked": true,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3,
+        "subsubcategoryId":"cc996dae-2d3f-44b9-9df1-bec89df040df"
+    },
+    {
+        "id":"cc81826a-09e4-11ee-be56-0242ac120002",
+        "title":"Стіл комп'ютерний Hator Vast Pro (HTD-050) Black",
+        "description":"Особливості: LED підсвітка",
+        "price":9999,
+        "color":"black",
+        "brand":"Hator Vast Pro",
+        "IsLiked": true,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":3,
+        "subsubcategoryId":"cc996dae-2d3f-44b9-9df1-bec89df040df"
+    }
+    ,
+    {
+        "id":"cc81826a-09e4-11ee-be56-0242ac120002",
+        "title":"Тарілка обідня Ardesto Lucca 26 см White (AR2926WM)",
+        "description":"Форма: кругла",
+        "price":119,
+        "color":"white",
+        "brand":" Ardesto Lucca",
+        "IsLiked": true,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":1,
+        "subsubcategoryId":"cc996dae-2d3f-44b9-9df1-bec89df040df"
+    },
+    {
+        "id":"2560d8ea-09e5-11ee-be56-0242ac120002",
+        "title":"Тарілка обідня Ardesto Lucca 26 см White (AR2926WM)",
+        "description":"Форма: кругла",
+        "price":119,
+        "color":"white",
+        "brand":"Ardesto",
+        "IsLiked": true,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":1,
+        "subsubcategoryId":"27e81455-c2e3-422c-94b7-be6feace3e8e"
+    },
+    {
+        "id":"6538f59c-09e5-11ee-be56-0242ac120002",
+        "title":"Тарілка обідня Luminarc Zelie 20 см (V3730)",
+        "description":"Форма: кругла",
+        "price":96,
+        "color":"white",
+        "brand":"Luminarc",
+        "IsLiked": true,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":1,
+        "subsubcategoryId":"27e81455-c2e3-422c-94b7-be6feace3e8e"
+    },
+    {
+        "id":"bf25cd82-09e5-11ee-be56-0242ac120002",
+        "title":"Каструля Ardesto AR1940AS Gemini Vittoria 4.0 л",
+        "description":"Форма: кругла",
+        "price":549,
+        "color":"gray",
+        "brand":"Ardesto",
+        "IsLiked": true,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":2,
+        "subsubcategoryId":"8cd55be7-3c27-4251-9617-75086adf22c7"
+    },
+    {
+        "id":"0408c396-09e6-11ee-be56-0242ac120002",
+        "title":"Набір ножів Ardesto Gemini Gourmet 3 пр. (AR2103GR)",
+        "description":"Набір: 3 кожі",
+        "price":250,
+        "color":"gray",
+        "brand":"Ardesto",
+        "IsLiked": true,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":2,
+        "subsubcategoryId":"f506b6c3-2a11-4505-9518-d03c99621deb"
+    },
+    {
+        "id":"29e12734-09e6-11ee-be56-0242ac120002",
+        "title":"Набір ножів Ardesto Fresh 5 пр. (AR2105FR)",
+        "description":"Набір: 5 кожeй",
+        "price":315,
+        "color":"gray",
+        "brand":"Ardesto",
+        "IsLiked": true,
+        "isAvailable":true,
+        "images":null,  
+        "numOfImages":2,
+        "subsubcategoryId":"f506b6c3-2a11-4505-9518-d03c99621deb"
     }
 ]

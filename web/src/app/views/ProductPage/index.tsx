@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { ProductItem } from '@components/Products/ProductItem';
-
 import { ProductSlider } from '@components/Product/ProductSlider';
 import notLikedProduct from '@img/Product/not-favorite-icon.png';
 import likedProduct from '@img/Product/favorite-icon.png';
@@ -14,10 +14,11 @@ import { Product } from '@/product';
 import { RootState } from '@/app/store';
 import { User } from '@/users';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
+import { amountOfLikedProducts } from '@/app/store/actions/users';
+
 
 import './index.scss';
 
-const LAST_ITEM_PATH_INCREMENT = 1;
 const ONE_PRODUCT_IMAGE = 1;
 const NO_PRODUCT_IMAGE = 0;
 const ADMIN_ROLE = 1;
@@ -28,16 +29,17 @@ const ProductPage = () => {
     const productRecommendations: Product[] | null = useAppSelector((state: RootState) => state.productsReducer.productRecomendation);
     const user: User | null = useAppSelector((state: RootState) => state.usersReducer.user);
 
+    const { id } = useParams();
+
     const [isFavorite, setIsFavorite] = useState(product.IsLiked);
 
-    const getLastItem = (thePath: string) => thePath.substring(thePath.lastIndexOf('/') + LAST_ITEM_PATH_INCREMENT);
-
-    const handleLikes = () => {
+    const handleLikes = async() => {
         if (isFavorite) {
-            dispatch(unlikeProduct(product.id));
+            await dispatch(unlikeProduct(product.id));
         } else {
-            dispatch(likeProduct(product.id));
+            await dispatch(likeProduct(product.id));
         }
+        await dispatch(amountOfLikedProducts());
         setIsFavorite(!isFavorite);
     };
 
@@ -49,12 +51,21 @@ const ProductPage = () => {
         window.location.replace(`/product-edit/${id}`);
     };
 
-    useEffect(() => {
+    const pageOnLoad = () => {
         dispatch(deleteProductPhotos());
-        const productId = getLastItem(window.location.pathname);
-        dispatch(getProduct(productId));
-        dispatch(productRecommendation(productId));
+        if (id) {
+            dispatch(getProduct(id));
+            dispatch(productRecommendation(id));
+        }
+    };
+
+    useEffect(() => {
+        pageOnLoad();
     }, []);
+
+    useEffect(() => {
+        setIsFavorite(product.IsLiked);
+    }, [product]);
 
     return (
         <div className="product">

@@ -25,6 +25,7 @@ export class ProductCreation {
         public images: string[] = [],
         public color: Color = 'white',
         public brand: string = '',
+        public subsubcategory: string = ''
     ) { };
 }
 
