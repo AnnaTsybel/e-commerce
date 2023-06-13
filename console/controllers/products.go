@@ -315,6 +315,34 @@ func (controller *Products) ListLikedProducts(w http.ResponseWriter, r *http.Req
 	}
 }
 
+func (controller *Products) CountLikedProducts(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	ctx := r.Context()
+
+	claimsMap, err := goauth.GetClaims(ctx)
+	if err != nil {
+		controller.serveError(w, http.StatusUnauthorized, ErrProducts.Wrap(err))
+		return
+	}
+
+	claims, err := userauth.GetStructClaims(claimsMap)
+	if err != nil {
+		controller.serveError(w, http.StatusUnauthorized, ErrProducts.Wrap(err))
+		return
+	}
+
+	allProducts, err := controller.products.ListLikedProducts(ctx, claims.UserID)
+	if err != nil {
+		controller.serveError(w, http.StatusInternalServerError, ErrProducts.Wrap(err))
+		return
+	}
+
+	if err = json.NewEncoder(w).Encode(len(allProducts)); err != nil {
+		log.Println("failed to write json response", ErrUsers.Wrap(err))
+		return
+	}
+}
+
 func (controller *Products) SearchByTitle(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	ctx := r.Context()

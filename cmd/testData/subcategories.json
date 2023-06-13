@@ -1,0 +1,57 @@
+[
+  {
+    "id": "1100cf90-55df-493f-9aed-ae05b2285f91",
+    "name": "Ноутбук",
+    "categoryId" : "1d3f6445-ca72-4538-a7f8-1bb3f69d8d09"
+  },
+  {
+    "id": "ed8aae7f-93ca-4cec-9c87-453ba103f9d2",
+    "name": "Компьютер",
+    "categoryId" : "1d3f6445-ca72-4538-a7f8-1bb3f69d8d09"
+  },
+  {
+    "id": "6f6ed333-f08f-40e3-8647-d701b97f2e10",
+    "name": "Планшети",
+    "categoryId" : "1d3f6445-ca72-4538-a7f8-1bb3f69d8d09"
+  },
+  {
+    "id": "c36869b8-e8fa-40e5-880c-8c190fd93405",
+    "name": "Велика побутова техніка",
+    "categoryId" : "c2f92cc0-822b-4645-a297-61ab589a70ad"
+  },
+  {
+    "id": "4bcdfe8d-bdf4-45e5-8cb1-775de25cbdf0",
+    "name": "Кліматична техніка",
+    "categoryId" : "c2f92cc0-822b-4645-a297-61ab589a70ad"
+  },
+  {
+    "id": "2351d90a-dd39-4871-962e-2b71270f39c1",
+    "name": "Кухня",
+    "categoryId" : "c2f92cc0-822b-4645-a297-61ab589a70ad"
+  },
+  {
+    "id": "9e46cd04-0ff2-4c63-af95-0df0900818d8",
+    "name": "Телефони",
+    "categoryId" : "48d5bdc0-5d4d-4e4f-a099-d066c04eeb46"
+  },
+  {
+    "id": "4bcdfe8d-bdf4-45e5-8cb1-775de25cbdf0",
+    "name": "Аксесуари до телефонів",
+    "categoryId" : "48d5bdc0-5d4d-4e4f-a099-d066c04eeb46"
+  },
+  {
+    "id": "1d9d13a8-db44-4a01-b22e-76b3c1448aaa",
+    "name": "Телевізори та аксесуари",
+    "categoryId" : "48d5bdc0-5d4d-4e4f-a099-d066c04eeb46"
+  },
+  {
+    "id": "24940b97-8c11-4040-869b-aef574407282",
+    "name": "Меблі",
+    "categoryId" : "8b2fe68f-7be0-4acf-9880-9c50e6824d39"
+  },
+  {
+    "id": "deaf73ad-07de-4ce2-9428-99431b03d0b8",
+    "name": "Посуд",
+    "categoryId" : "8b2fe68f-7be0-4acf-9880-9c50e6824d39"
+  }
+]

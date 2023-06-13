@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"github.com/caarlos0/env/v6"
 	documentize "graduate_work"
+	"graduate_work/categories"
 	"graduate_work/database"
 	"graduate_work/products"
 	"graduate_work/users"
@@ -54,6 +55,7 @@ func main() {
 	}
 
 	seed(ctx, db)
+	return
 
 	err = errs.Combine(app.Run(ctx), app.Close())
 	log.Println(err)
@@ -99,11 +101,53 @@ func seed(ctx context.Context, db documentize.DB) error {
 		return err
 	}
 
+	categoriesFile, err := os.ReadFile("./cmd/testData/categories.json")
+	if err != nil {
+		log.Println("AAAA111", err)
+		return err
+	}
+
+	subcategoriestFile, err := os.ReadFile("./cmd/testData/subcategories.json")
+	if err != nil {
+		log.Println("AAAA111", err)
+		return err
+	}
+
+	subsubcategoriestFile, err := os.ReadFile("./cmd/testData/subsubcategories.json")
+	if err != nil {
+		log.Println("AAAA111", err)
+		return err
+	}
+
 	testProducts := make([]products.Product, 0, 10)
 
 	err = json.Unmarshal(productsFile, &testProducts)
 	if err != nil {
 		log.Println("BBB111", err)
+		return err
+	}
+
+	testCategories := make([]categories.Category, 0, 10)
+
+	err = json.Unmarshal(categoriesFile, &testCategories)
+	if err != nil {
+		log.Println("DDD111", err)
+		return err
+	}
+
+	testSubCategories := make([]categories.Subcategory, 0, 10)
+
+	err = json.Unmarshal(subcategoriestFile, &testSubCategories)
+	if err != nil {
+		log.Println("DDD222", err)
+		return err
+	}
+
+	testSubSubCategories := make([]categories.Subsubcategory, 0, 10)
+
+	err = json.Unmarshal(subsubcategoriestFile, &testSubSubCategories)
+	if err != nil {
+		log.Println("DDD333", err)
 		return err
 	}
 
@@ -121,6 +165,21 @@ func seed(ctx context.Context, db documentize.DB) error {
 	for _, product := range testProducts {
 		err = db.Products().Create(ctx, product)
 		log.Println("err products creation", err)
+	}
+
+	for _, category := range testCategories {
+		err = db.Categories().CreateCategory(ctx, category)
+		log.Println("err products category", err)
+	}
+
+	for _, category := range testSubCategories {
+		err = db.Categories().CreateSubcategory(ctx, category)
+		log.Println("err products subcategory", category.Name, err)
+	}
+
+	for _, category := range testSubSubCategories {
+		err = db.Categories().CreateSubsubcategory(ctx, category)
+		log.Println("err products subsubcategory", category.Name, err)
 	}
 
 	return nil

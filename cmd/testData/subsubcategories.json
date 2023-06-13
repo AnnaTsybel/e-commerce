@@ -1,0 +1,182 @@
+[
+  {
+    "id": "c4feaefd-5e93-4eba-a56d-708828c0acf5",
+    "name": "Asus",
+    "categoryId" : "1100cf90-55df-493f-9aed-ae05b2285f91"
+  },
+  {
+    "id": "e5a5f3d1-a4c1-45f7-880d-301d7c06682f",
+    "name": "Lenovo",
+    "categoryId" : "1100cf90-55df-493f-9aed-ae05b2285f91"
+  },
+  {
+    "id": "6b3a4984-bc94-4be5-b66a-f649ca168cb6",
+    "name": "Acer",
+    "categoryId" : "1100cf90-55df-493f-9aed-ae05b2285f91"
+  },
+  {
+    "id": "2747cd34-d582-46e5-bf0d-3058317d7c6b",
+    "name": "Apple",
+    "categoryId" : "1100cf90-55df-493f-9aed-ae05b2285f91"
+  },
+  {
+    "id": "ab17ec3f-17c1-4f87-949b-a77f5af84de3",
+    "name": "Монітори",
+    "categoryId" : "ed8aae7f-93ca-4cec-9c87-453ba103f9d2"
+  },
+  {
+    "id": "c2986713-943e-4627-947f-6bb08fa66588",
+    "name": "Клавіатури та миші",
+    "categoryId" : "ed8aae7f-93ca-4cec-9c87-453ba103f9d2"
+  },
+  {
+    "id": "309c20ad-9119-4140-81dd-97d1d5891096",
+    "name": "Компютерні колонки",
+    "categoryId" : "ed8aae7f-93ca-4cec-9c87-453ba103f9d2"
+  },
+  {
+    "id": "2c48b84f-5331-458d-8ea4-7c6fd6e7739a",
+    "name": "Apple iPad",
+    "categoryId" : "6f6ed333-f08f-40e3-8647-d701b97f2e10"
+  },
+  {
+    "id": "e3270978-128d-4b2c-92d8-2076825c5cbe",
+    "name": "Samsung",
+    "categoryId" : "6f6ed333-f08f-40e3-8647-d701b97f2e10"
+  },
+  {
+    "id": "0dc958ff-fc93-4100-8265-f1298f1c93f0",
+    "name": "Lenovo",
+    "categoryId" : "6f6ed333-f08f-40e3-8647-d701b97f2e10"
+  },
+  {
+    "id": "e3f390eb-2b28-4046-bebb-a13d6d0d50fe",
+    "name": "Чохли для планшетів",
+    "categoryId" : "6f6ed333-f08f-40e3-8647-d701b97f2e10"
+  },
+  {
+    "id": "1f1360b6-7712-4936-82b7-b98ef0844c98",
+    "name": "Захисні плівки та скло",
+    "categoryId" : "6f6ed333-f08f-40e3-8647-d701b97f2e10"
+  },
+  {
+    "id": "a6224a59-b9c7-467f-bb47-05f4065ee4da",
+    "name": "Холодильники",
+    "categoryId" : "c36869b8-e8fa-40e5-880c-8c190fd93405"
+  },
+  {
+    "id": "8c6c3fc2-d88c-4e6d-8885-fd5ce26b2298",
+    "name": "Пральні машини",
+    "categoryId" : "c36869b8-e8fa-40e5-880c-8c190fd93405"
+  },
+  {
+    "id": "d936ed53-722f-40d2-8c41-9e4d63273061",
+    "name": "Посудомийні машини",
+    "categoryId" : "c36869b8-e8fa-40e5-880c-8c190fd93405"
+  },
+  {
+    "id": "45493a10-3fec-4367-97d4-c765c7acb24f",
+    "name": "Кондиціонери",
+    "categoryId" : "4bcdfe8d-bdf4-45e5-8cb1-775de25cbdf0"
+  },
+  {
+    "id": "03363dc9-4c34-4e9d-b70d-6d7245ba6a2f",
+    "name": "Бойлери",
+    "categoryId" : "4bcdfe8d-bdf4-45e5-8cb1-775de25cbdf0"
+  },
+  {
+    "id": "ee0b8bbb-0d32-4c3e-8e19-940cf0f988c2",
+    "name": "Очищувачі повітря",
+    "categoryId" : "4bcdfe8d-bdf4-45e5-8cb1-775de25cbdf0"
+  },
+  {
+    "id": "e368f558-9a45-452a-b204-8c62d6cb4a89",
+    "name": "Кавоварки",
+    "categoryId" : "2351d90a-dd39-4871-962e-2b71270f39c1"
+  },
+  {
+    "id": "2238b214-f2df-4ff8-94a5-7595bd6abf70",
+    "name": "Блендери",
+    "categoryId" : "2351d90a-dd39-4871-962e-2b71270f39c1"
+  },
+  {
+    "id": "44a19e90-f0a5-4336-8ecf-4186c4b14134",
+    "name": "Мультиварки",
+    "categoryId" : "2351d90a-dd39-4871-962e-2b71270f39c1"
+  },
+  {
+    "id": "57a3509d-11bf-4c9b-b0f2-9719bc8a3f16",
+    "name": "Apple",
+    "categoryId" : "9e46cd04-0ff2-4c63-af95-0df0900818d8"
+  },
+  {
+    "id": "a8b599ad-5893-4955-a738-fa851d018815",
+    "name": "Samsung",
+    "categoryId" : "9e46cd04-0ff2-4c63-af95-0df0900818d8"
+  },
+  {
+    "id": "80149913-21e1-4217-bb00-8864ddd6b91b",
+    "name": "Xiaomi",
+    "categoryId" : "9e46cd04-0ff2-4c63-af95-0df0900818d8"
+  },
+  {
+    "id": "585e5109-5bd0-4777-b1f0-05616b509fd9",
+    "name": "Навушники",
+    "categoryId" : "4bcdfe8d-bdf4-45e5-8cb1-775de25cbdf0"
+  },
+  {
+    "id": "a34b5c9c-c358-4e07-8b4c-dddf913f84d6",
+    "name": "Кабелі",
+    "categoryId" : "4bcdfe8d-bdf4-45e5-8cb1-775de25cbdf0"
+  },
+  {
+    "id": "0da73381-58c4-4258-8bf5-02eb2bfb9e09",
+    "name": "Адаптори",
+    "categoryId" : "4bcdfe8d-bdf4-45e5-8cb1-775de25cbdf0"
+  },
+  {
+    "id": "287a9b3d-72bf-4fa1-9782-26fa15210938",
+    "name": "Чохли",
+    "categoryId" : "4bcdfe8d-bdf4-45e5-8cb1-775de25cbdf0"
+  },
+  {
+    "id": "61e654b1-6a52-4d10-895e-fa6fbf53f6bb",
+    "name": "Samsung",
+    "categoryId" : "1d9d13a8-db44-4a01-b22e-76b3c1448aaa"
+  },
+  {
+    "id": "02709362-a098-4009-bb22-d838c0ab2e3f",
+    "name": "LG",
+    "categoryId" : "1d9d13a8-db44-4a01-b22e-76b3c1448aaa"
+  },
+  {
+    "id": "1029d355-714b-46a6-9982-527c1bc7162c",
+    "name": "Кабелі та адаптери",
+    "categoryId" : "1d9d13a8-db44-4a01-b22e-76b3c1448aaa"
+  },
+  {
+    "id": "380074c1-6797-4954-a4ed-435dbb76518b",
+    "name": "Крісла",
+    "categoryId" : "24940b97-8c11-4040-869b-aef574407282"
+  },
+  {
+    "id": "cc996dae-2d3f-44b9-9df1-bec89df040df",
+    "name": "Компʼютерні столи",
+    "categoryId" : "24940b97-8c11-4040-869b-aef574407282"
+  },
+  {
+    "id": "27e81455-c2e3-422c-94b7-be6feace3e8e",
+    "name": "Тарілки",
+    "categoryId" : "deaf73ad-07de-4ce2-9428-99431b03d0b8"
+  },
+  {
+    "id": "8cd55be7-3c27-4251-9617-75086adf22c7",
+    "name": "Кастрюлі",
+    "categoryId" : "deaf73ad-07de-4ce2-9428-99431b03d0b8"
+  },
+  {
+    "id": "f506b6c3-2a11-4505-9518-d03c99621deb",
+    "name": "Ножі",
+    "categoryId" : "deaf73ad-07de-4ce2-9428-99431b03d0b8"
+  }
+]
