@@ -55,7 +55,6 @@ func main() {
 	}
 
 	seed(ctx, db)
-	return
 
 	err = errs.Combine(app.Run(ctx), app.Close())
 	log.Println(err)
