@@ -95,7 +95,7 @@ func (controller *Categories) ListSubCategories(w http.ResponseWriter, r *http.R
 		return
 	}
 
-	subcategories, err := controller.categories.ListSubcategoriesByID(ctx, id)
+	subcategories, err := controller.categories.ListSubcategoriesByIDWithChild(ctx, id)
 	if err != nil {
 		log.Println("could not list subcategories", ErrCategories.Wrap(err))
 		controller.serveError(w, http.StatusInternalServerError, ErrCategories.Wrap(err))

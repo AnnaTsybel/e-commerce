@@ -62,6 +62,31 @@ func (service *Service) ListSubcategoriesByID(ctx context.Context, id uuid.UUID)
 	return service.db.ListSubcategoriesByID(ctx, id)
 }
 
+func (service *Service) ListSubcategoriesByIDWithChild(ctx context.Context, id uuid.UUID) ([]SubcategoryWithChild, error) {
+	subcategories, err := service.db.ListSubcategoriesByID(ctx, id)
+	if err != nil {
+		return nil, err
+	}
+
+	resp := make([]SubcategoryWithChild, 0, len(subcategories))
+
+	for _, subcategory := range subcategories {
+		subsubcategories, err := service.ListSubsubcategoriesByID(ctx, subcategory.ID)
+		if err != nil {
+			return nil, err
+		}
+
+		subcategoryWithChild := SubcategoryWithChild{
+			Subcategory:    subcategory,
+			Subsubcategory: subsubcategories,
+		}
+
+		resp = append(resp, subcategoryWithChild)
+	}
+
+	return resp, nil
+}
+
 func (service *Service) CreateSubsubcategory(ctx context.Context, category Subsubcategory) error {
 	category.ID = uuid.New()
 
