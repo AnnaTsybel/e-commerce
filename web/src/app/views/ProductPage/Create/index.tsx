@@ -1,10 +1,10 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 import closeIcon from '@img/Product/remove-icon.png';
 import photoAddIcon from '@img/Product/photo-add-icon.png';
 import backButtonIcon from '@img/back-button.png';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
-
 import { ProductCreation } from '@/product';
 import { convertToBase64 } from '@/app/internal/convertImage';
 import { create } from '@/app/store/actions/products';
@@ -13,6 +13,7 @@ import { addProductPhotos, deleteProductPhoto, setProductPhotos } from '@/app/st
 import { Color, colors } from '@/colors';
 import { setSubSubCategory } from '@/app/store/actions/categories';
 import { SubSubCategory } from '@/categories';
+import { ToastNotifications } from '@/notifications/service';
 
 
 import '../index.scss';
@@ -57,17 +58,21 @@ const ProductCreate = () => {
     };
 
     const createProduct = async() => {
-        await dispatch(create(new ProductCreation(
-            title,
-            description,
-            price,
-            files,
-            currentColor,
-            brand,
-            currentSubSubCategorie
-        )));
+        try {
+            await dispatch(create(new ProductCreation(
+                title,
+                description,
+                price,
+                files,
+                currentColor,
+                brand,
+                currentSubSubCategorie
+            )));
 
-        await navigate('/products');
+            navigate('/');
+        } catch {
+            ToastNotifications.couldNotAddProduct();
+        }
     };
 
     const onChangePrice = (e: any) => {
@@ -127,8 +132,6 @@ const ProductCreate = () => {
                     <span></span>
                 </div>
                 <div className="product-create__select">
-
-
                     <select
                         onChange={onChangeSubSubCategorie}
                         value={currentSubSubCategorie}

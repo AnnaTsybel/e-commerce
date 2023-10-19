@@ -25,7 +25,7 @@ export class ProductCreation {
         public images: string[] = [],
         public color: Color = 'white',
         public brand: string = '',
-        public subsubcategory: string = ''
+        public subsubcategoryName: string = ''
     ) { };
 }
 
@@ -40,5 +40,15 @@ export class ProductEdit {
         public IsLiked: boolean = false,
         public brand: string = '',
         public images: string[] = [],
+        public subsubcategoryName: string = ''
     ) { };
+}
+
+export class ProductFilter {
+    public constructor(
+        public subsubCategoryId: string = '00000000-0000-0000-0000-000000000000',
+        public color: string = '',
+        public priceFrom: string = '',
+        public priceTo: string = '',
+    ) { }
 }

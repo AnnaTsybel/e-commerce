@@ -2,6 +2,7 @@
 @import url("./app/static/styles/__reset.scss");
 @import url("./app/static/styles/__variables.scss");
 @import url("./app/static/styles/__mixins.scss");
+@import "react-toastify/dist/ReactToastify.min.css";
 
 html {
     scroll-behavior: smooth;

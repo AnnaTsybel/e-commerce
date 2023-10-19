@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import { ProductItem } from '@components/Products/ProductItem';
+
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { Product } from '@/product';
 import { RootState } from '@/app/store';

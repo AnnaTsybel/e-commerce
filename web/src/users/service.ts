@@ -1,6 +1,3 @@
-// Copyright (C) 2021 Creditor Corp. Group.
-// See LICENSE for copying information.
-
 import { User, UserRegisterData, UserUpdateData } from '.';
 import { UsersClient } from '@/api/users';
 import { Product } from '@/product';

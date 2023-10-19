@@ -1,6 +1,3 @@
-import { User } from '@/users';
-
-
 export const getUserAge = (dateOfBirth: string) => {
     const CHECK_IS_VALUE_TWO_DIGIT = 10;
     const CONVERT_MONTH_VALUE = 1;

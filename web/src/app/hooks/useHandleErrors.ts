@@ -1,13 +1,9 @@
-// Copyright (C) 2022 Creditor Corp. Group.
-// See LICENSE for copying information.
-
 import {
     BadRequestError,
     InternalError,
     NotFoundError,
     UnauthorizedError,
 } from '@/api';
-
 
 /* error code */
 const BAD_REQUEST_ERROR = 400;

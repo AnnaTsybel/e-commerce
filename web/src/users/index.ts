@@ -34,7 +34,7 @@ export class UserRegisterData {
 
 export class UserUpdateData {
     public constructor(
-        public id: string = '00000000-0000 - 0000 - 0000 - 000000000000',
+        public id: string = '00000000-0000-0000-0000-000000000000',
         public name: string = '',
         public surname: string = '',
         public phoneNumber: string = '',
@@ -44,6 +44,5 @@ export class UserUpdateData {
         public createdAt: string = '',
         public dateOfBirth: string = '',
         public passwordHash: string = '',
-
     ) { };
 }

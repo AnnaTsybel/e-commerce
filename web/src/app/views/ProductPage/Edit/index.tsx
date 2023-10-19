@@ -13,6 +13,7 @@ import { getProduct, updateProduct } from '@/app/store/actions/products';
 import { addProductPhotos, deleteProductPhoto, setProductPhotos } from '@/app/store/reducers/products';
 import { setSubSubCategory } from '@/app/store/actions/categories';
 import { SubSubCategory } from '@/categories';
+import { ToastNotifications } from '@/notifications/service';
 
 
 import '../index.scss';
@@ -78,20 +79,25 @@ const ProductEditPage = () => {
     };
 
     const editProduct = () => {
-        dispatch(updateProduct(
-            new ProductEdit(
-                product.id,
-                title,
-                description,
-                price,
-                product.isAvailable,
-                currentColor,
-                product.IsLiked,
-                brand,
-                files
-            )));
+        try {
+            dispatch(updateProduct(
+                new ProductEdit(
+                    product.id,
+                    title,
+                    description,
+                    price,
+                    product.isAvailable,
+                    currentColor,
+                    product.IsLiked,
+                    brand,
+                    files,
+                    currentSubSubCategorie
+                )));
 
-        navigate(`/product/${product.id}`);
+            navigate(`/product/${product.id}`);
+        } catch {
+            ToastNotifications.couldNotEditProduct();
+        }
     };
 
     const onChangeSubSubCategorie = (e: any) => {
@@ -134,7 +140,6 @@ const ProductEditPage = () => {
                 <img src={backButtonIcon} alt="back-button" className="product-edit__back-button" />
             </Link>
             <form className="product-edit">
-
                 <h2 className="product-edit__title">Зміна продукту</h2>
                 <div className="product-edit__input__wrapper" >
                     <label className="product-edit__label">Назва</label>

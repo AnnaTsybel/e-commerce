@@ -1,8 +1,5 @@
-// Copyright (C) 2021 Creditor Corp. Group.
-// See LICENSE for copying information.
-
 import { APIClient } from '.';
-import { Product, ProductCreation, ProductEdit } from '@/product';
+import { Product, ProductCreation, ProductEdit, ProductFilter } from '@/product';
 
 /**
  * ProductsClient is a http implementation of users API.
@@ -172,5 +169,30 @@ export class ProductsClient extends APIClient {
         const products = await response.json();
 
         return products;
+    };
+
+    /** Searches products */
+    public async filterProducts(productFilter: ProductFilter): Promise<Product[]> {
+        const path = `${this.ROOT_PATH}/by/subsubcategory/${productFilter.subsubCategoryId}?color=${productFilter.color}&priceFrom=${productFilter.priceFrom}&priceTo=${productFilter.priceTo}`;
+        const response = await this.http.get(path);
+
+        if (!response.ok) {
+            await this.handleError(response);
+        }
+        const products = await response.json();
+
+        return products.map((product: any) =>
+            new Product(
+                product.id,
+                product.title,
+                product.description,
+                product.price,
+                product.isAvailable,
+                product.color,
+                product.isLiked,
+                product.brand,
+                product.numOfImages
+            )
+        );
     };
 }

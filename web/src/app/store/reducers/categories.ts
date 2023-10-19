@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { setCategories, setCurrentCategory, setSubSubCategory } from '../actions/categories';
+import { setCategories, setCurrentCategory, setSubSubCategory } from '@/app/store/actions/categories';
 import { Category, SubCategory, SubSubCategory } from '@/categories';
 
 /** Exposes channels state */

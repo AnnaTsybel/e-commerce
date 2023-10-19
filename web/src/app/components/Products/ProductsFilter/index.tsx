@@ -1,10 +1,24 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+
 import { Color, colors } from '@/colors';
+import { filterProducts } from '@/app/store/actions/products';
+import { useAppDispatch } from '@/app/hooks/useReduxToolkit';
+import { ProductFilter } from '@/product';
 
 import './index.scss';
 
 export const ProductsFilter = () => {
-    const [currentColor, setCurrentColor] = useState<Color>();
+    const [currentColor, setCurrentColor] = useState<Color>('');
+    const [minPrice, setMinPrice] = useState<string>('');
+    const [maxPrice, setMaxPrice] = useState<string>('');
+
+    const { id } = useParams();
+    const dispatch = useAppDispatch();
+
+    const handleFiltering = () => {
+        dispatch(filterProducts(new ProductFilter(id, currentColor, minPrice, maxPrice)));
+    };
 
     return (
         <div className="products-filter">
@@ -38,10 +52,14 @@ export const ProductsFilter = () => {
                             <input type="text" className="products-filter__price__input" />
                             -
                             <input type="text" className="products-filter__price__input" />
-                            <button className="products-filter__price__button">Ok</button>
+
                         </div>
                     </div>
                 </div>
+                <button className="products-filter__button"
+                    onClick={() => handleFiltering()}>
+                    Відфільтрувати
+                </button>
             </div>
         </div>
     );

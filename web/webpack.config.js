@@ -9,7 +9,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 
 const PRODUCTION_PLUGINS = [
     new HtmlWebpackPlugin({
-        title: "Boosty template",
+        title: "E-commerce",
         template: "./public/index.html",
         favicon: "./public/favicon.ico",
         minify: false,
@@ -34,7 +34,7 @@ const PRODUCTION_PLUGINS = [
 
 const DEVELOPMENT_PLUGINS = [
     new HtmlWebpackPlugin({
-        title: "Boosty template",
+        title: "E-commerce",
         template: "./public/index.html",
         favicon: "./public/favicon.ico",
     }),
@@ -99,7 +99,7 @@ module.exports = (env, argv) => {
                 "@": path.resolve(__dirname, "./src/"),
                 "@img": path.resolve(__dirname, "./src/app/static/img"),
             },
-            extensions: [".ts", ".tsx", ".js", ".jsx"],
+            extensions: [".ts", ".tsx", ".js", ".jsx", "json"],
             modules: ["node_modules"],
         },
         module: {

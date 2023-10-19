@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import userNoPhoto from '@img/no-photo-profile.webp';
-import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 
+import userNoPhoto from '@img/no-photo-profile.webp';
 import { AuthRoutesConfig } from '@/routes';
 import { Gender, User, UserUpdateData } from '@/users';
 import { convertToBase64 } from '@/app/internal/convertImage';
 import { getUser, logout, updateUser } from '@/app/store/actions/users';
+import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { RootState } from '@/app/store';
 import { getUserAge } from '@/app/internal/getUserAge';
+import { ToastNotifications } from '@/notifications/service';
 
 
 import './index.scss';
@@ -76,9 +77,14 @@ const UserPage = () => {
     };
 
     const logoutUser = async() => {
-        await dispatch(logout());
+        try {
+            await dispatch(logout());
 
-        await navigate(AuthRoutesConfig.Registration.path);
+            await navigate(AuthRoutesConfig.Registration.path);
+        }
+        catch {
+            ToastNotifications.somethingWentsWrong();
+        }
     };
 
     const setUserAvatar = () => {
@@ -197,7 +203,6 @@ const UserPage = () => {
                     </div>
                 </>
                 : <>
-
                     <button
                         className="user__edit-button"
                         onClick={() => setIsEditing(true)}
@@ -235,10 +240,9 @@ const UserPage = () => {
                     <button className="user__logout" onClick={() => logoutUser()}>
                         Вийти з акаунту
                     </button>
-
                 </>
             }
-        </div >
+        </div>
     );
 };
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
+
 import arrow from '@img/Home/Slider/arrow-icon.png';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
-
 import { Product } from '@/product';
 import { RootState } from '@/app/store';
 import { setProductPhotos } from '@/app/store/reducers/products';
