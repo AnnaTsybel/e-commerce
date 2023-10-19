@@ -9,6 +9,7 @@ import searchIcon from '@img/Navbar/search-icon.png';
 import сancelIcon from '@img/Navbar/cancel-icon.png';
 import logoIcon from '@img/Navbar/logo.png';
 import { SearchingModal } from './SearchingModal';
+
 import { User } from '@/users';
 import { RouteConfig } from '@/routes';
 import { RootState } from '@/app/store';

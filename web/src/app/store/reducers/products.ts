@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import { deleteProductData, getListByCategory, getProduct, getRecommendationForHomePage, productRecommendation, searchProducts } from '@/app/store/actions/products';
+import { deleteProductData, filterProducts, getListByCategory, getProduct, getRecommendationForHomePage, productRecommendation, searchProducts } from '@/app/store/actions/products';
 import { Product } from '@/product';
 
 /** Exposes channels state */
@@ -44,7 +44,7 @@ export const productsSlice = createSlice({
         }),
         addProductPhotos: (state, action: PayloadAction<string[]>) => ({
             ...state,
-            productPhoto: state.productPhotos.concat(action.payload),
+            productPhotos: state.productPhotos.concat(action.payload),
         }),
         deleteProductPhotos: (state) => {
             state.productPhotos = [];
@@ -68,6 +68,10 @@ export const productsSlice = createSlice({
         }));
 
         builder.addCase(getListByCategory.fulfilled, (state, action) => ({
+            ...state,
+            products: action.payload,
+        }));
+        builder.addCase(filterProducts.fulfilled, (state, action) => ({
             ...state,
             products: action.payload,
         }));

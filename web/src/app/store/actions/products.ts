@@ -1,15 +1,8 @@
-// Copyright (C) 2022 Creditor Corp. Group.
-// See LICENSE for copying information.
-
-import { Dispatch } from 'redux';
-
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { productsSlice } from '../reducers/products';
-import { BadRequestError } from '@/api';
-import { setErrorMessage } from '@/app/store/reducers/error';
+
 import { ProductsClient } from '@/api/products';
 import { ProductsService } from '@/product/service';
-import { ProductCreation, ProductEdit } from '@/product';
+import { ProductCreation, ProductEdit, ProductFilter } from '@/product';
 
 const productsClient = new ProductsClient();
 export const productsService = new ProductsService(productsClient);
@@ -32,6 +25,15 @@ export const getListByCategory = createAsyncThunk(
     '/products/list/categories',
     async function(subsubcategoryId: string) {
         const products = await productsService.list(subsubcategoryId);
+
+        return products;
+    }
+);
+
+export const filterProducts = createAsyncThunk(
+    '/products/filters',
+    async function(productFilter: ProductFilter) {
+        const products = await productsService.filterProducts(productFilter);
 
         return products;
     }

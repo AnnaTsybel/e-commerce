@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+
 import notLikedProduct from '@img/Product/not-favorite-icon.png';
 import likedProduct from '@img/Product/favorite-icon.png';
 import deleteIcon from '@img/Product/delete-icon.png';
 import editIcon from '@img/Product/edit-icon.png';
 import noImage from '@img/Product/no-image.png';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
-
 import { amountOfLikedProducts } from '@/app/store/actions/users';
 import { User } from '@/users';
 import { RootState } from '@/app/store';

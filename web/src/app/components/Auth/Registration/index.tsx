@@ -5,6 +5,7 @@ import { RouteConfig } from '@/routes';
 import { Gender, UserRegisterData } from '@/users';
 import { useAppDispatch } from '@/app/hooks/useReduxToolkit';
 import { getUser, register } from '@/app/store/actions/users';
+import { ToastNotifications } from '@/notifications/service';
 
 import '../index.scss';
 
@@ -44,7 +45,7 @@ export const Registration = () => {
             await navigate(RouteConfig.Home.path);
         }
         catch (e) {
-            /** TODO: add catching error */
+            ToastNotifications.couldNotRegisterUser();
         }
     };
 

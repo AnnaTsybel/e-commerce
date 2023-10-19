@@ -1,6 +1,3 @@
-// Copyright (C) 2021 Creditor Corp. Group.
-// See LICENSE for copying information.
-
 import { APIClient } from '.';
 import { User, UserRegisterData, UserUpdateData } from '@/users';
 import { Product } from '@/product';

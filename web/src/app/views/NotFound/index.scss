@@ -14,16 +14,16 @@
         text-transform: uppercase;
         text-decoration: none;
         font-size: 14rem;
-        color: #b5659b;
         font-family: "Raleway", sans-serif;
+        color: #b5659b;
 
         span {
-            background: white;
             font-size: 12rem;
+            font-family: "Raleway", sans-serif;
+            background: white;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-family: "Raleway", sans-serif;
         }
     }
 
@@ -32,22 +32,22 @@
         text-transform: uppercase;
         text-decoration: none;
         font-size: 2.5rem;
-        color: white;
         font-family: "Raleway", sans-serif;
+        color: white;
     }
 
     &__button {
         margin-top: 50px;
-        cursor: pointer;
         border-radius: 5px;
-        background: #b5659b;
         padding: 10px 23px;
         font-size: 16px;
         border: none;
         outline: none;
         font-weight: 600;
-        color: #424769;
         font-family: "Raleway", sans-serif;
         text-transform: uppercase;
+        color: #424769;
+        background: #b5659b;
+        cursor: pointer;
     }
 }

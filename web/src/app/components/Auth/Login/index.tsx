@@ -52,7 +52,9 @@ export const Login = () => {
                     className="auth__button"
                     type="button"
                     onClick={() => login()}
-                >Увійти</button>
+                >
+                    Увійти
+                </button>
             </form>
         </>
     );

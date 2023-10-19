@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
-
 import { BrowserRouter } from 'react-router-dom';
+
+import { Notification } from '@components/common/Notification';
 import { GlobalRoutes } from '../routes';
 
 import '../index.scss';
@@ -9,6 +10,7 @@ function App() {
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <BrowserRouter>
+                <Notification />
                 <GlobalRoutes />
             </BrowserRouter>
         </Suspense>

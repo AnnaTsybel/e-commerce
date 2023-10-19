@@ -1,6 +1,3 @@
-// Copyright (C) 2021 Creditor Corp. Group.
-// See LICENSE for copying information.
-
 import { APIClient } from '.';
 
 import { Category, SubCategory, SubSubCategory } from '@/categories';
@@ -36,7 +33,6 @@ export class CategoriesClient extends APIClient {
                         subsubcategoryItem.name,
                         subsubcategoryItem.categoryId
                     ))
-
                 );
 
                 subcategories.push(new SubCategory(

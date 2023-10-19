@@ -1,10 +1,11 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 
 import { SubCategories } from '@components/Catalog/SubCategories';
+
 import arrowRight from '@img/arrow-right.png';
-import { Category, SubCategory } from '@/categories';
 import { useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { RootState } from '@/app/store';
+import { Category, SubCategory } from '@/categories';
 
 
 import './index.scss';
@@ -27,7 +28,7 @@ const Catalog: React.FC<{
                                 className={`catalog__main-category__item 
                             ${category.name === currentCategory.name
                                     && 'catalog__main-category__item--active'}`}
-                                key={`${category.id}-${index}`}
+                                key={category.id}
                                 onMouseEnter={() => setCurrentCategory(category)}
                             >
                                 <p className="catalog__main-category__item__text">
@@ -45,7 +46,7 @@ const Catalog: React.FC<{
                         {currentCategory.subcategories.map((subcategory: SubCategory, index: number) =>
                             <SubCategories
                                 subcategory={subcategory}
-                                key={`${subcategory.id}-${index}`}
+                                key={subcategory.id}
                                 setCatalogOpened={setCatalogOpened}
                             />
                         )}

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { ProductItem } from '@components/Products/ProductItem';
 import { ProductSlider } from '@components/Product/ProductSlider';
+
 import notLikedProduct from '@img/Product/not-favorite-icon.png';
 import likedProduct from '@img/Product/favorite-icon.png';
 import deleteIcon from '@img/Product/delete-icon.png';
@@ -79,7 +80,8 @@ const ProductPage = () => {
                         product.numOfImages > ONE_PRODUCT_IMAGE ?
                             <ProductSlider />
                             :
-                            <div style={{ backgroundImage: `url(${window.location.origin}/images/products/${product.id}/0.png)` }}
+                            <div
+                                style={{ backgroundImage: `url(${window.location.origin}/images/products/${product.id}/0.png)` }}
                                 className="product__photo__image"
                             />
                     }

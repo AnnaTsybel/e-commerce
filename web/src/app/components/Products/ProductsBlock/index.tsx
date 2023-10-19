@@ -1,4 +1,5 @@
 import { ProductItem } from '@components/Products/ProductItem';
+
 import { Product } from '@/product';
 
 import './index.scss';

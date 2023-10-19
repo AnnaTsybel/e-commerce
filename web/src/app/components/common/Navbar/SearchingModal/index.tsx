@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+
 import { Product } from '@/product';
+import { getProduct } from '@/app/store/actions/products';
+import { useAppDispatch } from '@/app/hooks/useReduxToolkit';
 
 import './index.scss';
 
@@ -9,9 +12,12 @@ export const SearchingModal: React.FC<{
     classname?: string;
 }> = ({ setIsSearching, foundedProducts, classname }) => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const handleRedirectUserProfile = (productId: string) => {
+        dispatch(getProduct(productId));
         navigate(`/product/${productId}`);
+
         setIsSearching(false);
     };
 

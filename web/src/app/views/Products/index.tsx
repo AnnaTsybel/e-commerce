@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 import { ProductsFilter } from '@components/Products/ProductsFilter';
 import { ProductItem } from '@components/Products/ProductItem';
+
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { RootState } from '@/app/store';
 import { getUser } from '@/app/store/actions/users';

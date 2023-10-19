@@ -1,4 +1,4 @@
-import { Product, ProductCreation, ProductEdit } from '.';
+import { Product, ProductCreation, ProductEdit, ProductFilter } from '.';
 import { ProductsClient } from '@/api/products';
 
 /**
@@ -58,5 +58,9 @@ export class ProductsService {
     /** searchProducts */
     public async searchProducts(text: string): Promise<Product[]> {
         return await this.products.searchProducts(text);
+    }
+
+    public async filterProducts(productFilter: ProductFilter): Promise<Product[]> {
+        return await this.products.filterProducts(productFilter);
     }
 }

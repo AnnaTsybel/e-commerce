@@ -3,14 +3,17 @@ import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import backButtonIcon from '@img/back-button.png';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
+
 import { RootState } from '@/app/store';
 import { setCurrentCategory } from '@/app/store/actions/categories';
 import { SubCategory, SubSubCategory } from '@/categories';
+
 
 import './index.scss';
 
 const Categories = () => {
     const dispatch = useAppDispatch();
+
     const { id } = useParams<string>();
 
     const currentCategory: SubCategory[] | null = useAppSelector((state: RootState) => state.categoriesReducer.currentCategory);
