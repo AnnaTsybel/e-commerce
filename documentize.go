@@ -3,9 +3,6 @@ package documentize
 import (
 	"context"
 	"errors"
-	"github.com/BoostyLabs/goauth"
-	"github.com/zeebo/errs"
-	"golang.org/x/sync/errgroup"
 	"graduate_work/categories"
 	"graduate_work/console"
 	"graduate_work/pkg/store"
@@ -13,6 +10,10 @@ import (
 	"graduate_work/users"
 	"graduate_work/users/userauth"
 	"net"
+
+	"github.com/BoostyLabs/goauth"
+	"github.com/zeebo/errs"
+	"golang.org/x/sync/errgroup"
 )
 
 type DB interface {
@@ -94,7 +95,7 @@ func New(config *Config, db DB) (*Documentize, error) {
 			Path:       "/",
 		}
 
-		app.server = console.NewServer(
+		app.server, err = console.NewServer(
 			cfg,
 			listener,
 			app.auth,
@@ -102,6 +103,9 @@ func New(config *Config, db DB) (*Documentize, error) {
 			app.products,
 			app.categories,
 		)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return app, nil
