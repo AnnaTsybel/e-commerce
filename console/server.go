@@ -52,7 +52,7 @@ type Server struct {
 }
 
 // NewServer is a constructor for console web server.
-func NewServer(config Config, listener net.Listener, userAuth *userauth.Service, users *users.Service, products *products.Service, categories *categories.Service) *Server {
+func NewServer(config Config, listener net.Listener, userAuth *userauth.Service, users *users.Service, products *products.Service, categories *categories.Service) (*Server, error) {
 	server := &Server{
 		config:      config,
 		listener:    listener,
@@ -65,7 +65,7 @@ func NewServer(config Config, listener net.Listener, userAuth *userauth.Service,
 
 	err := server.initializeTemplates()
 	if err != nil {
-		return nil
+		return nil, err
 	}
 
 	usersController := controllers.NewUsers(users)
@@ -126,7 +126,7 @@ func NewServer(config Config, listener net.Listener, userAuth *userauth.Service,
 		Handler: router,
 	}
 
-	return server
+	return server, nil
 }
 
 // Run starts the server that host webapp and api endpoint.
