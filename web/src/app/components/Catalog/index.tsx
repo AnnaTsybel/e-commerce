@@ -2,21 +2,20 @@ import { Dispatch, SetStateAction, useState } from 'react';
 
 import { SubCategories } from '@components/Catalog/SubCategories';
 
-import arrowRight from '@img/arrow-right.png';
 import { useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { RootState } from '@/app/store';
 import { Category, SubCategory } from '@/categories';
 
+import arrowRight from '@img/arrow-right.png';
 
 import './index.scss';
 
 const INDEX_FIRST_ITEM = 0;
 
-const Catalog: React.FC<{
-    setCatalogOpened: Dispatch<SetStateAction<boolean>>;
-}>
+const Catalog: React.FC<{ setCatalogOpened: Dispatch<SetStateAction<boolean>> }>
     = ({ setCatalogOpened }) => {
         const categories: Category[] | null = useAppSelector((state: RootState) => state.categoriesReducer.listCategories);
+
         const [currentCategory, setCurrentCategory] = useState<Category>(categories[INDEX_FIRST_ITEM]);
 
         return (
@@ -26,7 +25,7 @@ const Catalog: React.FC<{
                         {categories.map((category: Category, index: number) =>
                             <div
                                 className={`catalog__main-category__item 
-                            ${category.name === currentCategory.name
+                                    ${category.name === currentCategory.name
                                     && 'catalog__main-category__item--active'}`}
                                 key={category.id}
                                 onMouseEnter={() => setCurrentCategory(category)}
@@ -37,7 +36,8 @@ const Catalog: React.FC<{
                                 <span className="catalog__main-category__item__icon">
                                     <img src={arrowRight}
                                         alt="arrow-right"
-                                        className="catalog__main-category__item__image" />
+                                        className="catalog__main-category__item__image"
+                                    />
                                 </span>
                             </div>
                         )}

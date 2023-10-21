@@ -1,12 +1,12 @@
-import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import userNoPhoto from '@img/no-photo-profile.webp';
-import { useAppSelector } from '@/app/hooks/useReduxToolkit';
-import { RootState } from '@/app/store';
 import { User } from '@/users';
 import { Category } from '@/categories';
+import { useAppSelector } from '@/app/hooks/useReduxToolkit';
+import { RootState } from '@/app/store';
 
+import userNoPhoto from '@img/no-photo-profile.webp';
 
 import './index.scss';
 
@@ -37,15 +37,16 @@ export const Aside = () => {
                     >
                         <p className="aside__category__text">{category.name}</p>
                     </Link>
-                )
-                }
+                )}
             </div>
             {user
                 && <div className="aside__user">
                     <Link className="aside__user__info" to={`user/${user.id}`}>
-                        <img src={photo}
+                        <img
+                            src={photo}
                             alt="user"
-                            className="aside__user__info__photo" />
+                            className="aside__user__info__photo"
+                        />
                         <div>
                             <p className="aside__user__info__name">{user.name} {user.surname}</p>
                             <p className="aside__user__info__email">{user.email}</p>
@@ -53,7 +54,6 @@ export const Aside = () => {
                     </Link>
                 </div>
             }
-
         </aside>
     );
 };

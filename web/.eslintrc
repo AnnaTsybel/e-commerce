@@ -21,8 +21,6 @@
             {
                 "require": {
                     "FunctionDeclaration": true,
-                    "MethodDefinition": true,
-                    "ClassDeclaration": true
                 }
             }
         ],
@@ -160,7 +158,7 @@
         "no-sequences": "error",
         "no-throw-literal": "error",
         "no-useless-concat": "error",
-        "no-useless-return": "error",
+        "no-useless-return": "off",
         "no-void": "error",
         "require-await": "error",
         "yoda": "error",

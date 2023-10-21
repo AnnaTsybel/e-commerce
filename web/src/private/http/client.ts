@@ -69,6 +69,7 @@ export class HttpClient {
    * @param path
    * @param body serialized JSON
    */
+    /* eslint-disable */
     private async do(
         method: string,
         path: string,

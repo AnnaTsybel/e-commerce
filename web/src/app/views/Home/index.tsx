@@ -41,7 +41,8 @@ const Home = () => {
                 }
                 <ProductBlock
                     products={productRecommendationForHome}
-                    title="Рекомендовані товари" />
+                    title="Рекомендовані товари"
+                />
             </div>
         </div>
     );

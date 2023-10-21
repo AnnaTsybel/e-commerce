@@ -4,19 +4,25 @@ import { useParams } from 'react-router-dom';
 import { ProductItem } from '@components/Products/ProductItem';
 import { ProductSlider } from '@components/Product/ProductSlider';
 
+import { User } from '@/users';
+import { Product } from '@/product';
+import { RootState } from '@/app/store';
+import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
+import { amountOfLikedProducts } from '@/app/store/actions/users';
+import { deleteProductPhotos } from '@/app/store/reducers/products';
+import {
+    deleteProductData,
+    getProduct,
+    likeProduct,
+    productRecommendation,
+    unlikeProduct,
+} from '@/app/store/actions/products';
+
 import notLikedProduct from '@img/Product/not-favorite-icon.png';
 import likedProduct from '@img/Product/favorite-icon.png';
 import deleteIcon from '@img/Product/delete-icon.png';
 import editIcon from '@img/Product/edit-icon.png';
 import productNoImage from '@img/Product/no-image.png';
-import { deleteProductData, getProduct, likeProduct, productRecommendation, unlikeProduct } from '@/app/store/actions/products';
-import { deleteProductPhotos } from '@/app/store/reducers/products';
-import { Product } from '@/product';
-import { RootState } from '@/app/store';
-import { User } from '@/users';
-import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
-import { amountOfLikedProducts } from '@/app/store/actions/users';
-
 
 import './index.scss';
 
@@ -54,6 +60,7 @@ const ProductPage = () => {
 
     const pageOnLoad = () => {
         dispatch(deleteProductPhotos());
+
         if (id) {
             dispatch(getProduct(id));
             dispatch(productRecommendation(id));
@@ -74,8 +81,10 @@ const ProductPage = () => {
             <div className="product__content">
                 <div className="product__photo">
                     {product.numOfImages === NO_PRODUCT_IMAGE ?
-                        <div style={{ backgroundImage: `url(${productNoImage})` }}
-                            className="product__photo__image" />
+                        <div
+                            style={{ backgroundImage: `url(${productNoImage})` }}
+                            className="product__photo__image"
+                        />
                         :
                         product.numOfImages > ONE_PRODUCT_IMAGE ?
                             <ProductSlider />
@@ -95,55 +104,62 @@ const ProductPage = () => {
                         <div className="product__actions">
                             {user.role === ADMIN_ROLE &&
                                 <>
-                                    <button className="product__button"
-                                        onClick={() => editProduct(product.id)}>
+                                    <button
+                                        className="product__button"
+                                        onClick={() => editProduct(product.id)}
+                                    >
                                         <img src={editIcon} alt="edit-icon" />
                                     </button>
-                                    <button className="product__button" onClick={() => deleteProduct()}>
+                                    <button
+                                        className="product__button"
+                                        onClick={() => deleteProduct()}
+                                    >
                                         <img src={deleteIcon} alt="delete-icon" />
                                     </button>
                                 </>}
                             <div className="product__like" onClick={() => handleLikes()}>
                                 {isFavorite
-                                    ? <img src={likedProduct}
+                                    ? <img
+                                        src={likedProduct}
                                         alt="like"
-                                        className="product__like__image" />
-                                    : <img src={notLikedProduct}
+                                        className="product__like__image"
+                                    />
+                                    : <img
+                                        src={notLikedProduct}
                                         alt="like"
-                                        className="product__like__image" />
+                                        className="product__like__image"
+                                    />
                                 }
                             </div>
                         </div>
                     </div>
-
                     <div className="product__price">
                         <p className="product__subtitle">Ціна:</p>
-                        <span className="product__price__value"> {product.price} &#8372;</span>
+                        <span className="product__price__value">
+                            {product.price} &#8372;
+                        </span>
                     </div>
                     <div className="product__price">
                         <p className="product__subtitle">Бренд:</p>
                         <span className="product__price__value"> {product.brand}</span>
                     </div>
-
-                    {product.isAvailable
-                        ? <p className="product__available">Є в нявності</p>
-                        : <p className="product__no-available">Нема в наявності</p>
+                    {product.isAvailable ?
+                        <p className="product__available">Є в нявності</p>
+                        :
+                        <p className="product__no-available">Нема в наявності</p>
                     }
                     <div className="product__description">
                         <p className="product__subtitle">Опис:</p>
                         <p className="product__description__text">
                             {product.description}
                         </p>
-
                     </div>
-
                 </div>
             </div>
             <div className="product__recommendations">
                 {productRecommendations.map((product: Product) =>
                     <ProductItem key={product.title} product={product} />
                 )}
-
             </div>
         </div>
     );

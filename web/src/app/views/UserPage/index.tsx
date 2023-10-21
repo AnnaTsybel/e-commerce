@@ -79,7 +79,7 @@ const UserPage = () => {
         try {
             await dispatch(logout());
 
-            await navigate(AuthRoutesConfig.Registration.path);
+            navigate(AuthRoutesConfig.Registration.path);
         }
         catch {
             ToastNotifications.somethingWentsWrong();

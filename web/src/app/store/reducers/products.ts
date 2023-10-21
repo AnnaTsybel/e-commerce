@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { deleteProductData, filterProducts, getListByCategory, getProduct, getRecommendationForHomePage, productRecommendation, searchProducts } from '@/app/store/actions/products';
 import { Product } from '@/product';

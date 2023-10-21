@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import arrow from '@img/Home/Slider/arrow-icon.png';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
+import { setProductPhotos } from '@/app/store/reducers/products';
 import { Product } from '@/product';
 import { RootState } from '@/app/store';
-import { setProductPhotos } from '@/app/store/reducers/products';
 
+import arrow from '@img/Home/Slider/arrow-icon.png';
 
 import './index.scss';
 
@@ -15,12 +15,11 @@ const STEP = 1;
 const INDEX_SLIDER_DECREMENTING_LENGTH = 1;
 
 export const ProductSlider = () => {
-    const [current, setCurrent] = useState<number>(DEFAULT_SLIDE);
+    const [currentSlide, setCurrentSlide] = useState<number>(DEFAULT_SLIDE);
     const product: Product | null = useAppSelector((state: RootState) => state.productsReducer.currentProduct);
     const productPhotos: string[] | null = useAppSelector((state: RootState) => state.productsReducer.productPhotos);
 
     const dispatch = useAppDispatch();
-
 
     const getPhotosArray = () => {
         const sliderPhotos: string[] = [];
@@ -33,17 +32,17 @@ export const ProductSlider = () => {
     };
 
     const nextSlide = () => {
-        setCurrent(current === product.numOfImages - INDEX_SLIDER_DECREMENTING_LENGTH ?
+        setCurrentSlide(currentSlide === product.numOfImages - INDEX_SLIDER_DECREMENTING_LENGTH ?
             FIRST_SLIDE
             :
-            current + STEP);
+            currentSlide + STEP);
     };
 
     const prevSlide = () => {
-        setCurrent(current === FIRST_SLIDE ?
+        setCurrentSlide(currentSlide === FIRST_SLIDE ?
             product.numOfImages - INDEX_SLIDER_DECREMENTING_LENGTH
             :
-            current - STEP);
+            currentSlide - STEP);
     };
 
     useEffect(() => {
@@ -54,18 +53,20 @@ export const ProductSlider = () => {
 
     return (
         <div className="product-slider">
-
             <div className="product-slider__arrow product-slider__arrow__prev" onClick={() => prevSlide()}>
-                <img src={arrow} alt="arrow-left" className="product-slider__arrow__prev__image" />
+                <img
+                    src={arrow}
+                    alt="arrow-left"
+                    className="product-slider__arrow__prev__image"
+                />
             </div>
-
             <div className="product-slider__container">
                 {productPhotos.map((sliderImage, index) =>
                     <div
                         key={sliderImage}
-                        className={`product-slider__item ${index === current ? 'active' : ''}`}
+                        className={`product-slider__item ${index === currentSlide ? 'active' : ''}`}
                     >
-                        {index === current &&
+                        {index === currentSlide &&
                             <img
                                 src={sliderImage}
                                 alt="slider item"
@@ -76,7 +77,11 @@ export const ProductSlider = () => {
                 )}
             </div>
             <div className="product-slider__arrow product-slider__arrow__next" onClick={() => nextSlide()}>
-                <img src={arrow} alt="arrow-right" className=" product-slider__arrow__next__image" />
+                <img
+                    src={arrow}
+                    alt="arrow-right"
+                    className=" product-slider__arrow__next__image"
+                />
             </div>
         </div>
     );
