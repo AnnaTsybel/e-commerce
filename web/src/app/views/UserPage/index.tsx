@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import userNoPhoto from '@img/no-photo-profile.webp';
-import { AuthRoutesConfig } from '@/routes';
+import { AuthRoutesConfig } from '@app/routes';
 import { Gender, User, UserUpdateData } from '@/users';
 import { convertToBase64 } from '@/app/internal/convertImage';
 import { getUser, logout, updateUser } from '@/app/store/actions/users';
@@ -11,8 +11,9 @@ import { RootState } from '@/app/store';
 import { getUserAge } from '@/app/internal/getUserAge';
 import { ToastNotifications } from '@/notifications/service';
 
-
 import './index.scss';
+import { StyledInput } from '@app/components/common/StyledInput';
+import { StyledGenderSwitcher } from '@app/components/common/StyledGenderSwitcher';
 
 const PHOTO_INDEX = 0;
 const SECOND_INDEX = 1;
@@ -25,16 +26,16 @@ const UserPage = () => {
 
     const [isEditing, setIsEditing] = useState(false);
 
-    const [name, setName] = useState<string>();
-    const [surname, setSurname] = useState<string>();
-    const [phonenumber, setPhonenumber] = useState<string>();
-    const [gender, setGender] = useState<Gender>();
-    const [photo, setPhoto] = useState<string>();
-    const [file, setFile] = useState<string>();
-    const [email, setEmail] = useState<string>();
-    const [dateOfBirth, setDateOfBirth] = useState<string>();
-    const [convertedDateOfBirth, setConvertedDateOfBirth] = useState<string>();
-    const [isAvatarExists, setIsAvatarExists] = useState<boolean>();
+    const [name, setName] = useState<string>('');
+    const [surname, setSurname] = useState<string>('');
+    const [phonenumber, setPhonenumber] = useState<string>('');
+    const [gender, setGender] = useState<Gender>('');
+    const [photo, setPhoto] = useState<string>('');
+    const [file, setFile] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [dateOfBirth, setDateOfBirth] = useState<string>('');
+    const [convertedDateOfBirth, setConvertedDateOfBirth] = useState<string>('');
+    const [isAvatarExists, setIsAvatarExists] = useState<boolean>(false);
 
     const handleFileChange = async(e: any) => {
         if (e.target.files?.length) {
@@ -44,10 +45,7 @@ const UserPage = () => {
         }
     };
 
-    const setDateOfBirthConverted = (date: string) => {
-        const convertedDate = new Date(date).toISOString();
-        setDateOfBirth(convertedDate);
-    };
+    const setDateOfBirthConverted = (date: string) => new Date(date).toISOString();
 
     const setUserAge = (dateOfBirthUser: string) => {
         const age = getUserAge(dateOfBirthUser);
@@ -57,6 +55,7 @@ const UserPage = () => {
 
     const sendChanges = () => {
         setIsEditing(false);
+        const convertedDateOfBirth = setDateOfBirthConverted(dateOfBirth);
 
         dispatch(updateUser(new UserUpdateData(
             user.id,
@@ -67,7 +66,7 @@ const UserPage = () => {
             file,
             gender,
             user.createdAt,
-            dateOfBirth,
+            convertedDateOfBirth,
             user.passwordHash
         )));
 
@@ -135,71 +134,39 @@ const UserPage = () => {
                             />
                             <span>Оберіть нове фото</span>
                         </div>
-                        <div className="user__input__wrapper" >
-                            <label className="user__label">Імʼя</label>
-                            <input
-                                className="user__input"
-                                defaultValue={name}
-                                onChange={e => setName(e.target.value)}
-                            />
-                            <span></span>
-                        </div>
-                        <div className="user__input__wrapper" >
-                            <label className="user__label">Прізвище</label>
-                            <input
-                                className="user__input"
-                                defaultValue={surname}
-                                onChange={e => setSurname(e.target.value)}
-                            />
-                            <span></span>
-                        </div>
-                        <div className="user__input__wrapper" >
-                            <label className="user__label">Email</label>
-                            <input
-                                className="user__input"
-                                defaultValue={email}
-                                onChange={e => setEmail(e.target.value)}
-                            />
-                            <span></span>
-                        </div>
-                        <div className="user__input__wrapper" >
-                            <label className="user__label">Мобільний</label>
-                            <input
-                                className="user__input"
-                                defaultValue={phonenumber}
-                                onChange={e => setPhonenumber(e.target.value)}
-                            />
-                            <span></span>
-                        </div>
-                        <div className="user__input__wrapper" >
-                            <label className="user__label">Дата народження</label>
-                            <input
-                                className="user__input"
-                                defaultValue={dateOfBirth}
-                                onChange={e => setDateOfBirthConverted(e.target.value)}
-                                type="date"
-                            />
-                            <span></span>
-                        </div>
-                        <div className="user__input__wrapper" >
-                            <div className="user__gender__wrapper" >
-                                <label className="user__gender__title">Ваша стать</label>
-                                <div className="user__gender">
-                                    <div
-                                        className={`user__gender__item ${gender === 'woman' && 'user__gender__item--active'}`}
-                                        onClick={() => setGender('woman')}
-                                    >
-                                        Жінка
-                                    </div>
-                                    <div
-                                        className={`user__gender__item ${gender === 'man' && 'user__gender__item--active'}`}
-                                        onClick={() => setGender('man')}>
-                                        Чоловік
-                                    </div>
-                                </div>
-                            </div>
-                            <span></span>
-                        </div>
+                        <StyledInput
+                            title="Імʼя"
+                            onChange={e => setName(e.target.value)}
+                            required={true}
+                            value={name}
+                        />
+                        <StyledInput
+                            title="Прізвище"
+                            onChange={e => setSurname(e.target.value)}
+                            required={true}
+                            value={surname}
+                        />
+                        <StyledInput
+                            title="Прізвище"
+                            onChange={e => setEmail(e.target.value)}
+                            required={true}
+                            value={email}
+                            type="email"
+                        />
+                        <StyledInput
+                            title="Прізвище"
+                            onChange={e => setPhonenumber(e.target.value)}
+                            required={true}
+                            value={phonenumber}
+                        />
+                        <StyledInput
+                            title="Дата народження"
+                            onChange={e => setDateOfBirth(e.target.value)}
+                            required={true}
+                            value={dateOfBirth}
+                            type="email"
+                        />
+                        <StyledGenderSwitcher gender={gender} setGender={setGender} />
                     </div>
                 </>
                 : <>

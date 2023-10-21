@@ -97,6 +97,7 @@ module.exports = (env, argv) => {
                 "@components": path.resolve(__dirname, "./src/app/components/"),
                 "@static": path.resolve(__dirname, "./src/app/static/"),
                 "@": path.resolve(__dirname, "./src/"),
+                "@app": path.resolve(__dirname, "./src/app"),
                 "@img": path.resolve(__dirname, "./src/app/static/img"),
             },
             extensions: [".ts", ".tsx", ".js", ".jsx", "json"],

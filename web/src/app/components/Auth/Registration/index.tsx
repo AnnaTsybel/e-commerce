@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { RouteConfig } from '@/routes';
+import { StyledInput } from '@components/common/StyledInput';
+import { StyledGenderSwitcher } from '@components/common/StyledGenderSwitcher';
+
 import { Gender, UserRegisterData } from '@/users';
+import { ToastNotifications } from '@/notifications/service';
+import { RouteConfig } from '@app/routes';
 import { useAppDispatch } from '@/app/hooks/useReduxToolkit';
 import { getUser, register } from '@/app/store/actions/users';
-import { ToastNotifications } from '@/notifications/service';
 
 import '../index.scss';
 
@@ -21,13 +24,12 @@ export const Registration = () => {
     const [gender, setGender] = useState<Gender>('man');
     const [dateOfBirth, setDateOfBirth] = useState<string>('');
 
-    const setDateOfBirthConverted = (date: string) => {
-        const convertedDate = new Date(date).toISOString();
-        setDateOfBirth(convertedDate);
-    };
+    const setDateOfBirthConverted = (date: string) => new Date(date).toISOString();
 
     const registerUser = async() => {
         try {
+            const convertedDateOfBirth = setDateOfBirthConverted(dateOfBirth);
+
             await dispatch(register(new UserRegisterData(
                 name,
                 surname,
@@ -35,14 +37,14 @@ export const Registration = () => {
                 email,
                 gender,
                 password,
-                dateOfBirth
+                convertedDateOfBirth
             )));
 
-            await window.localStorage.setItem('IS_LOGGEDIN', JSON.stringify(true));
+            window.localStorage.setItem('IS_LOGGEDIN', JSON.stringify(true));
 
             await dispatch(getUser());
 
-            await navigate(RouteConfig.Home.path);
+            navigate(RouteConfig.Home.path);
         }
         catch (e) {
             ToastNotifications.couldNotRegisterUser();
@@ -61,83 +63,50 @@ export const Registration = () => {
                 </Link>
             </div>
             <form className="auth__form">
-                <div className="auth__input__wrapper">
-                    <label className="auth__label">Імʼя</label>
-                    <input
-                        className="auth__input"
-                        onChange={e => setName(e.target.value)}
-                        required
-                        autoComplete="off"
-                    />
-                    <span></span>
-                </div>
-                <div className="auth__input__wrapper">
-                    <label className="auth__label">Прізвище</label>
-                    <input
-                        className="auth__input"
-                        onChange={e => setSurname(e.target.value)}
-                        required
-                        autoComplete="off"
-                    />
-                    <span></span>
-                </div>
-                <div className="auth__input__wrapper">
-                    <label className="auth__label">Електрона пошта</label>
-                    <input
-                        className="auth__input"
-                        onChange={e => setEmail(e.target.value)}
-                        required
-                        autoComplete="off"
-                        type="email"
-                    />
-                    <span></span>
-                </div>
-                <div className="auth__input__wrapper" >
-                    <label className="auth__label">Мобільний номер</label>
-                    <input
-                        className="auth__input"
-                        onChange={e => setPhoneNumber(e.target.value)}
-                        required
-                    />
-                    <span></span>
-                </div>
-                <div className="auth__input__wrapper" >
-                    <label className="auth__label">День народження</label>
-                    <input
-                        className="auth__input"
-                        onChange={e => setDateOfBirthConverted(e.target.value)}
-                        type="date"
-                        required
-                    />
-                    <span></span>
-                </div>
-                <div className="auth__gender__wrapper" >
-                    <label className="auth__gender__title">Ваша стать</label>
-                    <div className="auth__gender">
-                        <div
-                            className={`auth__gender__item ${gender === 'woman' && 'auth__gender__item--active'}`}
-                            onClick={() => setGender('woman')}
-                        >
-                            Жінка
-                        </div>
-                        <div
-                            className={`auth__gender__item ${gender === 'man' && 'auth__gender__item--active'}`}
-                            onClick={() => setGender('man')}>
-                            Чоловік
-                        </div>
-                    </div>
-                </div>
-                <div className="auth__input__wrapper" >
-                    <label className="auth__label">Пароль</label>
-                    <input
-                        className="auth__input"
-                        onChange={e => setPassword(e.target.value)}
-                        type="password"
-                        required
-                        autoComplete="off"
-                    />
-                    <span></span>
-                </div>
+                <StyledInput
+                    title="Імʼя"
+                    onChange={e => setName(e.target.value)}
+                    required={true}
+                    value={name}
+                />
+                <StyledInput
+                    title="Прізвище"
+                    onChange={e => setSurname(e.target.value)}
+                    required={true}
+                    value={surname}
+                />
+                <StyledInput
+                    title="Електрона пошта"
+                    onChange={e => setEmail(e.target.value)}
+                    required={true}
+                    value={email}
+                    type="email"
+                />
+                <StyledInput
+                    title="Номер телефону"
+                    onChange={e => setPhoneNumber(e.target.value)}
+                    required={true}
+                    value={phoneNumber}
+                    type="text"
+                />
+                <StyledInput
+                    title="День народження"
+                    onChange={e => setDateOfBirth(e.target.value)}
+                    required={true}
+                    value={dateOfBirth}
+                    type="date"
+                />
+                <StyledGenderSwitcher
+                    gender={gender}
+                    setGender={setGender}
+                />
+                <StyledInput
+                    title="Пароль"
+                    onChange={e => setPassword(e.target.value)}
+                    required={true}
+                    value={password}
+                    type="password"
+                />
                 <button
                     className="auth__button"
                     type="button"

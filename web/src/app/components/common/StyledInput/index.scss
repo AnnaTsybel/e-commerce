@@ -1,0 +1,46 @@
+.styled-input {
+    position: relative;
+    margin-bottom: 20px;
+
+    &__input {
+        outline: none;
+        width: 200px;
+        padding: 30px 10px 7px;
+        border: none;
+        font-size: 16px;
+        color: #fff;
+        background: #676f9d;
+
+        &:focus {
+            position: relative;
+
+            & + span:after {
+                z-index: 2;
+                position: absolute;
+                content: "";
+                height: 100%;
+                width: 2px;
+                left: 0;
+                bottom: 0;
+                background: #b5659b;
+            }
+        }
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px #676f9d inset !important;
+        -webkit-text-fill-color: white !important;
+    }
+
+    &__label {
+        z-index: 3;
+        position: absolute;
+        top: 8px;
+        left: 10px;
+        font-size: 11px;
+        color: #acb7f9;
+    }
+}

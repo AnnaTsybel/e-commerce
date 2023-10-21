@@ -1,20 +1,22 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import closeIcon from '@img/Product/remove-icon.png';
-import photoAddIcon from '@img/Product/photo-add-icon.png';
-import backButtonIcon from '@img/back-button.png';
-import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
+import { StyledInput } from '@components/common/StyledInput';
+
 import { ProductCreation } from '@/product';
+import { Color, colors } from '@/colors';
+import { SubSubCategory } from '@/categories';
+import { ToastNotifications } from '@/notifications/service';
+import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { convertToBase64 } from '@/app/internal/convertImage';
 import { create } from '@/app/store/actions/products';
 import { RootState } from '@/app/store';
-import { addProductPhotos, deleteProductPhoto, setProductPhotos } from '@/app/store/reducers/products';
-import { Color, colors } from '@/colors';
 import { setSubSubCategory } from '@/app/store/actions/categories';
-import { SubSubCategory } from '@/categories';
-import { ToastNotifications } from '@/notifications/service';
+import { addProductPhotos, deleteProductPhoto, setProductPhotos } from '@/app/store/reducers/products';
 
+import closeIcon from '@img/Product/remove-icon.png';
+import photoAddIcon from '@img/Product/photo-add-icon.png';
+import backButtonIcon from '@img/back-button.png';
 
 import '../index.scss';
 
@@ -27,16 +29,16 @@ const ProductCreate = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const productPhotos: string[] | [] = useAppSelector((state: RootState) => state.productsReducer.productPhotos);
-    const subsubcategories: SubSubCategory[] | [] = useAppSelector((state: RootState) => state.categoriesReducer.allSubSubcategories);
-
     const [currentColor, setCurrentColor] = useState<Color>(colors[DEFAULT_COLOR_INDEX]);
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
     const [price, setPrice] = useState<number>(DEFAULT_PRICE);
-    const [brand, setBrand] = useState<string>();
+    const [brand, setBrand] = useState<string>('');
     const [files, setFiles] = useState<string[]>();
     const [currentSubSubCategorie, setCurrentSubSubCategorie] = useState<string>();
+
+    const productPhotos: string[] | [] = useAppSelector((state: RootState) => state.productsReducer.productPhotos);
+    const subsubcategories: SubSubCategory[] | [] = useAppSelector((state: RootState) => state.categoriesReducer.allSubSubcategories);
 
     const handleFileChange = async(e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.length) {
@@ -112,16 +114,18 @@ const ProductCreate = () => {
             </Link>
             <form className="product-create">
                 <h2 className="product-create__title">Створення продукту</h2>
-                <div className="product-create__input__wrapper" >
-                    <label className="product-create__label">Назва</label>
-                    <input className="product-create__input" onChange={e => setTitle(e.target.value)} />
-                    <span></span>
-                </div>
-                <div className="product-create__input__wrapper" >
-                    <label className="product-create__label">Бренд</label>
-                    <input className="product-create__input" onChange={e => setBrand(e.target.value)} />
-                    <span></span>
-                </div>
+                <StyledInput
+                    title="Назва"
+                    onChange={e => setTitle(e.target.value)}
+                    required={true}
+                    value={title}
+                />
+                <StyledInput
+                    title="Бренд"
+                    onChange={e => setBrand(e.target.value)}
+                    required={true}
+                    value={brand}
+                />
                 <div className="product-create__input__wrapper" >
                     <label className="product-create__label">Ціна</label>
                     <input
@@ -136,17 +140,15 @@ const ProductCreate = () => {
                         onChange={onChangeSubSubCategorie}
                         value={currentSubSubCategorie}
                     >
-                        {subsubcategories.length && subsubcategories.map((subsubcategory: SubSubCategory) =>
-                            <option
-                                key={subsubcategory.id}
-                                value={subsubcategory.name}
-                            >
-                                {subsubcategory.name}
-                            </option>
-                        )
-
-                        }
-
+                        {subsubcategories.length &&
+                            subsubcategories.map((subsubcategory: SubSubCategory) =>
+                                <option
+                                    key={subsubcategory.id}
+                                    value={subsubcategory.name}
+                                >
+                                    {subsubcategory.name}
+                                </option>
+                            )}
                     </select>
                     <span className="product-create__select__arrow" >
                         &#9660;
