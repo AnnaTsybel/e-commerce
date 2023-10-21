@@ -1,20 +1,22 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import photoAddIcon from '@img/Product/photo-add-icon.png';
-import closeIcon from '@img/Product/remove-icon.png';
-import backButtonIcon from '@img/back-button.png';
+import { StyledInput } from '@components/common/StyledInput';
+
 import { Product, ProductEdit } from '@/product';
 import { Color, colors } from '@/colors';
-import { convertToBase64 } from '@/app/internal/convertImage';
+import { SubSubCategory } from '@/categories';
+import { ToastNotifications } from '@/notifications/service';
 import { RootState } from '@/app/store';
+import { convertToBase64 } from '@/app/internal/convertImage';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { getProduct, updateProduct } from '@/app/store/actions/products';
 import { addProductPhotos, deleteProductPhoto, setProductPhotos } from '@/app/store/reducers/products';
 import { setSubSubCategory } from '@/app/store/actions/categories';
-import { SubSubCategory } from '@/categories';
-import { ToastNotifications } from '@/notifications/service';
 
+import photoAddIcon from '@img/Product/photo-add-icon.png';
+import closeIcon from '@img/Product/remove-icon.png';
+import backButtonIcon from '@img/back-button.png';
 
 import '../index.scss';
 
@@ -136,42 +138,39 @@ const ProductEditPage = () => {
 
     return (
         <>
-            <Link to="/products" >
-                <img src={backButtonIcon} alt="back-button" className="product-edit__back-button" />
+            <Link to="/products">
+                <img
+                    src={backButtonIcon}
+                    alt="back-button"
+                    className="product-edit__back-button"
+                />
             </Link>
             <form className="product-edit">
                 <h2 className="product-edit__title">Зміна продукту</h2>
-                <div className="product-edit__input__wrapper" >
-                    <label className="product-edit__label">Назва</label>
-                    <input
-                        className="product-edit__input"
-                        defaultValue={product.title}
-                        onChange={e => setTitle(e.target.value)}
-                    />
-                    <span></span>
-                </div>
+                <StyledInput
+                    title="Назва"
+                    onChange={e => setTitle(e.target.value)}
+                    required={true}
+                    value={product.title}
+                />
+                <StyledInput
+                    title="Назва"
+                    onChange={e => setBrand(e.target.value)}
+                    required={true}
+                    value={product.brand}
+                />
                 <div className="product-edit__input__wrapper" >
                     <label className="product-edit__label">Ціна</label>
                     <input
                         className="product-edit__input"
                         defaultValue={price}
                         type="number"
-                        onChange={onChangePrice} />
-                    <span></span>
-                </div>
-                <div className="product-edit__input__wrapper" >
-                    <label className="product-edit__label">Бренд</label>
-                    <input
-                        className="product-edit__input"
-                        defaultValue={product.brand}
-                        onChange={e => setBrand(e.target.value)}
+                        onChange={onChangePrice}
                     />
                     <span></span>
                 </div>
                 <div className="product-edit__select">
-                    <select
-                        onChange={onChangeSubSubCategorie}
-                    >
+                    <select onChange={onChangeSubSubCategorie} >
                         {subsubcategories.length && subsubcategories.map((subsubcategory: SubSubCategory) =>
                             <option
                                 key={subsubcategory.id}
@@ -192,16 +191,14 @@ const ProductEditPage = () => {
                 />
                 <div className="product-edit__color__content">
                     {colors.map((color) =>
-                        <div
-                            key={color}
-                            className="product-edit__color__item"
-                        >
+                        <div key={color} className="product-edit__color__item" >
                             <div
                                 className={`product__color__icon product__${color}__icon 
                                 ${currentColor === color ? 'product-edit__color__checked' : ''}`}
                                 onClick={() => setCurrentColor(color)} />
                             <p className="product-edit__color__item__text">{color}</p>
-                        </div>)}
+                        </div>
+                    )}
                 </div>
                 <div className="product-edit__photos__container">
                     <div className="product-edit__photos">
@@ -225,9 +222,7 @@ const ProductEditPage = () => {
                 </div>
                 <div className="product-edit__photo" >
                     <p>Оберіть фото продукту</p>
-                    <label
-                        className="product-edit__photo__label"
-                        htmlFor="product-photo">
+                    <label htmlFor="product-photo" className="product-edit__photo__label" >
                         <img
                             src={photoAddIcon}
                             alt="add icon"

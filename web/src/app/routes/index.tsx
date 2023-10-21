@@ -1,20 +1,20 @@
 import { lazy, useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { Footer } from '../app/components/common/Footer';
+import { Footer } from '../components/common/Footer';
 
-import { Navbar } from '../app/components/common/Navbar';
+import { Navbar } from '../components/common/Navbar';
 
-const RegistrationPage = lazy(() => import('../app/views/RegistrationPage'));
-const LoginPage = lazy(() => import('../app/views/LoginPage'));
-const Home = lazy(() => import('../app/views/Home'));
-const User = lazy(() => import('../app/views/UserPage'));
-const NotFound = lazy(() => import('../app/views/NotFound'));
-const Product = lazy(() => import('../app/views/ProductPage'));
-const Products = lazy(() => import('../app/views/Products'));
-const ProductCreate = lazy(() => import('../app/views/ProductPage/Create'));
-const ProductEdit = lazy(() => import('../app/views/ProductPage/Edit'));
-const Categories = lazy(() => import('../app/views/Categories'));
-const LikedProducts = lazy(() => import('../app/views/ProductPage/Liked'));
+const RegistrationPage = lazy(() => import('../views/RegistrationPage'));
+const LoginPage = lazy(() => import('../views/LoginPage'));
+const Home = lazy(() => import('../views/Home'));
+const User = lazy(() => import('../views/UserPage'));
+const NotFound = lazy(() => import('../views/NotFound'));
+const Product = lazy(() => import('../views/ProductPage'));
+const Products = lazy(() => import('../views/Products'));
+const ProductCreate = lazy(() => import('../views/ProductPage/Create'));
+const ProductEdit = lazy(() => import('../views/ProductPage/Edit'));
+const Categories = lazy(() => import('../views/Categories'));
+const LikedProducts = lazy(() => import('../views/ProductPage/Liked'));
 
 /** Route base config implementation */
 export class ComponentRoutes {

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { RouteConfig } from '@/routes/index';
+import { RouteConfig } from '@app/routes';
 
 import './index.scss';
 

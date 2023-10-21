@@ -1,0 +1,38 @@
+.styled-gender-switcher {
+    width: 200px;
+    margin-bottom: 20px;
+
+    &__title {
+        position: relative;
+        margin-bottom: 10px;
+        display: block;
+        text-align: center;
+        font-size: 16px;
+        color: #acb7f9;
+    }
+
+    &__items {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 85px;
+        height: 30px;
+        padding: 5px 7px;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        background: #676f9d;
+        color: #fff;
+        cursor: pointer;
+
+        &--active {
+            background: #32385a;
+        }
+    }
+}

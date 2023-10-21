@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import { Notification } from '@components/common/Notification';
-import { GlobalRoutes } from '../routes';
+import { GlobalRoutes } from '@app/routes';
 
 import '../index.scss';
 

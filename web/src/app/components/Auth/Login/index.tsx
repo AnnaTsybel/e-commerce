@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { StyledInput } from '@components/common/StyledInput';
+
 import { UsersClient } from '@/api/users';
-import { RouteConfig } from '@/routes';
+import { RouteConfig } from '@app/routes';
 import { UsersService } from '@/users/service';
 
 import '../index.scss';
 
 export const Login = () => {
     const navigate = useNavigate();
-    const [password, setPassword] = useState<string>();
-    const [email, setEmail] = useState<string>();
+
+    const [password, setPassword] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
 
     const usersClient = new UsersClient();
     const usersService = new UsersService(usersClient);
@@ -18,7 +21,7 @@ export const Login = () => {
     const login = async() => {
         if (password && email) {
             await usersService.login(email, password);
-            await window.localStorage.setItem('IS_LOGGEDIN', JSON.stringify(true));
+            window.localStorage.setItem('IS_LOGGEDIN', JSON.stringify(true));
             navigate(RouteConfig.Home.path);
         }
     };
@@ -32,22 +35,20 @@ export const Login = () => {
                 <Link className="auth__switcher__item" to="/registration">Реєстрація</Link>
             </div>
             <form className="auth__form">
-                <div className="auth__input__wrapper">
-                    <label className="auth__label">Електрона пошта</label>
-                    <input
-                        className="auth__input"
-                        onChange={e => setEmail(e.target.value)}
-                        required
-                    />
-                    <span></span>
-                </div>
-                <div className="auth__input__wrapper" >
-                    <label className="auth__label">Пароль</label>
-                    <input className="auth__input"
-                        onChange={e => setPassword(e.target.value)}
-                        required />
-                    <span></span>
-                </div>
+                <StyledInput
+                    title="Електрона пошта"
+                    onChange={e => setEmail(e.target.value)}
+                    required={true}
+                    value={email}
+                    type="email"
+                />
+                <StyledInput
+                    title="Пароль"
+                    onChange={e => setPassword(e.target.value)}
+                    required={true}
+                    value={password}
+                    type="password"
+                />
                 <button
                     className="auth__button"
                     type="button"

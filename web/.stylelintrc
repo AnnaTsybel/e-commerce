@@ -11,7 +11,6 @@
         "string-quotes": "double",
         "no-duplicate-selectors": true,
         "selector-max-attribute": 1,
-        "selector-combinator-space-after": "always",
         "selector-attribute-operator-space-before": "never",
         "selector-attribute-operator-space-after": "never",
         "selector-attribute-brackets-space-inside": "never",

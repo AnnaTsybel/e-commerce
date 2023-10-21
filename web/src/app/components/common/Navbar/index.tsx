@@ -2,16 +2,10 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import Catalog from '@components/Catalog';
-import userProfileIcon from '@img/Navbar/user-icon.png';
-import catalogIcon from '@img/Navbar/catalog-icon.png';
-import favoriteIcon from '@img/Navbar/not-favorite-icon.png';
-import searchIcon from '@img/Navbar/search-icon.png';
-import сancelIcon from '@img/Navbar/cancel-icon.png';
-import logoIcon from '@img/Navbar/logo.png';
 import { SearchingModal } from './SearchingModal';
 
 import { User } from '@/users';
-import { RouteConfig } from '@/routes';
+import { RouteConfig } from '@app/routes';
 import { RootState } from '@/app/store';
 import { useAppDispatch, useAppSelector } from '@/app/hooks/useReduxToolkit';
 import { searchProducts } from '@/app/store/actions/products';
@@ -19,6 +13,12 @@ import { Product } from '@/product';
 import { setCategories } from '@/app/store/actions/categories';
 import { amountOfLikedProducts, getUser } from '@/app/store/actions/users';
 
+import userProfileIcon from '@img/Navbar/user-icon.png';
+import catalogIcon from '@img/Navbar/catalog-icon.png';
+import favoriteIcon from '@img/Navbar/not-favorite-icon.png';
+import searchIcon from '@img/Navbar/search-icon.png';
+import сancelIcon from '@img/Navbar/cancel-icon.png';
+import logoIcon from '@img/Navbar/logo.png';
 
 import './index.scss';
 
