@@ -16,7 +16,9 @@ export const SubCategories: React.FC<{
 
     const handleRedirectingCategoryProducts = async(id: string) => {
         await dispatch(getListByCategory(id));
+
         navigate(`/category/${id}/products`);
+
         setCatalogOpened(false);
     };
 

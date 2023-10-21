@@ -3,6 +3,7 @@ export type UserStatus = 'admin' | 'user';
 
 const DEFAULT_ROLE = 1;
 
+/**  */
 export class User {
     public constructor(
         public id: string = '00000000-0000 - 0000 - 0000 - 000000000000',

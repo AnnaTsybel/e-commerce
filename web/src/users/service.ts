@@ -11,11 +11,11 @@ export class UsersService {
     public constructor(users: UsersClient) {
         this.users = users;
     }
-    /** handles user registration */
+    /** user registration */
     public async register(user: UserRegisterData): Promise<void> {
         await this.users.register(user);
     }
-    /** handles user login */
+    /** user login */
     public async login(email: string, password: string): Promise<void> {
         await this.users.login(email, password);
     }
@@ -24,14 +24,14 @@ export class UsersService {
         return await this.users.getUser();
     }
 
-    /** logouts */
+    /** gets liked products */
     public async likedProducts(): Promise<Product[]> {
         return await this.users.likedProducts();
     }
 
-    /** logouts */
+    /** gets amount of liked products */
     public async amountOflikedProducts(): Promise<number> {
-        return await this.users.countOfLikedProducts();
+        return await this.users.amountOfLikedProducts();
     }
 
     /** updates user info */

@@ -2,12 +2,12 @@ import { APIClient } from '.';
 import { User, UserRegisterData, UserUpdateData } from '@/users';
 import { Product } from '@/product';
 
+const MOCK_ADMIN = 0;
+
 /**
  * UsersClient is a http implementation of users API.
  * Exposes all users-related functionality.
  */
-const MOCK_ADMIN = 1;
-
 export class UsersClient extends APIClient {
     private readonly ROOT_PATH: string = '/api/v0/auth';
 
@@ -89,7 +89,7 @@ export class UsersClient extends APIClient {
     }
 
     /** logout */
-    public async countOfLikedProducts(): Promise<number> {
+    public async amountOfLikedProducts(): Promise<number> {
         const path = '/api/v0/users/liked/count';
         const response = await this.http.get(path);
 

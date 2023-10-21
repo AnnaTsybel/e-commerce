@@ -36,10 +36,10 @@ export const Navbar = () => {
         if (e.target.value) {
             setIsSearching(true);
             dispatch(searchProducts(e.target.value));
+
+            return;
         }
-        else {
-            setIsSearching(false);
-        }
+        setIsSearching(false);
     };
 
     useEffect(() => {
@@ -52,7 +52,11 @@ export const Navbar = () => {
         <header className="header">
             <div className="header__content">
                 <Link className="header__logo" to={RouteConfig.Home.path}>
-                    <img className="header__logo__image" src={logoIcon} alt="logo icon" />
+                    <img
+                        className="header__logo__image"
+                        src={logoIcon}
+                        alt="logo icon"
+                    />
                 </Link>
                 <div className="header__catalog" onClick={() => setCatalogOpened(!isCatalogOpened)}>
                     <div className="header__catalog__icon">
@@ -60,7 +64,8 @@ export const Navbar = () => {
                             ? <img className="header__catalog__icon__image"
                                 src={сancelIcon} alt="cancel icon" />
                             : <img className="header__catalog__icon__image"
-                                src={catalogIcon} alt="catalog icon" />}
+                                src={catalogIcon} alt="catalog icon" />
+                        }
                     </div>
                     <p className="header__catalog__text">Каталог</p>
                 </div>
@@ -99,9 +104,7 @@ export const Navbar = () => {
                     </span>
                 </div>
             </div>
-            {isCatalogOpened
-                && <Catalog setCatalogOpened={setCatalogOpened} />
-            }
+            {isCatalogOpened && <Catalog setCatalogOpened={setCatalogOpened} />}
             {isSearching &&
                 <SearchingModal setIsSearching={setIsSearching} foundedProducts={foundedProducts} />}
         </header>

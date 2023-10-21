@@ -7,17 +7,7 @@ import arrow from '@img/Home/Slider/arrow-icon.png';
 
 import './index.scss';
 
-const sliderImages = [
-    {
-        photo: sliderPhoto1,
-    },
-    {
-        photo: sliderPhoto2,
-    },
-    {
-        photo: sliderPhoto3,
-    },
-];
+const sliderImages = [sliderPhoto1, sliderPhoto2, sliderPhoto3];
 
 const DEFAULT_SLIDE = 0;
 const FIRST_SLIDE = 0;
@@ -25,39 +15,41 @@ const STEP = 1;
 const INDEX_SLIDER_DECREMENTING_LENGTH = 1;
 
 export const Slider = () => {
-    const [current, setCurrent] = useState<number>(DEFAULT_SLIDE);
+    const [currentSlide, setCurrentSlide] = useState<number>(DEFAULT_SLIDE);
     const sliderImagesLength = sliderImages.length;
 
     const nextSlide = () => {
-        setCurrent(current === sliderImagesLength - INDEX_SLIDER_DECREMENTING_LENGTH ?
+        setCurrentSlide(currentSlide === sliderImagesLength - INDEX_SLIDER_DECREMENTING_LENGTH ?
             FIRST_SLIDE
             :
-            current + STEP);
+            currentSlide + STEP);
     };
 
     const prevSlide = () => {
-        setCurrent(current === FIRST_SLIDE ?
+        setCurrentSlide(currentSlide === FIRST_SLIDE ?
             sliderImagesLength - INDEX_SLIDER_DECREMENTING_LENGTH
             :
-            current - STEP);
+            currentSlide - STEP);
     };
 
     return (
         <div className="slider">
-
             <div className="slider__arrow slider__arrow__prev" onClick={() => prevSlide()}>
-                <img src={arrow} alt="arrow-left" className="slider__arrow__prev__image" />
-
+                <img
+                    src={arrow}
+                    alt="arrow-left"
+                    className="slider__arrow__prev__image"
+                />
             </div>
-
             <div className="slider__container">
                 {sliderImages.map((sliderImage, index) =>
-                    <div key={sliderImage.photo}
-                        className={` slider__item ${index === current ? 'active' : ''}`}
+                    <div
+                        key={sliderImage}
+                        className={` slider__item ${index === currentSlide ? 'active' : ''}`}
                     >
-                        {index === current &&
+                        {index === currentSlide &&
                             <img
-                                src={sliderImage.photo}
+                                src={sliderImage}
                                 alt="slider item"
                                 className="slider__item__image"
                             />
@@ -66,7 +58,11 @@ export const Slider = () => {
                 )}
             </div>
             <div className="slider__arrow slider__arrow__next" onClick={() => nextSlide()}>
-                <img src={arrow} alt="arrow-right" className=" slider__arrow__next__image" />
+                <img
+                    src={arrow}
+                    alt="arrow-right"
+                    className=" slider__arrow__next__image"
+                />
             </div>
         </div>
     );

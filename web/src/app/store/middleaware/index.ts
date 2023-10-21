@@ -8,6 +8,7 @@ export const handleErrorMiddleware: Middleware =
     (api: MiddlewareAPI) => (next) => (action) => {
         if (action.error) {
             api.dispatch(setErrorMessage(action.error.message));
+
             useHandleError(action.error.message);
         } else {
             next(action);

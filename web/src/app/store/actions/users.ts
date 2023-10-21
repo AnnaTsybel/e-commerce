@@ -4,9 +4,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { UsersClient } from '@/api/users';
 import { BadRequestError } from '@/api';
 import { UsersService } from '@/users/service';
+import { UserRegisterData, UserUpdateData } from '@/users';
 import { userSlice } from '@/app/store/reducers/users';
 import { setErrorMessage } from '@/app/store/reducers/error';
-import { UserRegisterData, UserUpdateData } from '@/users';
 
 const usersClient = new UsersClient();
 export const usersService = new UsersService(usersClient);
@@ -61,6 +61,7 @@ export const logout = createAsyncThunk(
     '/auth/logout',
     async function() {
         await usersService.logout();
+
         window.localStorage.setItem('IS_LOGGEDIN', JSON.stringify(false));
     }
 );

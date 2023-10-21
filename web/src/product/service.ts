@@ -15,22 +15,22 @@ export class ProductsService {
         return await this.products.product(productId);
     }
 
-    /** products list */
+    /** list of products */
     public async list(subsubcategoryId: string): Promise<Product[]> {
         return await this.products.list(subsubcategoryId);
     }
 
-    /** products list */
+    /** products recommendation */
     public async productRecommendations(productId: string): Promise<Product[]> {
         return await this.products.productRecommendations(productId);
     }
 
-    /** products list */
+    /** recommendations for home */
     public async getRecommendationForHome(): Promise<Product[]> {
         return await this.products.recommendationForHomePage();
     }
 
-    /** creates products */
+    /** creates product */
     public async create(productCreation: ProductCreation): Promise<void> {
         await this.products.create(productCreation);
     }
@@ -55,11 +55,12 @@ export class ProductsService {
         await this.products.unlikeProduct(productId);
     }
 
-    /** searchProducts */
+    /** searches products */
     public async searchProducts(text: string): Promise<Product[]> {
         return await this.products.searchProducts(text);
     }
 
+    /** filters products */
     public async filterProducts(productFilter: ProductFilter): Promise<Product[]> {
         return await this.products.filterProducts(productFilter);
     }

@@ -33,12 +33,10 @@ export const ProductsFilter = () => {
                                 className="products-filter__color__item"
                                 onClick={() => setCurrentColor(color)}
                             >
-
                                 <div
                                     className={`product__color__icon
-                                    product__${color}__icon 
-                                    ${currentColor === color && 'product__color__icon__checked'}
-                                    `}
+                                        product__${color}__icon 
+                                        ${currentColor === color && 'product__color__icon__checked'}`}
                                 />
                                 <p className="products-filter__color__item__text">{color}</p>
                             </div>
@@ -52,12 +50,14 @@ export const ProductsFilter = () => {
                             <input type="text" className="products-filter__price__input" />
                             -
                             <input type="text" className="products-filter__price__input" />
-
                         </div>
                     </div>
                 </div>
-                <button className="products-filter__button"
-                    onClick={() => handleFiltering()}>
+                <button
+                    className="products-filter__button"
+                    onClick={() => handleFiltering()}
+                    type="button"
+                >
                     Відфільтрувати
                 </button>
             </div>

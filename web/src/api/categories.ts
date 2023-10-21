@@ -22,34 +22,42 @@ export class CategoriesClient extends APIClient {
 
         const categoriesItem: Category[] = [];
 
-        categories.map((category: any) => {
+        categories.forEach((category: any) => {
             const subcategories: SubCategory[] = [];
-            category.subcategory.map((subcategoryItem: any) => {
+
+            category.subcategory.forEach((subcategoryItem: any) => {
                 const subsubcategories: SubSubCategory[] = [];
 
+                /* eslint-disable */
                 subcategoryItem.subsubcategory.map((subsubcategoryItem: any) =>
-                    subsubcategories.push(new SubSubCategory(
-                        subsubcategoryItem.id,
-                        subsubcategoryItem.name,
-                        subsubcategoryItem.categoryId
-                    ))
+                    subsubcategories.push(
+                        new SubSubCategory(
+                            subsubcategoryItem.id,
+                            subsubcategoryItem.name,
+                            subsubcategoryItem.categoryId
+                        ))
                 );
 
-                subcategories.push(new SubCategory(
-                    subcategoryItem.subcategory.id,
-                    subcategoryItem.subcategory.name,
-                    subcategoryItem.subcategory.categoryId,
-                    subsubcategories
-                ));
+                subcategories.push(
+                    new SubCategory(
+                        subcategoryItem.subcategory.id,
+                        subcategoryItem.subcategory.name,
+                        subcategoryItem.subcategory.categoryId,
+                        subsubcategories
+                    )
+                );
             });
-            categoriesItem.push(new Category(
-                category.category.id,
-                category.category.name,
-                category.category.categoryId,
-                subcategories
-            ));
-        }
-        );
+
+            categoriesItem.push(
+                new Category(
+                    category.category.id,
+                    category.category.name,
+                    category.category.categoryId,
+                    subcategories
+                ));
+
+            return;
+        });
 
         return categoriesItem;
     }
@@ -66,22 +74,25 @@ export class CategoriesClient extends APIClient {
         const subcategories = await response.json();
         const subcategoriesItem: SubCategory[] = [];
 
-        subcategories.map((subcategoryItem: any) => {
+        subcategories.forEach((subcategoryItem: any) => {
             const subsubcategories: SubSubCategory[] = [];
-            subcategoryItem.subsubcategory.map((subsubcategoryItem: any) => {
-                subsubcategories.push(new SubSubCategory(
-                    subsubcategoryItem.id,
-                    subsubcategoryItem.name,
-                    subsubcategoryItem.categoryId
-                ));
+
+            subcategoryItem.subsubcategory.forEach((subsubcategoryItem: any) => {
+                subsubcategories.push(
+                    new SubSubCategory(
+                        subsubcategoryItem.id,
+                        subsubcategoryItem.name,
+                        subsubcategoryItem.categoryId
+                    ));
             });
 
-            subcategoriesItem.push(new SubCategory(
-                subcategoryItem.subcategory.id,
-                subcategoryItem.subcategory.name,
-                subcategoryItem.subcategory.categoryId,
-                subsubcategories
-            ));
+            subcategoriesItem.push(
+                new SubCategory(
+                    subcategoryItem.subcategory.id,
+                    subcategoryItem.subcategory.name,
+                    subcategoryItem.subcategory.categoryId,
+                    subsubcategories
+                ));
         });
 
         return subcategoriesItem;
@@ -100,13 +111,14 @@ export class CategoriesClient extends APIClient {
 
         const subsubcategoriesItem: SubSubCategory[] = [];
 
-        subsubcategory.map((subsubcategoryItem: any) => {
-            subsubcategoriesItem.push(new SubSubCategory(
-                subsubcategoryItem.id,
-                subsubcategoryItem.name,
-                subsubcategoryItem.categoryId
-            ));
-        });
+        subsubcategory.map((subsubcategoryItem: any) =>
+            subsubcategoriesItem.push(
+                new SubSubCategory(
+                    subsubcategoryItem.id,
+                    subsubcategoryItem.name,
+                    subsubcategoryItem.categoryId
+                ))
+        );
 
         return subsubcategoriesItem;
     }

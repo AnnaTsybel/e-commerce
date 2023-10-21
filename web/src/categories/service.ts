@@ -11,15 +11,15 @@ export class CategoriesService {
     public constructor(categories: CategoriesClient) {
         this.categories = categories;
     }
-    /** product */
+    /** current category */
     public async currentCategory(categoryId: string): Promise<SubCategory[]> {
         return await this.categories.currentCategory(categoryId);
     }
-    /** product */
+    /** list of categories */
     public async listCategories(): Promise<Category[]> {
         return await this.categories.listCategories();
     }
-    /** product */
+    /** subsubcategories */
     public async getSubSubCategories(): Promise<SubSubCategory[]> {
         return await this.categories.getSubSubcategorieItem();
     }
